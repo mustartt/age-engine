@@ -5,12 +5,14 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_ECS_H_
 #define FINAL_PROJECT_ENGINE_ECS_ECS_H_
 
+#include <cstdint>
+#include <vector>
 namespace AGE {
 namespace ECS {
 
 using EntityID = std::uint64_t;
 using ComponentID = EntityID;
-using Archtype = std::vector<ComponentID>;
+using Archetype = std::vector<ComponentID>;
 using ComponentType = std::type_info;
 
 class Registry {

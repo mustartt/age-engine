@@ -15,29 +15,23 @@
 namespace AGE {
 namespace ECS {
 
-class Entity {
-    EntityID id;
-    std::string entityName;
-    std::string entityTag;
-  public:
-    Entity();
-    ~Entity();
-  private:
-    EntityID getID() const { return id; }
-    const std::string &getEntityName() const { return entityName; }
-    const std::string &getEntityTag() const { return entityTag; }
-};
-
 class EntityManager {
-    std::unordered_map<EntityID, Archtype> entityComponentMapping;
+    std::unordered_map<EntityID, Archetype> entityComponentMapping;
+    EntityID entitySequenceID;
     size_t entityCount;
     // id generator singleton
+
   public:
-    Entity createEntity();
-    void destoryEntity();
-    void setArchtype(Entity &entity);
-    Archtype &getArchtype(Entity &entity);
+    EntityManager();
+    ~EntityManager() = default;
+
+    EntityID createEntity();
+    void destroyEntity(EntityID &entity);
+    void setArchetype(EntityID &entity, Archetype &archetype);
+    Archetype &getArchetype(EntityID &entity);
 };
+
+class InvalidEntityException : public std::exception {};
 
 }
 }
