@@ -34,7 +34,7 @@ class Registry final {
     template<typename T>
     void addComponent(EntityID entity, T component) {
         componentManager->addComponent<T>(entity, component);
-        auto archetype = entityManager->getArchetype(entity);
+        auto &archetype = entityManager->getArchetype(entity);
         archetype.push_back(componentManager->template getComponentType<T>());
         systemManager->entitySignatureChanged(entity, archetype);
     }

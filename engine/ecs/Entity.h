@@ -26,9 +26,9 @@ class EntityManager {
     ~EntityManager() = default;
 
     EntityID createEntity();
-    void destroyEntity(EntityID &entity);
-    void setArchetype(EntityID &entity, Archetype &archetype);
-    Archetype &getArchetype(EntityID &entity);
+    void destroyEntity(EntityID entity);
+    void setArchetype(EntityID entity, Archetype &archetype);
+    Archetype &getArchetype(EntityID entity);
 };
 
 class InvalidEntityException : public std::exception {};
@@ -42,17 +42,17 @@ EntityID EntityManager::createEntity() {
     return entitySequenceID++;
 }
 
-void EntityManager::destroyEntity(EntityID &entity) {
+void EntityManager::destroyEntity(EntityID entity) {
     if (!entityComponentMapping.count(entity)) throw InvalidEntityException();
     entityComponentMapping.erase(entity);
     --entityCount;
 }
 
-void EntityManager::setArchetype(EntityID &entity, Archetype &archetype) {
+void EntityManager::setArchetype(EntityID entity, Archetype &archetype) {
     entityComponentMapping[entity] = archetype;
 }
 
-Archetype &EntityManager::getArchetype(EntityID &entity) {
+Archetype &EntityManager::getArchetype(EntityID entity) {
     return entityComponentMapping[entity];
 }
 
