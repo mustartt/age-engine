@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <vector>
+
 namespace AGE {
 namespace ECS {
 
@@ -14,6 +15,7 @@ using EntityID = std::uint64_t;
 using ComponentID = EntityID;
 using Archetype = std::vector<ComponentID>;
 using ComponentType = const char *;
+using SystemType = const char *;
 
 class Registry {
 

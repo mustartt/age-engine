@@ -69,7 +69,7 @@ class ConcreteComponentContainer : public ComponentContainer {
 
 class ComponentManager {
     std::unordered_map<ComponentType, ComponentID> componentTypes;
-    std::unordered_map<ComponentType, std::unique_ptr<ComponentContainer>> componentArrays;
+    std::unordered_map<ComponentType, std::shared_ptr<ComponentContainer>> componentArrays;
     ComponentID componentIDSequence = 0;
   public:
     template<typename T>
@@ -77,7 +77,7 @@ class ComponentManager {
         auto typeName = typeid(T).name();
         if (componentTypes.count(typeName)) throw ComponentAlreadyRegistered{};
         componentTypes[typeName] = componentIDSequence++;
-        componentArrays[typeName] = std::make_unique<ConcreteComponentContainer<T>>();
+        componentArrays[typeName] = std::make_shared<ConcreteComponentContainer<T>>();
     }
 
     template<typename T>
@@ -111,7 +111,7 @@ class ComponentManager {
 
   private:
     template<typename T>
-    std::unique_ptr<ConcreteComponentContainer<T>> getComponentArray() {
+    std::shared_ptr<ConcreteComponentContainer<T>> getComponentArray() {
         auto typeName = typeid(T).name();
         if (!componentTypes.count(typeName)) throw ComponentNotRegistered{};
         return std::static_pointer_cast<ConcreteComponentContainer<T>>(componentArrays[typeName]);
