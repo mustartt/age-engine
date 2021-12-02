@@ -5,6 +5,9 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 
+#include "../IAsciiRenderProp.h"
+#include "../../ScreenBuffer.h"
+
 namespace AGE {
 namespace Renderer {
 
