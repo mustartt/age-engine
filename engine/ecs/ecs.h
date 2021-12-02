@@ -13,7 +13,7 @@ namespace ECS {
 using EntityID = std::uint64_t;
 using ComponentID = EntityID;
 using Archetype = std::vector<ComponentID>;
-using ComponentType = std::type_info;
+using ComponentType = const char *;
 
 class Registry {
 
