@@ -18,6 +18,27 @@ using Archetype = std::vector<ComponentID>;
 using ComponentType = const char *;
 using SystemType = const char *;
 
+class Registry {
+    using EntityType = EntityID;
+  public:
+    Registry() = default;
+    virtual ~Registry() = default;
+
+    virtual EntityType createEntity() = 0;
+    virtual void destroyEntity(EntityType entityId) = 0;
+
+};
+
+class Entity {
+    EntityID entityId;
+    Registry *registry;
+  public:
+    Entity() = default;
+    Entity(EntityID entityId, Registry *registry)
+        : entityId{entityId}, registry{registry} {}
+    Entity(const Entity &other) = default;
+};
+
 }
 }
 

@@ -11,18 +11,18 @@
 #include <memory>
 #include <algorithm>
 
-#include "ecs.h"
+#include "../ecs.h"
 
 namespace AGE {
 namespace ECS {
 
-class Registry;
+class BasicRegistry;
 
 class System {
   protected:
-    Registry *registry;
+    BasicRegistry *registry;
   public:
-    explicit System(Registry *registry) : registry(registry) {}
+    explicit System(BasicRegistry *registry) : registry(registry) {}
     std::set<EntityID> entities;
 };
 
@@ -34,7 +34,7 @@ class SystemManager {
     std::unordered_map<SystemType, std::shared_ptr<System>> systems;
   public:
     template<typename T>
-    std::shared_ptr<T> registerSystem(Registry *reg) {
+    std::shared_ptr<T> registerSystem(BasicRegistry *reg) {
         auto typeName = typeid(T).name();
         if (archetypes.count(typeName)) throw SystemAlreadyRegistered{};
         auto system = std::make_shared<T>(reg);

@@ -10,7 +10,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "ecs.h"
+#include "../ecs.h"
 
 namespace AGE {
 namespace ECS {

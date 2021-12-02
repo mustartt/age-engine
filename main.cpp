@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ncurses.h"
 
-#include "engine/ecs/Registry.h"
+#include "engine/ecs/impl/BasicRegistry.h"
 
 int main() {
     using namespace AGE::ECS;
@@ -15,7 +15,7 @@ int main() {
 
     struct TagSystem : public System {
       public:
-        explicit TagSystem(Registry *reg) : System(reg) {}
+        explicit TagSystem(BasicRegistry *reg) : System(reg) {}
         void printTags() {
             for (auto const &entity: entities) {
                 auto &entityTag = registry->getComponent<Tag>(entity);
@@ -31,7 +31,7 @@ int main() {
         }
     };
 
-    Registry registry;
+    BasicRegistry registry;
 
     registry.registerComponent<Tag>();
     registry.registerComponent<UpdateChar>();

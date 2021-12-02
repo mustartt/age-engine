@@ -10,14 +10,14 @@
 #include <memory>
 #include <list>
 
-#include "ecs.h"
+#include "../ecs.h"
 #include "Entity.h"
 
 namespace AGE {
 namespace ECS {
 
 //class Component {
-//    Registry *registry;
+//    BasicRegistry *registry;
 //  protected:
 //    template<typename T>
 //    T &GetComponent(EntityID &entity);

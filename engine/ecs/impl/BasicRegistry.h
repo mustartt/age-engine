@@ -5,7 +5,7 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_REGISTRY_H_
 
 #include <vector>
-#include "ecs.h"
+#include "../ecs.h"
 #include "Entity.h"
 #include "Component.h"
 #include "System.h"
@@ -13,15 +13,15 @@
 namespace AGE {
 namespace ECS {
 
-class Registry final {
+class BasicRegistry final : public Registry {
     std::unique_ptr<EntityManager> entityManager;
     std::unique_ptr<ComponentManager> componentManager;
     std::unique_ptr<SystemManager> systemManager;
   public:
-    Registry() : entityManager(std::make_unique<EntityManager>()),
-                 componentManager(std::make_unique<ComponentManager>()),
-                 systemManager(std::make_unique<SystemManager>()) {};
-    ~Registry() = default;
+    BasicRegistry() : entityManager(std::make_unique<EntityManager>()),
+                      componentManager(std::make_unique<ComponentManager>()),
+                      systemManager(std::make_unique<SystemManager>()) {};
+    ~BasicRegistry() override = default;
 
     EntityID createEntity() {
         return entityManager->createEntity();
@@ -41,7 +41,6 @@ class Registry final {
     template<typename T>
     void removeComponent(EntityID entity) {
         componentManager->removeComponent<T>(entity);
-
         std::vector<ComponentID> archetype = entityManager->getArchetype(entity);
         std::remove(archetype.begin(), archetype.end(), componentManager->getComponentType<T>());
         systemManager->entitySignatureChanged(entity, archetype);
@@ -59,7 +58,7 @@ class Registry final {
         componentManager->template registerComponent<T>();
     }
     template<typename T>
-    std::shared_ptr<T> registerSystem(Registry *reg) {
+    std::shared_ptr<T> registerSystem(BasicRegistry *reg) {
         return systemManager->template registerSystem<T>(reg);
     }
     template<typename T>
