@@ -1,21 +1,45 @@
 #include <iostream>
 #include "ncurses.h"
 
+#include "engine/ecs/Registry.h"
+
 int main() {
-    initscr();
-    cbreak();
+    using namespace AGE::ECS;
 
-    WINDOW *window = newwin(25, 80, 0, 0);
-    refresh();
+    struct Tag {
+      std::string tag;
+    };
 
-    box(window, 0, 0);
-    mvwprintw(window, 1, 1, "Hello World!");
+    struct TagSystem : public System {
+      public:
+        explicit TagSystem(Registry *reg) : System(reg) {}
+        void printTags() {
+            for (auto const &entity: entities) {
+                auto &entityTag = registry->getComponent<Tag>(entity);
+                std::cout << "Object: " << entityTag.tag << std::endl;
+            }
+        }
+        void testModification() {
+            for (auto const &entity: entities) {
+                auto &entityTag = registry->getComponent<Tag>(entity);
+                entityTag.tag += '!';
+            }
+        }
+    };
 
-    wrefresh(window);
+    Registry registry;
 
-    getch();
+    registry.registerComponent<Tag>();
 
-    delwin(window);
-    endwin();
-    return 0;
+    auto tagSystem = registry.registerSystem<TagSystem>(&registry);
+    Archetype archetype;
+    archetype.push_back(registry.getComponentType<Tag>());
+    registry.setSystemArchetype<TagSystem>(archetype);
+
+    auto test = registry.createEntity();
+    registry.addComponent<Tag>(test, {"TestEntityTag"});
+
+    tagSystem->printTags();
+    tagSystem->printTags();
+
 }

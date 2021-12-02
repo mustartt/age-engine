@@ -16,9 +16,14 @@
 namespace AGE {
 namespace ECS {
 
+class Registry;
+
 class System {
+  protected:
+    Registry *registry;
   public:
-    std::set<Entity> entities;
+    explicit System(Registry *registry) : registry(registry) {}
+    std::set<EntityID> entities;
 };
 
 class SystemAlreadyRegistered : public std::exception {};
@@ -29,10 +34,10 @@ class SystemManager {
     std::unordered_map<SystemType, std::shared_ptr<System>> systems;
   public:
     template<typename T>
-    std::shared_ptr<T> registerSystem() {
+    std::shared_ptr<T> registerSystem(Registry *reg) {
         auto typeName = typeid(T).name();
         if (archetypes.count(typeName)) throw SystemAlreadyRegistered{};
-        auto system = std::make_shared<T>();
+        auto system = std::make_shared<T>(reg);
         systems[typeName] = system;
         return system;
     }
@@ -40,19 +45,19 @@ class SystemManager {
     template<typename T>
     void setArchetype(Archetype &signature) {
         auto typeName = typeid(T).name();
-        if (!archetypes.count(typeName)) throw SystemNotRegistered{};
+        if (!systems.count(typeName)) throw SystemNotRegistered{};
         archetypes[typeName] = signature;
     }
 
-    void entityDestroyed(Entity entity) {
+    void entityDestroyed(EntityID entity) {
         for (auto const &pair: systems) {
             auto const &system = pair.second;
             system->entities.erase(entity);
         }
     }
 
-    void entitySignatureChanged(Entity entity, Archetype &entityArchetype) {
-        for (auto const &pair: mSystems) {
+    void entitySignatureChanged(EntityID entity, Archetype &entityArchetype) {
+        for (auto const &pair: systems) {
             auto const &type = pair.first;
             auto const &system = pair.second;
             auto const &systemArchetype = archetypes[type];
@@ -68,7 +73,7 @@ class SystemManager {
     static bool hasRequiredArchetype(const Archetype &test, const Archetype &parent) {
         return std::all_of(parent.begin(), parent.end(), [test](auto id) {
           return std::find(test.begin(), test.end(), id) != test.end();
-        })
+        });
     }
 };
 

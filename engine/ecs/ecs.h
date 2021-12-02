@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <memory>
 
 namespace AGE {
 namespace ECS {
@@ -16,10 +17,6 @@ using ComponentID = EntityID;
 using Archetype = std::vector<ComponentID>;
 using ComponentType = const char *;
 using SystemType = const char *;
-
-class Registry {
-
-};
 
 }
 }

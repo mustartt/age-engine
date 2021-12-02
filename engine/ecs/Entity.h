@@ -39,7 +39,7 @@ EntityManager::EntityManager()
 
 EntityID EntityManager::createEntity() {
     ++entityCount;
-    return ++entitySequenceID;
+    return entitySequenceID++;
 }
 
 void EntityManager::destroyEntity(EntityID &entity) {
@@ -53,7 +53,6 @@ void EntityManager::setArchetype(EntityID &entity, Archetype &archetype) {
 }
 
 Archetype &EntityManager::getArchetype(EntityID &entity) {
-    if (!entityComponentMapping.count(entity)) throw InvalidEntityException();
     return entityComponentMapping[entity];
 }
 

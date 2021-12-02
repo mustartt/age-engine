@@ -16,12 +16,12 @@
 namespace AGE {
 namespace ECS {
 
-class Component {
-    Registry *registry;
-  protected:
-    template<typename T>
-    T &GetComponent(EntityID &entity);
-};
+//class Component {
+//    Registry *registry;
+//  protected:
+//    template<typename T>
+//    T &GetComponent(EntityID &entity);
+//};
 
 class ComponentAlreadyExist : public std::exception {};
 class ComponentDoesNotExist : public std::exception {};
@@ -39,12 +39,17 @@ class ComponentContainer {
 template<typename T>
 class ConcreteComponentContainer : public ComponentContainer {
     using ListIter = typename std::list<T>::iterator;
+    struct ListIterHash {
+      size_t operator()(const ListIter &i) const {
+          return std::hash<T *>()(&*i);
+      }
+    };
     std::list<T> components;
     std::unordered_map<EntityID, ListIter> entityComponentMapping;
-    std::unordered_map<ListIter, EntityID> componentEntityMapping;
+    std::unordered_map<ListIter, EntityID, ListIterHash> componentEntityMapping;
   public:
     void insertEntityComponent(EntityID entity, T component) {
-        if (entityComponentMapping.find(entity)) throw ComponentAlreadyExist{};
+        if (entityComponentMapping.count(entity)) throw ComponentAlreadyExist{};
         ListIter iter = components.insert(components.end(), std::move(component));
         entityComponentMapping[entity] = iter;
         componentEntityMapping[iter] = entity;
@@ -61,7 +66,7 @@ class ConcreteComponentContainer : public ComponentContainer {
         return *entityComponentMapping[entity];
     }
     void entityDestroyed(EntityID entity) override {
-        if (entityComponentMapping.find(entity)) {
+        if (entityComponentMapping.count(entity)) {
             removeEntityComponent(entity);
         }
     }
