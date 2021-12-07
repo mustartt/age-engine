@@ -5,7 +5,7 @@
 #include "CursesRenderer.h"
 
 CursesContextManager::CursesContextManager(std::unique_ptr<CursesRenderer> renderer)
-    : renderer_(std::move(renderer)) {
+    : renderer(std::move(renderer)) {
     initscr();
     cbreak();
     noecho();

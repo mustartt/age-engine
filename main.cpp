@@ -1,55 +1,30 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 #include "ncurses.h"
 
 #include "engine/ecs/impl/BasicRegistry.h"
+#include "CursesContextManager.h"
+#include "engine/ncurses/CursesKeyboard.h"
 
-int main() {
-    using namespace AGE::ECS;
+int main(int argc, char *argv[]) {
+    CursesContextManager manager(std::make_unique<CursesRenderer>(0, 0));
+    AGE::CursesKeyboard keyboard;
 
-    struct Tag {
-      std::string tag;
-    };
-    struct UpdateChar {
-      char c;
-    };
+    int col = 0;
+    for (int i = 0; i < 20; ++i) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        keyboard.captureInputs();
 
-    struct TagSystem : public System {
-      public:
-        explicit TagSystem(BasicRegistry *reg) : System(reg) {}
-        void printTags() {
-            for (auto const &entity: entities) {
-                auto &entityTag = registry->getComponent<Tag>(entity);
-                std::cout << "Object: " << entityTag.tag << std::endl;
-            }
+        std::optional<AGE::Keycode> key = keyboard.getKeycode();
+        while (key) {
+            mvaddch(1, col++, key.value());
+            refresh();
+            key = keyboard.getKeycode();
         }
-        void testModification() {
-            for (auto const &entity: entities) {
-                auto &entityTag = registry->getComponent<Tag>(entity);
-                auto &updateChar = registry->getComponent<UpdateChar>(entity);
-                entityTag.tag += updateChar.c;
-            }
-        }
-    };
-
-    BasicRegistry registry;
-
-    registry.registerComponent<Tag>();
-    registry.registerComponent<UpdateChar>();
-
-    auto tagSystem = registry.registerSystem<TagSystem>(&registry);
-    Archetype archetype;
-    archetype.push_back(registry.getComponentType<Tag>());
-    archetype.push_back(registry.getComponentType<UpdateChar>());
-    registry.setSystemArchetype<TagSystem>(archetype);
-
-    auto test = registry.createEntity();
-    registry.addComponent<Tag>(test, {"TestEntityTag"});
-    registry.addComponent<UpdateChar>(test, {'?'});
-
-    tagSystem->printTags();
-    for (int i = 0; i < 10; ++i) {
-        tagSystem->testModification();
+        refresh();
     }
-    tagSystem->printTags();
 
+    return 0;
 }
