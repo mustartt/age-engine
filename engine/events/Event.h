@@ -11,9 +11,11 @@
 #include <memory>
 #include <list>
 
+namespace AGE {
+
 class Event {
   public:
-    virtual ~Event() = delete;
+    virtual ~Event() = default;
 };
 
 class UnknownEventException : std::exception {};
@@ -21,57 +23,60 @@ class UnknownEventException : std::exception {};
 class EventQueue;
 class EventDispatcher {
   public:
-    void operator()(const Event *event, EventQueue *eventQueue) const {
+    void operator()(Event *event, EventQueue *eventQueue) const {
         call(event, eventQueue);
     }
   private:
-    virtual void call(const Event *event, EventQueue *eventQueue) const = 0;
+    virtual void call(Event *event, EventQueue *eventQueue) const = 0;
 };
-
-using MemberFunction = void (*)(Event *event, EventQueue *eventQueue);
-using LambdaFunction = std::function<void(Event *event, EventQueue *eventQueue)>;
 
 template<class T, class EventType>
 class MemberEventDispatcher : public EventDispatcher {
-    T *instance;
-    MemberFunction func;
   public:
+    using MemberFunction = void (T::*)(EventType *event, EventQueue *eventQueue);
     explicit MemberEventDispatcher(T *instance, MemberFunction function)
         : instance{instance}, func{function} {};
-    void call(const Event *event, EventQueue *eventQueue) const override {
-        instance->*func(static_cast<EventType *>(event, eventQueue));
+    void call(Event *event, EventQueue *eventQueue) const override {
+        (instance->*func)(static_cast<EventType *>(event), eventQueue);
     }
+  private:
+    T *instance;
+    MemberFunction func;
 };
 
 template<class EventType>
 class FunctionEventDispatcher : public EventDispatcher {
-    LambdaFunction function;
   public:
+    using LambdaFunction = std::function<void(EventType *event, EventQueue *eventQueue)>;
     explicit FunctionEventDispatcher(LambdaFunction function) : function{std::move(function)} {};
-    void call(const Event *event, EventQueue *eventQueue) const override {
-        function(static_cast<EventType *>(event, eventQueue));
+    void call(Event *event, EventQueue *eventQueue) const override {
+        function(static_cast<EventType *>(event), eventQueue);
     }
+  private:
+    LambdaFunction function;
 };
 
 class EventQueue {
     std::unordered_map<std::type_index,
                        std::vector<const EventDispatcher *>> dispatchers;
-    std::vector<std::pair<std::type_index, std::unique_ptr<Event>>> queue;
+    std::vector<std::unique_ptr<Event>> queue;
+    std::vector<std::type_index> queueEventType;
   public:
     template<typename EventType, typename... Args>
     void enqueue(Args &&... args) {
-        auto event = std::make_unique<EventType>(std::forward<Args>(args)...);
-        queue.push_back(std::make_pair(typeid(EventType), event));
+        queue.push_back(std::make_unique<EventType>(std::forward<Args>(args)...));
+        queueEventType.emplace_back(typeid(EventType));
     }
 
     void dispatchEvents() {
-        for (auto &eventPair: queue) {
-            auto &dispatcherList = dispatchers[eventPair.first];
-            for (auto &dispatcher: dispatcherList) {
-                dispatcher->operator()(eventPair.second.get(), this);
+        for (int i = 0; i < queue.size(); ++i) {
+            auto &eventType = queueEventType[i];
+            for (auto &dispatcher: dispatchers[eventType]) {
+                dispatcher->operator()(queue[i].get(), this);
             }
         }
         queue.clear();
+        queueEventType.clear();
     }
 
     template<typename EventType>
@@ -87,5 +92,7 @@ class EventQueue {
                        });
     }
 };
+
+}
 
 #endif //FINAL_PROJECT_ENGINE_EVENTS_EVENT_H_
