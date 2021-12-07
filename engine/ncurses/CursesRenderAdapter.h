@@ -6,11 +6,14 @@
 #define FINAL_PROJECT_ENGINE_NCURSES_CURSESRENDERADAPTER_H_
 
 #include "../renderer/RenderTarget.h"
+#include "CursesRenderer.h"
 
 namespace AGE::Renderer {
 
 class CursesRenderAdapter : public RenderTarget {
+    CursesRenderer *cursesRenderer;
   public:
+    explicit CursesRenderAdapter(CursesRenderer *cursesRenderer);
     void render(ScreenBuffer &buffer) const override;
 };
 

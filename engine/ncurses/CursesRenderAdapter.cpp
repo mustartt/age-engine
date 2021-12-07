@@ -6,8 +6,12 @@
 
 namespace AGE::Renderer {
 
-void AGE::Renderer::CursesRenderAdapter::render(AGE::Renderer::ScreenBuffer &buffer) const {
+CursesRenderAdapter::CursesRenderAdapter(CursesRenderer *cursesRenderer) :
+    cursesRenderer{cursesRenderer} {}
 
+void CursesRenderAdapter::render(ScreenBuffer &buffer) const {
+    cursesRenderer->drawBuffer(buffer);
+    cursesRenderer->update();
 }
 
 }
