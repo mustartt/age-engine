@@ -25,7 +25,6 @@ void CursesRenderer::drawBuffer(Renderer::ScreenBuffer &buffer) const {
 }
 
 [[maybe_unused]] void CursesRenderer::update() const {
-    refresh();
     wrefresh(window);
 }
 
