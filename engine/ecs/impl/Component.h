@@ -9,13 +9,6 @@
 
 namespace AGE::ECS {
 
-//class Component {
-//    Registry *registry;
-//  protected:
-//    template<typename T>
-//    T &GetComponent(EntityID &entity);
-//};
-
 class ComponentAlreadyExist : public std::exception {};
 class ComponentDoesNotExist : public std::exception {};
 class ComponentNotRegistered : public std::exception {};
@@ -58,6 +51,9 @@ class ConcreteComponentContainer : public ComponentContainer {
         if (!entityComponentMapping.count(entity)) throw ComponentDoesNotExist{};
         return *entityComponentMapping[entity];
     }
+    bool hasComponent(EntityID entity) {
+        return entityComponentMapping.count(entity) > 0;
+    }
     void entityDestroyed(EntityID entity) override {
         if (entityComponentMapping.count(entity)) {
             removeEntityComponent(entity);
@@ -83,6 +79,11 @@ class ComponentManager {
         auto typeName = typeid(T).name();
         if (!componentTypes.count(typeName)) throw ComponentNotRegistered{};
         return componentTypes[typeName];
+    }
+
+    template<typename T>
+    bool hasComponent(EntityID entity) {
+        return getComponentArray<T>()->hasComponent(entity);
     }
 
     template<typename T>

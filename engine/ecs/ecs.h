@@ -19,18 +19,6 @@ using Archetype = std::vector<ComponentID>;
 using ComponentType = const char *;
 using SystemType = const char *;
 
-class Entity {
-    EntityID entityId;
-    Registry *registry;
-  public:
-    explicit Entity(EntityID entityId, Registry *registry)
-        : entityId{entityId}, registry{registry} {}
-    Entity(Entity &other) = default;
-    Entity(Entity &&other) = default;
-    Entity &operator=(const Entity &other) = default;
-
-};
-
 }
 
 #endif //FINAL_PROJECT_ENGINE_ECS_ECS_H_
