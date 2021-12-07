@@ -4,46 +4,34 @@
 
 #include "ncurses.h"
 
-#include "engine/events/Event.h"
+#include "engine/ncurses/CursesContextManager.h"
+#include "engine/renderer/Renderer.h"
+#include "engine/ncurses/CursesRenderAdapter.h"
 
-class MessageEvent : public AGE::Event {
-    std::string msg;
-  public:
-    explicit MessageEvent(std::string msg) : msg{std::move(msg)} {}
-    std::string &getMessage() { return msg; }
-};
-
-class TestSystem {
-    std::unique_ptr<AGE::EventDispatcher> dispatcher;
-    AGE::EventQueue *eventQueue;
-  public:
-    explicit TestSystem(AGE::EventQueue *eventQueue)
-        : dispatcher(std::make_unique<AGE::MemberEventDispatcher<TestSystem, MessageEvent>>
-                         (this, &TestSystem::handleSomeEvent)),
-          eventQueue(eventQueue) {
-        eventQueue->registerEventDispatcher<MessageEvent>(dispatcher.get());
+[[noreturn]] void DEBUG_PAUSE() {
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    ~TestSystem() {
-        eventQueue->unregisterEventDispatcher<MessageEvent>(dispatcher.get());
-    }
-    void handleSomeEvent(MessageEvent *event, AGE::EventQueue *queue) {
-        std::cout << event->getMessage() << std::endl;
-    }
-};
-
-void test(AGE::EventQueue *queue) {
-    TestSystem system1(queue);
-    queue->enqueue<MessageEvent>("Hello World!");
-    queue->dispatchEvents();
 }
 
 int main(int argc, char *argv[]) {
     using namespace AGE;
 
-    EventQueue queue;
-    test(&queue);
+    CursesContextManager manager(80, 25);
+    auto renderer = manager.getRendererInstance();
+    Renderer::RenderTarget *adapter = new Renderer::CursesRenderAdapter(renderer);
+    ConcreteRenderer concreteRenderer(adapter, 80, 25);
 
-    queue.dispatchEvents();
+    for (int x = 0; x < 80; ++x) {
+        for (int y = 0; y < 25; ++y) {
+            concreteRenderer.clear();
+            concreteRenderer.drawCharacter(x, y, '@');
+            concreteRenderer.draw();
+            // std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        }
+    }
+    renderer->update();
 
+    DEBUG_PAUSE();
     return 0;
 }

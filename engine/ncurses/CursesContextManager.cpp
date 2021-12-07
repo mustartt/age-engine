@@ -6,11 +6,13 @@
 namespace AGE {
 
 CursesContextManager::CursesContextManager(int width, int height)
-    : renderer(std::make_unique<CursesRenderer>(width, height)),
-      keyboard(std::make_unique<CursesKeyboard>()) {
+    : renderer(),
+      keyboard() {
     initscr();
     cbreak();
     noecho();
+    renderer = std::make_unique<CursesRenderer>(width, height);
+    keyboard = std::make_unique<CursesKeyboard>();
 }
 
 CursesContextManager::~CursesContextManager() {

@@ -6,6 +6,11 @@
 
 namespace AGE {
 
+ConcreteRenderer::ConcreteRenderer(Renderer::RenderTarget *target, int width, int height)
+    : width{width}, height{height},
+      screenBuffer(width, height),
+      renderTarget{target} {}
+
 void ConcreteRenderer::drawCharacter(int x, int y, char c) {
     if (x < 0 || x >= screenBuffer.getWidth()) return;
     if (y < 0 || y >= screenBuffer.getHeight()) return;
@@ -35,12 +40,11 @@ void ConcreteRenderer::drawRect(int x, int y, int w, int h, char border, char fi
 }
 
 void ConcreteRenderer::clear() {
-    std::fill(screenBuffer.getRawBufferContent(),
-              screenBuffer.getRawBufferContent() + width * height, ' ');
+    drawRect(0, 0, width, height, ' ');
 }
 
 void ConcreteRenderer::draw() {
-    // todo: draws to the render target
+    renderTarget->render(screenBuffer);
 }
 
 }

@@ -6,6 +6,7 @@
 #define FINAL_PROJECT__CURSESRENDERER_H_
 
 #include <exception>
+#include <ncurses.h>
 #include "../renderer/ScreenBuffer.h"
 
 namespace AGE {
@@ -15,12 +16,13 @@ class InvalidBufferSizeException : std::exception {};
 class CursesRenderer {
     int width;
     int height;
+    WINDOW *window;
   public:
     explicit CursesRenderer(int width, int height);
     ~CursesRenderer();
 
     void drawBuffer(Renderer::ScreenBuffer &buffer) const;
-    [[maybe_unused]] void update() const;
+    void update() const;
 };
 
 }

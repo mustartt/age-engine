@@ -8,16 +8,18 @@
 
 namespace AGE::Renderer {
 
-ScreenBuffer::ScreenBuffer(int width, int height)
+ScreenBuffer::ScreenBuffer(size_t width, size_t height)
     : width{width}, height{height},
-      buffer{std::make_unique<char>(width * height)} {
-    std::fill(buffer.get(), buffer.get() + width * height, ' ');
+      buffer{} {
+    for (int i = 0; i < height; ++i) {
+        buffer.emplace_back(width, ' ');
+    }
 }
 
 void ScreenBuffer::drawCharacter(int x, int y, char c) {
     assert(0 <= x && x < width && "invalid x screen buffer pos");
     assert(0 <= x && x < width && "invalid y screen buffer pos");
-    buffer.get()[y * width + x] = c;
+    buffer[y][x] = c;
 }
 
 }

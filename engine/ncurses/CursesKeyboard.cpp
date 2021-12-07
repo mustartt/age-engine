@@ -8,8 +8,8 @@
 namespace AGE {
 
 CursesKeyboard::CursesKeyboard() {
-    if (nodelay(stdscr, true) == ERR) {
-        throw NoDelayUnavailableException{};
+    if (nodelay(stdscr, TRUE) == ERR) {
+        // throw NoDelayUnavailableException{};
     }
 }
 

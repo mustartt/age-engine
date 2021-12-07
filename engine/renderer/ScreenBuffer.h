@@ -6,20 +6,23 @@
 #define FINAL_PROJECT_ENGINE_RENDERER_SCREENBUFFER_H_
 
 #include <memory>
+#include <vector>
+#include <string>
 
 namespace AGE::Renderer {
 
 class ScreenBuffer {
-    int width;
-    int height;
-    std::unique_ptr<char> buffer;
+    size_t width;
+    size_t height;
+    std::vector<std::string> buffer;
   public:
-    explicit ScreenBuffer(int width, int height);
+    explicit ScreenBuffer(size_t width, size_t height);
     ~ScreenBuffer() = default;
 
-    [[nodiscard]] int getWidth() const { return width; }
-    [[nodiscard]] int getHeight() const { return height; }
-    [[nodiscard]] char *getRawBufferContent() const { return buffer.get(); }
+    [[nodiscard]] size_t getWidth() const { return width; }
+    [[nodiscard]] size_t getHeight() const { return height; }
+    std::vector<std::string> &getBuffer() { return buffer; }
+    std::string &getLine(int line) { return buffer[line]; }
 
     void drawCharacter(int x, int y, char c);
 };
