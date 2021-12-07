@@ -5,12 +5,13 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_ECS_H_
 #define FINAL_PROJECT_ENGINE_ECS_ECS_H_
 
-#include <cstdint>
-#include <vector>
-#include <memory>
+#include "../age.h"
+#include "impl/Entity.h"
+#include "impl/Component.h"
+#include "impl/System.h"
+#include "impl/Registry.h"
 
-namespace AGE {
-namespace ECS {
+namespace AGE::ECS {
 
 using EntityID = std::uint64_t;
 using ComponentID = EntityID;
@@ -18,28 +19,18 @@ using Archetype = std::vector<ComponentID>;
 using ComponentType = const char *;
 using SystemType = const char *;
 
-class Registry {
-    using EntityType = EntityID;
-  public:
-    Registry() = default;
-    virtual ~Registry() = default;
-
-    virtual EntityType createEntity() = 0;
-    virtual void destroyEntity(EntityType entityId) = 0;
-
-};
-
 class Entity {
     EntityID entityId;
     Registry *registry;
   public:
-    Entity() = default;
-    Entity(EntityID entityId, Registry *registry)
+    explicit Entity(EntityID entityId, Registry *registry)
         : entityId{entityId}, registry{registry} {}
-    Entity(const Entity &other) = default;
+    Entity(Entity &other) = default;
+    Entity(Entity &&other) = default;
+    Entity &operator=(const Entity &other) = default;
+
 };
 
-}
 }
 
 #endif //FINAL_PROJECT_ENGINE_ECS_ECS_H_

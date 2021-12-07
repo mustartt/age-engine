@@ -5,19 +5,12 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_COMPONENT_H_
 #define FINAL_PROJECT_ENGINE_ECS_COMPONENT_H_
 
-#include <typeinfo>
-#include <unordered_set>
-#include <memory>
-#include <list>
-
 #include "../ecs.h"
-#include "Entity.h"
 
-namespace AGE {
-namespace ECS {
+namespace AGE::ECS {
 
 //class Component {
-//    BasicRegistry *registry;
+//    Registry *registry;
 //  protected:
 //    template<typename T>
 //    T &GetComponent(EntityID &entity);
@@ -123,7 +116,6 @@ class ComponentManager {
     }
 };
 
-}
 }
 
 #endif //FINAL_PROJECT_ENGINE_ECS_COMPONENT_H_

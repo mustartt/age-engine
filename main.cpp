@@ -2,9 +2,7 @@
 #include <chrono>
 #include <thread>
 
-#include "engine/ncurses/CursesContextManager.h"
-#include "engine/renderer/AsciiRenderer.h"
-#include "engine/ncurses/CursesRenderAdapter.h"
+#include "engine/age.h"
 
 [[noreturn]] void DEBUG_PAUSE() {
     while (true) {
@@ -12,26 +10,19 @@
     }
 }
 
-int main(int argc, char *argv[]) {
-    using namespace AGE;
+class Application : public AGE::GameEntryPoint {
+  public:
+    Application() = default;
+    ~Application() override = default;
+    int run() override {
 
-    CursesContextManager manager(80, 25);
-    auto renderer = manager.getRendererInstance();
-    Renderer::RenderTarget *adapter = new Renderer::CursesRenderAdapter(renderer);
-    AsciiRenderer concreteRenderer(adapter, 80, 25);
+        
 
-    std::string test("Hello World!");
-
-    for (int x = 0; x < 80; ++x) {
-        for (int y = 0; y < 25; ++y) {
-            concreteRenderer.clear();
-            concreteRenderer.drawText(x, y, test);
-            concreteRenderer.draw();
-            std::this_thread::sleep_for(std::chrono::milliseconds(15));
-        }
+        return 0;
     }
-    renderer->update();
+};
 
-    DEBUG_PAUSE();
-    return 0;
+// resolve entry point extern
+std::unique_ptr<AGE::GameEntryPoint> gameEntryPoint(int argc, char *argv[]) {
+    return std::make_unique<Application>();
 }

@@ -45,9 +45,6 @@ class vec2 {
     }
 };
 
-using vec2<int> = vec2i;
-using vec2<float> = vec2f;
-
 }
 
 #endif //FINAL_PROJECT_ENGINE_DATA_VEC2_H_

@@ -12,8 +12,7 @@
 
 #include "../ecs.h"
 
-namespace AGE {
-namespace ECS {
+namespace AGE::ECS {
 
 class EntityManager {
     std::unordered_map<EntityID, Archetype> entityComponentMapping;
@@ -56,7 +55,6 @@ Archetype &EntityManager::getArchetype(EntityID entity) {
     return entityComponentMapping[entity];
 }
 
-}
 }
 
 #endif //FINAL_PROJECT_ENGINE_ENTITY_H_

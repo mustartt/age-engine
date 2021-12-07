@@ -4,24 +4,19 @@
 
 #ifndef FINAL_PROJECT_ENGINE_ECS_REGISTRY_H_
 
-#include <vector>
 #include "../ecs.h"
-#include "Entity.h"
-#include "Component.h"
-#include "System.h"
 
-namespace AGE {
-namespace ECS {
+namespace AGE::ECS {
 
-class BasicRegistry : public Registry {
+class Registry {
     std::unique_ptr<EntityManager> entityManager;
     std::unique_ptr<ComponentManager> componentManager;
     std::unique_ptr<SystemManager> systemManager;
   public:
-    BasicRegistry() : entityManager(std::make_unique<EntityManager>()),
-                      componentManager(std::make_unique<ComponentManager>()),
-                      systemManager(std::make_unique<SystemManager>()) {};
-    ~BasicRegistry() override = default;
+    Registry() : entityManager(std::make_unique<EntityManager>()),
+                 componentManager(std::make_unique<ComponentManager>()),
+                 systemManager(std::make_unique<SystemManager>()) {};
+    ~Registry() override = default;
 
     EntityID createEntity() {
         return entityManager->createEntity();
@@ -58,7 +53,7 @@ class BasicRegistry : public Registry {
         componentManager->template registerComponent<T>();
     }
     template<typename T>
-    std::shared_ptr<T> registerSystem(BasicRegistry *reg) {
+    std::shared_ptr<T> registerSystem(Registry *reg) {
         return systemManager->template registerSystem<T>(reg);
     }
     template<typename T>
@@ -67,7 +62,6 @@ class BasicRegistry : public Registry {
     }
 };
 
-}
 }
 
 #define FINAL_PROJECT_ENGINE_ECS_REGISTRY_H_
