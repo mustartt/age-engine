@@ -7,8 +7,7 @@
 
 #include <memory>
 
-namespace AGE {
-namespace Renderer {
+namespace AGE::Renderer {
 
 class ScreenBuffer {
     int width;
@@ -18,14 +17,13 @@ class ScreenBuffer {
     explicit ScreenBuffer(int width, int height);
     ~ScreenBuffer() = default;
 
-    int getWidth() const { return width; }
-    int getHeight() const { return height; }
-    char *getRawBufferContent() const { return buffer.get(); }
+    [[nodiscard]] int getWidth() const { return width; }
+    [[nodiscard]] int getHeight() const { return height; }
+    [[nodiscard]] char *getRawBufferContent() const { return buffer.get(); }
 
     void drawCharacter(int x, int y, char c);
 };
 
-}
 }
 
 #endif //FINAL_PROJECT_ENGINE_RENDERER_SCREENBUFFER_H_

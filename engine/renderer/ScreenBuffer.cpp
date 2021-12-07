@@ -6,8 +6,7 @@
 
 #include "ScreenBuffer.h"
 
-namespace AGE {
-namespace Renderer {
+namespace AGE::Renderer {
 
 ScreenBuffer::ScreenBuffer(int width, int height)
     : width{width}, height{height},
@@ -21,6 +20,5 @@ void ScreenBuffer::drawCharacter(int x, int y, char c) {
     buffer.get()[y * width + x] = c;
 }
 
-}
 }
 
