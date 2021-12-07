@@ -9,7 +9,7 @@ class CursesRenderer {
     int width;
     int height;
   public:
-    CursesRenderer(int width, int height);
+    explicit CursesRenderer(int width, int height);
     ~CursesRenderer();
 
 };
