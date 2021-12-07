@@ -13,8 +13,7 @@
 #include "../IAsciiRenderProp.h"
 #include "../../ScreenBuffer.h"
 
-namespace AGE {
-namespace Renderer {
+namespace AGE::Renderer {
 
 using BitMap = std::vector<std::pair<vec2i, char c>>;
 
@@ -22,15 +21,14 @@ class BitMapProp : public IAsciiRenderProp {
     BitMap bitmap{};
   public:
     explicit BitMapProp(BitMap bitmap) : bitmap{std::move{bitmap}} {}
-    void render(ScreenBuffer buffer, int xOffset, int yOffset) override {
+    void render(AsciiRenderer *renderer, int xOffset, int yOffset) override {
         for (auto &pair: bitmap) {
             auto pos = pair.first + vec2i(xOffset, yOffset);
-            buffer.drawCharacter(pos.x, pos.y, pair.second);
+            renderer->drawCharacter(pos.x, pos.y, pair.second);
         }
     }
 };
 
-}
 }
 
 #endif //FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_BITMAPPROP_H_
