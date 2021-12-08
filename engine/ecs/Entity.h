@@ -10,7 +10,8 @@
 #include <vector>
 #include <unordered_map>
 
-#include "../ecs.h"
+#include "ecs.h"
+#include "Registry.h"
 
 namespace AGE::ECS {
 
@@ -23,6 +24,8 @@ class Entity {
     Entity(Entity &other) = default;
     Entity(Entity &&other) = default;
     Entity &operator=(const Entity &other) = default;
+
+    EntityID getEntityId() const { return entityId; }
 
     template<typename T>
     void addComponent(T component) { registry->addComponent(entityId, component); }

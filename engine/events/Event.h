@@ -5,7 +5,12 @@
 #ifndef FINAL_PROJECT_ENGINE_EVENTS_EVENT_H_
 #define FINAL_PROJECT_ENGINE_EVENTS_EVENT_H_
 
-#include "../age.h"
+#include <functional>
+#include <vector>
+#include <memory>
+#include <unordered_map>
+#include <typeinfo>
+#include <typeindex>
 
 namespace AGE {
 

@@ -4,7 +4,10 @@
 
 #ifndef FINAL_PROJECT_ENGINE_ECS_REGISTRY_H_
 
-#include "../ecs.h"
+#include "ecs.h"
+#include "Entity.h"
+#include "Component.h"
+#include "System.h"
 
 namespace AGE::ECS {
 

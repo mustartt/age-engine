@@ -11,7 +11,7 @@
 #include <memory>
 
 
-#include "../ecs.h"
+#include "ecs.h"
 
 namespace AGE {
 namespace ECS {

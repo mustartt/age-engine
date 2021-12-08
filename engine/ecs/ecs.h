@@ -5,11 +5,19 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_ECS_H_
 #define FINAL_PROJECT_ENGINE_ECS_ECS_H_
 
-#include "../age.h"
-#include "impl/Entity.h"
-#include "impl/Component.h"
-#include "impl/System.h"
-#include "impl/Registry.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdint>
+#include <memory>
+#include <typeinfo>
+#include <unordered_set>
+#include <unordered_map>
+#include <list>
+#include <algorithm>
+#include <exception>
+#include <functional>
+#include <typeindex>
 
 namespace AGE::ECS {
 

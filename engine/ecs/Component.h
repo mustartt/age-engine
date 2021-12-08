@@ -5,7 +5,7 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_COMPONENT_H_
 #define FINAL_PROJECT_ENGINE_ECS_COMPONENT_H_
 
-#include "../ecs.h"
+#include "ecs.h"
 
 namespace AGE::ECS {
 
