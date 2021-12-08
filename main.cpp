@@ -1,16 +1,43 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <vector>
+#include <utility>
+
+#include "engine/data/vec2.h"
+#include "engine/data/vec3.h"
 
 #include "engine/age.h"
 #include "engine/Scene.h"
 #include "engine/components/EngineSystems.h"
 #include "engine/renderer/RenderComponents/impl/CharacterProp.h"
+#include "engine/renderer/RenderComponents/impl/BitMapProp.h"
 
 [[noreturn]] void DEBUG_PAUSE() {
     while (true) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
+}
+
+AGE::Renderer::BitMap createBitMap() {
+    std::vector<std::string> img{
+        "@  @@@@",
+        "@  @   ",
+        "@@@@@@@",
+        "   @  @",
+        "@@@@  @"
+    };
+
+    std::vector<std::pair<AGE::vec2<int>, char>> bitmap;
+
+    for (int x = 0; x < img[0].size(); ++x) {
+        for (int y = 0; y < img.size(); ++y) {
+            if (img[y][x] == '@') {
+                bitmap.emplace_back(AGE::vec2<int>(x - 3, y - 2), '@');
+            }
+        }
+    }
+    return bitmap;
 }
 
 class DefaultDrawScene : public AGE::Scene {
@@ -61,7 +88,7 @@ class Application : public AGE::CursesApplicationContext {
         scene->getRegistry()->setSystemArchetype<Systems::PlayerWASDControlSystem>(playerWASDArchetype);
 
         // entity creation
-        Renderer::AsciiRenderProp *charProp = new Renderer::CharacterProp('@');
+        Renderer::AsciiRenderProp *charProp = new Renderer::BitMapProp(createBitMap());
         ECS::Entity testEntity = scene->createEntity();
         testEntity.addComponent(Components::TransformComponent(vec3<int>(5, 5, 0)));
         testEntity.addComponent(Components::AsciiRenderComponent(charProp));

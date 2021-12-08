@@ -16,32 +16,27 @@ class vec2 {
     vec2(T x, T y) : x{x}, y{y} {}
     vec2(const vec2 &v) : x(v.x), y(v.y) {}
 
-    vec2 &operator=(const vec2 &v) {
+    vec2<T> &operator=(const vec2<T> &v) {
         x = v.x;
         y = v.y;
         return *this;
     }
-    vec2 operator+(vec2 &v) {
+    vec2<T> operator+(vec2<T> &v) {
         return vec2(x + v.x, y + v.y);
     }
-    vec2 operator-(vec2 &v) {
+    vec2<T> operator-(vec2<T> &v) {
         return vec2(x - v.x, y - v.y);
     }
-
-    template<typename D>
-    vec2 operator+(D s) {
+    vec2<T> operator+(T s) {
         return vec2(x + s, y + s);
     }
-    template<typename D>
-    vec2 operator-(D s) {
+    vec2<T> operator-(T s) {
         return vec2(x - s, y - s);
     }
-    template<typename D>
-    vec2 operator*(D s) {
+    vec2<T> operator*(T s) {
         return vec2(x * s, y * s);
     }
-    template<typename D>
-    vec2 operator/(D s) {
+    vec2<T> operator/(T s) {
         return vec2(x / s, y / s);
     }
 };

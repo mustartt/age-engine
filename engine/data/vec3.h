@@ -2,8 +2,8 @@
 // Created by henry on 2021-12-01.
 //
 
-#ifndef FINAL_PROJECT_ENGINE_DATA_VEC2_H_
-#define FINAL_PROJECT_ENGINE_DATA_VEC2_H_
+#ifndef FINAL_PROJECT_ENGINE_DATA_VEC3_H_
+#define FINAL_PROJECT_ENGINE_DATA_VEC3_H_
 
 namespace AGE {
 
@@ -50,4 +50,4 @@ class vec3 {
 
 }
 
-#endif //FINAL_PROJECT_ENGINE_DATA_VEC2_H_
+#endif //FINAL_PROJECT_ENGINE_DATA_VEC3_H_
