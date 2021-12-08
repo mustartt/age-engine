@@ -25,10 +25,10 @@ CursesApplicationContext::CursesApplicationContext(int width, int height)
     engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(dispatcher.get());
     eventListeners.push_back(std::move(dispatcher));
 
-    // debug: keypress handler
+    // debug: p keypress handler exists application
     std::unique_ptr<EventDispatcher>
         dispatcher2 = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::KeyPressedEvent>>
-        (this, &CursesApplicationContext::keyhandler);
+        (this, &CursesApplicationContext::exitKeyHandler);
     applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(dispatcher2.get());
     eventListeners.push_back(std::move(dispatcher2));
 }
@@ -65,9 +65,10 @@ int CursesApplicationContext::run() {
     return 0;
 }
 
-void CursesApplicationContext::keyhandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
-    if (event->getKeyCode() == 'r') {
-        isRunning = false;
+void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
+    if (event->getKeyCode() == 'p') {
+        getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
+        getEngineQueue()->dispatchEvents();
     }
 }
 

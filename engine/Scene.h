@@ -14,7 +14,7 @@ class Scene {
     std::string sceneName;
     std::unique_ptr<ECS::Registry> registry;
   public:
-    explicit Scene(std::string name = "Unknown Scene")
+    explicit Scene(std::string name = "Unnamed Scene")
         : registry(std::make_unique<ECS::Registry>()),
           sceneName(std::move(name)) {}
     virtual ~Scene() = default;
@@ -25,7 +25,9 @@ class Scene {
     ECS::Entity createEntity();
     void destroyEntity(const ECS::Entity &entity);
 
-    virtual void setup() {};
+    virtual void init() {};
+    virtual void onActivate() {};
+    virtual void onDeactivate() {};
     virtual void teardown() {};
 };
 
