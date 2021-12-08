@@ -6,5 +6,6 @@
 #define FINAL_PROJECT_ENGINE_DATA_UTILS_H_
 
 #include "vec2.h"
+#include "vec3.h"
 
 #endif //FINAL_PROJECT_ENGINE_DATA_UTILS_H_
