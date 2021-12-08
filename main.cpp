@@ -24,7 +24,7 @@ class TestScene : public AGE::Scene {
     }
 };
 
-class Application : public AGE::GameEntryPoint {
+class Application : public AGE::ApplicationContext {
   public:
     Application() = default;
     ~Application() override = default;
@@ -66,6 +66,6 @@ class Application : public AGE::GameEntryPoint {
 };
 
 // resolve entry point extern
-std::unique_ptr<AGE::GameEntryPoint> gameEntryPoint(int argc, char *argv[]) {
-    return std::make_unique<Application>();
+std::unique_ptr<AGE::ApplicationContext> gameEntryPoint(int argc, char *argv[]) {
+    return std::make_unique<AGE::CursesApplicationContext>(80, 25);
 }
