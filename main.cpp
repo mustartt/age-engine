@@ -37,6 +37,7 @@ class Application : public AGE::CursesApplicationContext {
         // component registration
         scene->getRegistry()->registerComponent<Components::TransformComponent>();
         scene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
+        scene->getRegistry()->registerComponent<Components::EntityTagComponent>();
 
         // ascii renderer setup and registration
         auto asciiRenderSystem = scene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>(scene->getRegistry());
@@ -49,12 +50,24 @@ class Application : public AGE::CursesApplicationContext {
             .push_back(scene->getRegistry()->getComponentType<Components::AsciiRenderComponent>());
         scene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRendererSystemArchetype);
 
+        // player wasd controller system setup and registation
+        auto playerWASD = scene->getRegistry()->registerSystem<Systems::PlayerWASDControlSystem>(scene->getRegistry());
+
+        ECS::Archetype playerWASDArchetype;
+        playerWASDArchetype
+            .push_back(scene->getRegistry()->getComponentType<Components::TransformComponent>());
+        playerWASDArchetype
+            .push_back(scene->getRegistry()->getComponentType<Components::EntityTagComponent>());
+        scene->getRegistry()->setSystemArchetype<Systems::PlayerWASDControlSystem>(playerWASDArchetype);
+
         // entity creation
         Renderer::AsciiRenderProp *charProp = new Renderer::CharacterProp('@');
         ECS::Entity testEntity = scene->createEntity();
         testEntity.addComponent(Components::TransformComponent(vec3<int>(5, 5, 0)));
         testEntity.addComponent(Components::AsciiRenderComponent(charProp));
+        testEntity.addComponent(Components::EntityTagComponent("PlayerWASD"));
 
+        // render dispatch
         std::unique_ptr<EventDispatcher>
             renderDispatcher =
             std::make_unique<FunctionEventDispatcher<Events::EngineDrawEvent>>(
@@ -63,6 +76,16 @@ class Application : public AGE::CursesApplicationContext {
                 });
         engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(renderDispatcher.get());
         eventListeners.push_back(std::move(renderDispatcher));
+
+        // keyboard dispatch
+        std::unique_ptr<EventDispatcher>
+            keyboardDispatch =
+            std::make_unique<FunctionEventDispatcher<Events::KeyPressedEvent>>(
+                [playerWASD](Events::KeyPressedEvent *event, EventQueue *queue) {
+                  playerWASD->move(event->getKeyCode());
+                });
+        applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
+        eventListeners.push_back(std::move(keyboardDispatch));
     }
 };
 

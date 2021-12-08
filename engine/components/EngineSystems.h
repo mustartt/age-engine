@@ -41,6 +41,32 @@ class AsciiRenderSystem : public ECS::System {
     }
 };
 
+// uses TransformComponent, EntityTagComponent
+class PlayerWASDControlSystem : public ECS::System {
+  public:
+    explicit PlayerWASDControlSystem(ECS::Registry *registry) : ECS::System(registry) {}
+    void move(int keycode) {
+        for (auto &entityId: entities) {
+            auto entity = ECS::Entity(entityId, registry);
+            auto &tag = entity.getComponent<Components::EntityTagComponent>();
+            if (tag.getTag() == "PlayerWASD") {
+                auto &transform = entity.getComponent<Components::TransformComponent>();
+                switch (keycode) {
+                    case 'w':transform.getPosition().y -= 1;
+                        break;
+                    case 'a':transform.getPosition().x -= 1;
+                        break;
+                    case 's':transform.getPosition().y += 1;
+                        break;
+                    case 'd':transform.getPosition().x += 1;
+                        break;
+                    default:break;
+                }
+            }
+        }
+    }
+};
+
 }
 
 #endif //FINAL_PROJECT_ENGINE_COMPONENTS_ENGINESYSTEMS_H_

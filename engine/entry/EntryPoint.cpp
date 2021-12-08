@@ -50,15 +50,11 @@ void CursesApplicationContext::init() {
 }
 
 int CursesApplicationContext::run() {
-    auto delay = std::chrono::milliseconds(500);
-    int count = 0;
+    auto delay = std::chrono::milliseconds(33);
     while (isRunning) {
-        ++count;
         // queue up engine events
         engineEventQueue->enqueue<Events::EngineDrawEvent>();
         engineEventQueue->enqueue<Events::EngineUpdateEvent>(delay);
-
-        if (count > 100) engineEventQueue->enqueue<Events::EngineShutdownEvent>(0);
 
         // queue all user keyboard inputs
         manager->getKeyboardInstance()->captureInputs();
@@ -68,10 +64,9 @@ int CursesApplicationContext::run() {
             keycode = manager->getKeyboardInstance()->getKeycode();
         }
 
-        engineEventQueue->dispatchEvents(); // dispatch engine events first
         applicationEventQueue->dispatchEvents(); // dispatch application events second
+        engineEventQueue->dispatchEvents(); // dispatch engine events first
         std::this_thread::sleep_for(delay);
-
     }
     return 0;
 }
