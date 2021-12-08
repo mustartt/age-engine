@@ -16,7 +16,7 @@ class Entity {
   public:
     explicit Entity(EntityID entityId, Registry *registry)
         : entityId{entityId}, registry{registry} {}
-    Entity(Entity &other) = default;
+    Entity(const Entity &other) = default;
     Entity(Entity &&other) = default;
     Entity &operator=(const Entity &other) = default;
 
@@ -27,7 +27,7 @@ class Entity {
     template<typename T>
     bool hasComponent() { return registry->hasComponent<T>(entityId); }
     template<typename T>
-    T &getComponent() { registry->getComponent<T>(entityId); }
+    T &getComponent() { return registry->getComponent<T>(entityId); }
     template<typename T>
     void removeComponent() { registry->removeComponent<T>(entityId); }
 };

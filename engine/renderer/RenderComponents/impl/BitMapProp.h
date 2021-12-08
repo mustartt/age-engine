@@ -10,14 +10,14 @@
 
 #include "../../../data/vec2.h"
 
-#include "../IAsciiRenderProp.h"
+#include "../AsciiRenderProp.h"
 #include "../../ScreenBuffer.h"
 
 namespace AGE::Renderer {
 
 using BitMap = std::vector<std::pair<vec2i, char c>>;
 
-class BitMapProp : public IAsciiRenderProp {
+class BitMapProp : public AsciiRenderProp {
     BitMap bitmap{};
   public:
     explicit BitMapProp(BitMap bitmap) : bitmap{std::move{bitmap}} {}

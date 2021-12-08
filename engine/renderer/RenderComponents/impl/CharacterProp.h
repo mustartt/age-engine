@@ -5,16 +5,17 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_CHARACTERPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_CHARACTERPROP_H_
 
-#include "../IAsciiRenderProp.h"
+#include "../AsciiRenderProp.h"
 #include "../../ScreenBuffer.h"
+#include "../../AsciiRenderer.h"
 
 namespace AGE::Renderer {
 
-class CharacterProp : public IAsciiRenderProp {
+class CharacterProp : public AsciiRenderProp {
     char character;
   public:
     explicit CharacterProp(char c) : character{c} {}
-    void render(AsciiRenderer *renderer, int xOffset, int yOffset) const override {
+    void render(AsciiRenderer *renderer, int xOffset, int yOffset) override {
         renderer->drawCharacter(xOffset, yOffset, character);
     }
 };

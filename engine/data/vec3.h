@@ -9,6 +9,7 @@ namespace AGE {
 
 template<typename T>
 class vec3 {
+  public:
     T x;
     T y;
     T z;

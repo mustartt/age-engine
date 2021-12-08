@@ -15,8 +15,8 @@ class System {
   protected:
     Registry *registry;
   public:
-    explicit System(Registry *registry) : registry(registry) {}
     std::set<EntityID> entities;
+    explicit System(Registry *registry) : registry(registry) {}
 };
 
 class SystemAlreadyRegistered : public std::exception {};

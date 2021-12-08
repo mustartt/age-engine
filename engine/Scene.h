@@ -12,15 +12,16 @@ namespace AGE {
 
 class Scene {
     std::string sceneName;
-    ECS::Registry registry;
+    std::unique_ptr<ECS::Registry> registry;
   public:
     explicit Scene(std::string name = "Unknown Scene")
-        : registry(), sceneName(std::move(name)) {}
+        : registry(std::make_unique<ECS::Registry>()),
+          sceneName(std::move(name)) {}
     virtual ~Scene() = default;
 
     [[nodiscard]] const std::string &getSceneName() const { return sceneName; }
 
-    ECS::Registry &getRegistry() { return registry; }
+    ECS::Registry *getRegistry() { return registry.get(); }
     ECS::Entity createEntity();
     void destroyEntity(const ECS::Entity &entity);
 

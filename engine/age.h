@@ -22,7 +22,6 @@
 #include <typeindex>
 
 /* engine includes */
-#include "data/utils.h"
 #include "entry/EntryPoint.h"
 #include "events/Event.h"
 #include "ncurses/curseswrapper.h"

@@ -5,12 +5,12 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 
-#include "../IAsciiRenderProp.h"
+#include "../AsciiRenderProp.h"
 #include "../../ScreenBuffer.h"
 
 namespace AGE::Renderer {
 
-class RectProp : public IAsciiRenderProp {
+class RectProp : public AsciiRenderProp {
     char character;
     int width;
     int height;
