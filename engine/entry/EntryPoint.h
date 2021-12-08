@@ -44,6 +44,8 @@ class CursesApplicationContext : public ApplicationContext {
     int run() override;
   private:
     void stop(Events::EngineShutdownEvent *event, EventQueue *eventQueue) { isRunning = false; }
+
+    void keyhandler(Events::KeyPressedEvent *event, EventQueue *eventQueue);
 };
 
 }

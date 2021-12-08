@@ -27,6 +27,20 @@ class EngineShutdownEvent : public EngineEvent {
     [[nodiscard]] int getStopCode() const { return stopcode; }
 };
 
+class ApplicationEvent : public Event {};
+class KeyPressedEvent : public ApplicationEvent {
+    int keycode;
+  public:
+    explicit KeyPressedEvent(int code) : keycode(code) {}
+    [[nodiscard]] int getKeyCode() const { return keycode; }
+};
+class SwitchSceneEvent : public ApplicationEvent {
+    std::string newSceneName;
+  public:
+    explicit SwitchSceneEvent(std::string name) : newSceneName(std::move(name)) {}
+    [[nodiscard]] const std::string &getNewSceneName() const { return newSceneName; }
+};
+
 }
 
 #endif //FINAL_PROJECT_ENGINE_EVENTS_ENGINE_EVENTS_ENGINEEVENT_H_

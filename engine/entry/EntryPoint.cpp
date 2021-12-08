@@ -7,7 +7,6 @@
 #include <thread>
 #include "EntryPoint.h"
 #include "../ncurses/CursesRenderAdapter.h"
-#include "../events/engine_events/EngineEvent.h"
 
 namespace AGE {
 
@@ -25,6 +24,13 @@ CursesApplicationContext::CursesApplicationContext(int width, int height)
         (this, &CursesApplicationContext::stop);
     engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(dispatcher.get());
     eventListeners.push_back(std::move(dispatcher));
+
+    // debug: keypress handler
+    std::unique_ptr<EventDispatcher>
+        dispatcher2 = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::KeyPressedEvent>>
+        (this, &CursesApplicationContext::keyhandler);
+    applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(dispatcher2.get());
+    eventListeners.push_back(std::move(dispatcher2));
 }
 
 void CursesApplicationContext::init() {
@@ -37,16 +43,32 @@ int CursesApplicationContext::run() {
     int count = 0;
     while (isRunning) {
         ++count;
+        // queue up engine events
         engineEventQueue->enqueue<Events::EngineDrawEvent>();
         engineEventQueue->enqueue<Events::EngineUpdateEvent>(delay);
 
         if (count > 100) engineEventQueue->enqueue<Events::EngineShutdownEvent>(0);
 
-        engineEventQueue->dispatchEvents();
+        // queue all user keyboard inputs
+        manager->getKeyboardInstance()->captureInputs();
+        std::optional<int> keycode = manager->getKeyboardInstance()->getKeycode();
+        while (keycode) {
+            applicationEventQueue->enqueue<Events::KeyPressedEvent>(keycode.value());
+            keycode = manager->getKeyboardInstance()->getKeycode();
+        }
+
+        engineEventQueue->dispatchEvents(); // dispatch engine events first
+        applicationEventQueue->dispatchEvents(); // dispatch application events second
         std::this_thread::sleep_for(delay);
 
     }
     return 0;
+}
+
+void CursesApplicationContext::keyhandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
+    if (event->getKeyCode() == 'r') {
+        isRunning = false;
+    }
 }
 
 }

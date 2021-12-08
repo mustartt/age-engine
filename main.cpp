@@ -13,17 +13,6 @@
     }
 }
 
-class TestScene : public AGE::Scene {
-  public:
-    void setup() override {
-        using namespace AGE;
-
-    }
-    void teardown() override {
-
-    }
-};
-
 class Application : public AGE::ApplicationContext {
   public:
     Application() = default;
@@ -34,7 +23,7 @@ class Application : public AGE::ApplicationContext {
         Renderer::RenderTarget *adapter = new Renderer::CursesRenderAdapter(manager.getRendererInstance());
         auto *renderer = new AsciiRenderer(adapter, 80, 25);
 
-        Scene *scene = new TestScene();
+        Scene *scene = new Scene();
 
         auto *sceneRegistry = scene->getRegistry();
 
