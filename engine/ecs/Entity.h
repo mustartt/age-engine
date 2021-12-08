@@ -5,11 +5,6 @@
 #ifndef FINAL_PROJECT_ENGINE_ENTITY_H_
 #define FINAL_PROJECT_ENGINE_ENTITY_H_
 
-#include <cstdint>
-#include <string>
-#include <vector>
-#include <unordered_map>
-
 #include "ecs.h"
 #include "Registry.h"
 
@@ -25,58 +20,17 @@ class Entity {
     Entity(Entity &&other) = default;
     Entity &operator=(const Entity &other) = default;
 
-    EntityID getEntityId() const { return entityId; }
+    [[nodiscard]] EntityID getEntityId() const { return entityId; }
 
     template<typename T>
     void addComponent(T component) { registry->addComponent(entityId, component); }
     template<typename T>
-    bool hasComponent() { registry->hasComponent<T>(entityId); }
+    bool hasComponent() { return registry->hasComponent<T>(entityId); }
     template<typename T>
     T &getComponent() { registry->getComponent<T>(entityId); }
     template<typename T>
     void removeComponent() { registry->removeComponent<T>(entityId); }
 };
-
-class EntityManager {
-    std::unordered_map<EntityID, Archetype> entityComponentMapping;
-    EntityID entitySequenceID;
-    size_t entityCount;
-    // id generator singleton
-
-  public:
-    EntityManager();
-    ~EntityManager() = default;
-
-    EntityID createEntity();
-    void destroyEntity(EntityID entity);
-    void setArchetype(EntityID entity, Archetype &archetype);
-    Archetype &getArchetype(EntityID entity);
-};
-
-class InvalidEntityException : public std::exception {};
-
-EntityManager::EntityManager()
-    : entitySequenceID{0}, entityCount{0},
-      entityComponentMapping{} {}
-
-EntityID EntityManager::createEntity() {
-    ++entityCount;
-    return entitySequenceID++;
-}
-
-void EntityManager::destroyEntity(EntityID entity) {
-    if (!entityComponentMapping.count(entity)) throw InvalidEntityException();
-    entityComponentMapping.erase(entity);
-    --entityCount;
-}
-
-void EntityManager::setArchetype(EntityID entity, Archetype &archetype) {
-    entityComponentMapping[entity] = archetype;
-}
-
-Archetype &EntityManager::getArchetype(EntityID entity) {
-    return entityComponentMapping[entity];
-}
 
 }
 

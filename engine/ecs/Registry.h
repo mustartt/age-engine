@@ -5,9 +5,9 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_REGISTRY_H_
 
 #include "ecs.h"
-#include "Entity.h"
-#include "Component.h"
-#include "System.h"
+#include "EntityManager.h"
+#include "ComponentManager.h"
+#include "SystemManager.h"
 
 namespace AGE::ECS {
 
@@ -19,7 +19,7 @@ class Registry {
     Registry() : entityManager(std::make_unique<EntityManager>()),
                  componentManager(std::make_unique<ComponentManager>()),
                  systemManager(std::make_unique<SystemManager>()) {};
-    ~Registry() override = default;
+    ~Registry() = default;
 
     EntityID createEntity() {
         return entityManager->createEntity();

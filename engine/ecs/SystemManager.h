@@ -2,19 +2,12 @@
 // Created by henry on 2021-12-01.
 //
 
-#ifndef FINAL_PROJECT_ENGINE_ECS_SYSTEM_H_
-#define FINAL_PROJECT_ENGINE_ECS_SYSTEM_H_
-
-#include <unordered_map>
-#include <unordered_set>
-#include <set>
-#include <memory>
-
+#ifndef FINAL_PROJECT_ENGINE_ECS_SYSTEMMANAGER_H_
+#define FINAL_PROJECT_ENGINE_ECS_SYSTEMMANAGER_H_
 
 #include "ecs.h"
 
-namespace AGE {
-namespace ECS {
+namespace AGE::ECS {
 
 class Registry;
 
@@ -78,6 +71,5 @@ class SystemManager {
 };
 
 }
-}
 
-#endif //FINAL_PROJECT_ENGINE_ECS_SYSTEM_H_
+#endif //FINAL_PROJECT_ENGINE_ECS_SYSTEMMANAGER_H_

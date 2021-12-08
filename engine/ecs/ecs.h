@@ -16,8 +16,8 @@
 #include <list>
 #include <algorithm>
 #include <exception>
-#include <functional>
 #include <typeindex>
+#include <set>
 
 namespace AGE::ECS {
 

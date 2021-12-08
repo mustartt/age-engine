@@ -6,7 +6,7 @@
 #define FINAL_PROJECT_ENGINE_SCENE_H_
 
 #include "age.h"
-#include "ecs/Registry.h"
+#include "ecs/Entity.h"
 
 namespace AGE {
 
