@@ -13,32 +13,41 @@
     }
 }
 
-class Application : public AGE::ApplicationContext {
+class DefaultDrawScene : public AGE::Scene {
   public:
-    Application() = default;
+    DefaultDrawScene(const std::string &name) : AGE::Scene(name) {}
+    ~DefaultDrawScene() override = default;
+    void init() override {}
+    void onActivate() override {}
+    void onDeactivate() override {}
+    void teardown() override {}
+};
+
+class Application : public AGE::CursesApplicationContext {
+  public:
+    Application(int width, int height) : AGE::CursesApplicationContext(width, height) {}
     ~Application() override = default;
-    int run() override {
+    void init() override {
+        AGE::CursesApplicationContext::init();
         using namespace AGE;
-        CursesContextManager manager(80, 25);
-        Renderer::RenderTarget *adapter = new Renderer::CursesRenderAdapter(manager.getRendererInstance());
-        auto *renderer = new AsciiRenderer(adapter, 80, 25);
 
-        Scene *scene = new Scene();
+        Scene *scene = getSceneManager()->createScene<DefaultDrawScene>("Draw_Scene");
 
-        auto *sceneRegistry = scene->getRegistry();
-
+        using namespace AGE;
         // component registration
-        sceneRegistry->registerComponent<Components::TransformComponent>();
-        sceneRegistry->registerComponent<Components::AsciiRenderComponent>();
+        scene->getRegistry()->registerComponent<Components::TransformComponent>();
+        scene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
 
         // ascii renderer setup and registration
-        auto asciiRenderSystem = sceneRegistry->registerSystem<Systems::AsciiRenderSystem>(sceneRegistry);
-        asciiRenderSystem->setRenderer(renderer);
+        auto asciiRenderSystem = scene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>(scene->getRegistry());
+        asciiRenderSystem->setRenderer(asciiRenderer.get());
 
         ECS::Archetype asciiRendererSystemArchetype;
-        asciiRendererSystemArchetype.push_back(sceneRegistry->getComponentType<Components::TransformComponent>());
-        asciiRendererSystemArchetype.push_back(sceneRegistry->getComponentType<Components::AsciiRenderComponent>());
-        sceneRegistry->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRendererSystemArchetype);
+        asciiRendererSystemArchetype
+            .push_back(scene->getRegistry()->getComponentType<Components::TransformComponent>());
+        asciiRendererSystemArchetype
+            .push_back(scene->getRegistry()->getComponentType<Components::AsciiRenderComponent>());
+        scene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRendererSystemArchetype);
 
         // entity creation
         Renderer::AsciiRenderProp *charProp = new Renderer::CharacterProp('@');
@@ -46,15 +55,18 @@ class Application : public AGE::ApplicationContext {
         testEntity.addComponent(Components::TransformComponent(vec3<int>(5, 5, 0)));
         testEntity.addComponent(Components::AsciiRenderComponent(charProp));
 
-        renderer->clear();
-        asciiRenderSystem->render();
-        renderer->draw();
-
-        return 0;
+        std::unique_ptr<EventDispatcher>
+            renderDispatcher =
+            std::make_unique<FunctionEventDispatcher<Events::EngineDrawEvent>>(
+                [asciiRenderSystem](Events::EngineDrawEvent *event, EventQueue *queue) {
+                  asciiRenderSystem->render();
+                });
+        engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(renderDispatcher.get());
+        eventListeners.push_back(std::move(renderDispatcher));
     }
 };
 
 // resolve entry point extern
 std::unique_ptr<AGE::ApplicationContext> gameEntryPoint(int argc, char *argv[]) {
-    return std::make_unique<AGE::CursesApplicationContext>(80, 25);
+    return std::make_unique<Application>(80, 25);
 }

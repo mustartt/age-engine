@@ -45,7 +45,7 @@ class SceneManager {
 
     std::optional<Scene *> getActiveScene() {
         if (!activeSceneName) return {};
-        return make_optional(loadedScenes[activeSceneName.value()].get());
+        return std::make_optional(loadedScenes[activeSceneName.value()].get());
     }
 
     void setActiveScene(const std::string &name) {

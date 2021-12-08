@@ -7,6 +7,7 @@
 #include <thread>
 #include "EntryPoint.h"
 #include "../ncurses/CursesRenderAdapter.h"
+#include "../SceneManager.h"
 
 namespace AGE {
 
@@ -17,20 +18,30 @@ CursesApplicationContext::CursesApplicationContext(int width, int height)
       applicationEventQueue(std::make_unique<EventQueue>()),
       renderTarget(std::make_unique<Renderer::CursesRenderAdapter>(manager->getRendererInstance())),
       asciiRenderer(std::make_unique<AsciiRenderer>(renderTarget.get(), width, height)),
+      sceneManager(std::make_unique<SceneManager>()),
       eventListeners{} {
-    // shutdown event listener
+    // shutdown event handler
     std::unique_ptr<EventDispatcher>
-        dispatcher = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::EngineShutdownEvent>>
-        (this, &CursesApplicationContext::stop);
-    engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(dispatcher.get());
-    eventListeners.push_back(std::move(dispatcher));
+        shutdownDispatcher =
+        std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::EngineShutdownEvent>>
+            (this, &CursesApplicationContext::shutdownHandler);
+    engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(shutdownDispatcher.get());
+    eventListeners.push_back(std::move(shutdownDispatcher));
 
     // debug: p keypress handler exists application
     std::unique_ptr<EventDispatcher>
-        dispatcher2 = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::KeyPressedEvent>>
+        exitKeyDispatcher = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::KeyPressedEvent>>
         (this, &CursesApplicationContext::exitKeyHandler);
-    applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(dispatcher2.get());
-    eventListeners.push_back(std::move(dispatcher2));
+    applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(exitKeyDispatcher.get());
+    eventListeners.push_back(std::move(exitKeyDispatcher));
+
+    // switch scene handler
+    std::unique_ptr<EventDispatcher>
+        switchSceneDispatcher =
+        std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::SwitchSceneEvent>>
+            (this, &CursesApplicationContext::changeSceneHandler);
+    applicationEventQueue->registerEventDispatcher<Events::SwitchSceneEvent>(switchSceneDispatcher.get());
+    eventListeners.push_back(std::move(switchSceneDispatcher));
 }
 
 void CursesApplicationContext::init() {
@@ -70,6 +81,10 @@ void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, Ev
         getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
         getEngineQueue()->dispatchEvents();
     }
+}
+
+void CursesApplicationContext::changeSceneHandler(Events::SwitchSceneEvent *event, EventQueue *eventQueue) {
+
 }
 
 }

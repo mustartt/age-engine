@@ -22,6 +22,7 @@ class AsciiRenderSystem : public ECS::System {
         : ECS::System(registry) {}
     void setRenderer(AsciiRenderer *asciiRenderer) { renderer = asciiRenderer; }
     void render() {
+        renderer->clear();
         std::map<int, std::vector<ECS::Entity>> renderLayer;
         for (auto &entityId: entities) {
             auto entity = ECS::Entity(entityId, registry);
@@ -36,6 +37,7 @@ class AsciiRenderSystem : public ECS::System {
                 prop.getRenderProp()->render(renderer, transform.getPosition().x, transform.getPosition().y);
             }
         }
+        renderer->draw();
     }
 };
 

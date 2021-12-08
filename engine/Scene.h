@@ -22,8 +22,13 @@ class Scene {
     [[nodiscard]] const std::string &getSceneName() const { return sceneName; }
 
     ECS::Registry *getRegistry() { return registry.get(); }
-    ECS::Entity createEntity();
-    void destroyEntity(const ECS::Entity &entity);
+    ECS::Entity createEntity() {
+        auto id = registry->createEntity();
+        return ECS::Entity(id, registry.get());
+    }
+    void destroyEntity(const ECS::Entity &entity) {
+        registry->destroyEntity(entity.getEntityId());
+    }
 
     virtual void init() {};
     virtual void onActivate() {};

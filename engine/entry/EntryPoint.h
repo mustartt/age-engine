@@ -12,6 +12,7 @@
 #include "../renderer/RenderTarget.h"
 #include "../renderer/AsciiRenderer.h"
 #include "../events/engine_events/EngineEvent.h"
+#include "../SceneManager.h"
 
 namespace AGE {
 
@@ -24,14 +25,21 @@ class ApplicationContext {
 };
 
 class CursesApplicationContext : public ApplicationContext {
+  protected:
     int windowWidth;
     int windowHeight;
     std::unique_ptr<CursesContextManager> manager;
+
     std::unique_ptr<EventQueue> engineEventQueue;
     std::unique_ptr<EventQueue> applicationEventQueue;
+
     std::unique_ptr<Renderer::RenderTarget> renderTarget;
     std::unique_ptr<AsciiRenderer> asciiRenderer;
+
+    std::unique_ptr<SceneManager> sceneManager;
+
     std::vector<std::unique_ptr<EventDispatcher>> eventListeners;
+
     bool isRunning = true;
   public:
     CursesApplicationContext(int width, int height);
@@ -42,9 +50,12 @@ class CursesApplicationContext : public ApplicationContext {
 
     void init() override;
     int run() override;
+
+    SceneManager *getSceneManager() const { return sceneManager.get(); }
   private:
-    void stop(Events::EngineShutdownEvent *event, EventQueue *eventQueue) { isRunning = false; }
+    void shutdownHandler(Events::EngineShutdownEvent *event, EventQueue *eventQueue) { isRunning = false; }
     void exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue); // debug: exits on p
+    void changeSceneHandler(Events::SwitchSceneEvent *event, EventQueue *eventQueue);
 };
 
 }
