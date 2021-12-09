@@ -68,7 +68,7 @@ class Registry {
     }
 
     template<typename T>
-    std::shared_ptr<T> registerSystem(Registry *reg) {
+    T* registerSystem(Registry *reg) {
         return systemManager->template registerSystem<T>(reg);
     }
 

@@ -25,15 +25,14 @@ class SystemNotRegistered : public std::exception {};
 
 class SystemManager {
     std::unordered_map<SystemType, Archetype> archetypes;
-    std::unordered_map<SystemType, std::shared_ptr<System>> systems;
+    std::unordered_map<SystemType, std::unique_ptr<System>> systems;
   public:
     template<typename T>
-    std::shared_ptr<T> registerSystem(Registry *reg) {
+    T *registerSystem(Registry *reg) {
         auto typeName = typeid(T).name();
         if (archetypes.count(typeName)) throw SystemAlreadyRegistered{};
-        auto system = std::make_shared<T>(reg);
-        systems[typeName] = system;
-        return system;
+        systems[typeName] = std::move(std::make_unique<T>(reg));
+        return static_cast<T *>(systems[typeName].get());
     }
 
     template<typename T>
