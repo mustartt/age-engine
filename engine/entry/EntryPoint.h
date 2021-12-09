@@ -20,8 +20,9 @@ class ApplicationContext {
   public:
     ApplicationContext() = default;
     virtual ~ApplicationContext() = default;
-    virtual int run() = 0;
+    virtual void run() = 0;
     virtual void init() = 0;
+    virtual void stop() = 0;
 };
 
 class CursesApplicationContext : public ApplicationContext {
@@ -38,7 +39,7 @@ class CursesApplicationContext : public ApplicationContext {
 
     std::unique_ptr<SceneManager> sceneManager;
 
-    std::vector<std::unique_ptr<EventDispatcher>> eventListeners;
+    std::unordered_map<std::string, std::unique_ptr<EventDispatcher>> eventListeners;
 
     bool isRunning = true;
   public:
@@ -49,7 +50,8 @@ class CursesApplicationContext : public ApplicationContext {
     [[nodiscard]] EventQueue *getApplicationQueue() const { return applicationEventQueue.get(); }
 
     void init() override;
-    int run() override;
+    void run() override;
+    void stop() override;
 
     SceneManager *getSceneManager() const { return sceneManager.get(); }
   private:

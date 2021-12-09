@@ -26,14 +26,14 @@ CursesApplicationContext::CursesApplicationContext(int width, int height)
         std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::EngineShutdownEvent>>
             (this, &CursesApplicationContext::shutdownHandler);
     engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(shutdownDispatcher.get());
-    eventListeners.push_back(std::move(shutdownDispatcher));
+    eventListeners["shutdown"] = std::move(shutdownDispatcher);
 
     // debug: p keypress handler exists application
     std::unique_ptr<EventDispatcher>
         exitKeyDispatcher = std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::KeyPressedEvent>>
         (this, &CursesApplicationContext::exitKeyHandler);
     applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(exitKeyDispatcher.get());
-    eventListeners.push_back(std::move(exitKeyDispatcher));
+    eventListeners["exit_key"] = std::move(exitKeyDispatcher);
 
     // switch scene handler
     std::unique_ptr<EventDispatcher>
@@ -41,7 +41,7 @@ CursesApplicationContext::CursesApplicationContext(int width, int height)
         std::make_unique<MemberEventDispatcher<CursesApplicationContext, Events::SwitchSceneEvent>>
             (this, &CursesApplicationContext::changeSceneHandler);
     applicationEventQueue->registerEventDispatcher<Events::SwitchSceneEvent>(switchSceneDispatcher.get());
-    eventListeners.push_back(std::move(switchSceneDispatcher));
+    eventListeners["switch_scene"] = std::move(switchSceneDispatcher);
 }
 
 void CursesApplicationContext::init() {
@@ -49,7 +49,7 @@ void CursesApplicationContext::init() {
     engineEventQueue->dispatchEvents();
 }
 
-int CursesApplicationContext::run() {
+void CursesApplicationContext::run() {
     auto delay = std::chrono::milliseconds(33);
     while (isRunning) {
         // queue up engine events
@@ -68,7 +68,12 @@ int CursesApplicationContext::run() {
         engineEventQueue->dispatchEvents(); // dispatch engine events first
         std::this_thread::sleep_for(delay);
     }
-    return 0;
+}
+
+void CursesApplicationContext::stop() {
+    engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(eventListeners["shutdown"].get());
+    applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(eventListeners["exist_key"].get());
+    applicationEventQueue->registerEventDispatcher<Events::SwitchSceneEvent>(eventListeners["switch_scene"].get());
 }
 
 void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
@@ -88,7 +93,9 @@ void CursesApplicationContext::changeSceneHandler(Events::SwitchSceneEvent *even
 int main(int argc, char *argv[]) {
     auto ptr = gameEntryPoint(argc, argv);
     ptr->init();
-    return ptr->run();
+    ptr->run();
+    ptr->stop();
+    return 0;
 }
 
 #endif

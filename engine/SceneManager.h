@@ -50,10 +50,11 @@ class SceneManager {
 
     void setActiveScene(const std::string &name) {
         if (!loadedScenes.count(name)) throw InvalidSceneName{};
-        std::string old{activeSceneName.value()};
+        if (activeSceneName) {
+            loadedScenes[activeSceneName.value()]->onDeactivate();
+        }
         activeSceneName = name;
         loadedScenes[name]->onActivate();
-        loadedScenes[old]->onDeactivate();
     }
 };
 

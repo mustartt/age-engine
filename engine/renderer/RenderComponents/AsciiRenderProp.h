@@ -9,6 +9,8 @@ namespace AGE::Renderer {
 
 class AsciiRenderProp {
   public:
+    AsciiRenderProp() = default;
+    virtual ~AsciiRenderProp() = default;
     virtual void render(AsciiRenderer *renderer, int xOffset, int yOffset) = 0;
 };
 
