@@ -4,8 +4,8 @@
 #include <vector>
 #include <utility>
 
-#include "engine/data/vec2.h"
-#include "engine/data/vec3.h"
+#include "engine/utils/vec2.h"
+#include "engine/utils/vec3.h"
 
 #include "engine/age.h"
 #include "engine/Scene.h"

@@ -6,7 +6,7 @@
 #define FINAL_PROJECT_ENGINE_COMPONENTS_ENGINECOMPONENTS_H_
 
 #include "../renderer/RenderComponents/AsciiRenderProp.h"
-#include "../data/vec3.h"
+#include "../utils/vec3.h"
 
 #include <string>
 
