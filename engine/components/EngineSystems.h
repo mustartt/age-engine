@@ -39,6 +39,12 @@ class AsciiRenderSystem : public ECS::System {
         }
         renderer->draw();
     }
+    ECS::Archetype getSystemArchetype() override {
+        ECS::Archetype archetype;
+        archetype.push_back(registry->getComponentType<Components::TransformComponent>());
+        archetype.push_back(registry->getComponentType<Components::AsciiRenderComponent>());
+        return archetype;
+    }
 };
 
 // uses TransformComponent, EntityTagComponent
@@ -64,6 +70,12 @@ class PlayerWASDControlSystem : public ECS::System {
                 }
             }
         }
+    }
+    ECS::Archetype getSystemArchetype() override {
+        ECS::Archetype archetype;
+        archetype.push_back(registry->getComponentType<Components::TransformComponent>());
+        archetype.push_back(registry->getComponentType<Components::EntityTagComponent>());
+        return archetype;
     }
 };
 

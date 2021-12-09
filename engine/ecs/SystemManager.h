@@ -17,6 +17,7 @@ class System {
   public:
     std::set<EntityID> entities;
     explicit System(Registry *registry) : registry(registry) {}
+    virtual Archetype getSystemArchetype() = 0;
 };
 
 class SystemAlreadyRegistered : public std::exception {};
