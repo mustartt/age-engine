@@ -67,9 +67,9 @@ class Registry {
         componentManager->template registerComponent<T>();
     }
 
-    template<typename T>
-    T* registerSystem(Registry *reg) {
-        return systemManager->template registerSystem<T>(reg);
+    template<typename T, typename... Args>
+    T *registerSystem(Registry *reg, Args &&...args) {
+        return systemManager->template registerSystem<T>(reg, args...);
     }
 
     template<typename T>

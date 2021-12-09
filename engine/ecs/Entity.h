@@ -30,6 +30,7 @@ class Entity {
     T &getComponent() { return registry->getComponent<T>(entityId); }
     template<typename T>
     void removeComponent() { registry->removeComponent<T>(entityId); }
+    void destroyEntity() { registry->destroyEntity(entityId); }
 };
 
 }

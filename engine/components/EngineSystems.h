@@ -37,6 +37,11 @@ class AsciiRenderSystem : public ECS::System {
                 prop.getRenderProp()->render(renderer, transform.getPosition().x, transform.getPosition().y);
             }
         }
+
+        // debug: entity counts
+        auto count = std::to_string(entities.size());
+        renderer->drawText(0, 24, count);
+
         renderer->draw();
     }
     ECS::Archetype getSystemArchetype() override {

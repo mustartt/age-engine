@@ -5,9 +5,10 @@
 
 #include <chrono>
 #include <thread>
+#include <fstream>
 #include "EntryPoint.h"
 #include "../ncurses/CursesRenderAdapter.h"
-#include "../SceneManager.h"
+#include "Scene.h"
 
 namespace AGE {
 
@@ -50,8 +51,10 @@ void CursesApplicationContext::init() {
 }
 
 void CursesApplicationContext::run() {
-    auto delay = std::chrono::milliseconds(33);
+//    std::ofstream file{"log.txt"};
+    auto delay = std::chrono::milliseconds(500);
     while (isRunning) {
+        auto past = std::chrono::steady_clock::now();
         // queue up engine events
         engineEventQueue->enqueue<Events::EngineDrawEvent>();
         engineEventQueue->enqueue<Events::EngineUpdateEvent>(delay);
@@ -66,14 +69,19 @@ void CursesApplicationContext::run() {
 
         applicationEventQueue->dispatchEvents(); // dispatch application events second
         engineEventQueue->dispatchEvents(); // dispatch engine events first
+
         std::this_thread::sleep_for(delay);
+
+        auto now = std::chrono::steady_clock::now();
+        auto time = std::chrono::duration_cast<std::chrono::milliseconds>(now - past);
+//        file << "Overall Tick Time = " << time.count() << std::endl;
     }
 }
 
 void CursesApplicationContext::stop() {
-    engineEventQueue->registerEventDispatcher<Events::EngineShutdownEvent>(eventListeners["shutdown"].get());
-    applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(eventListeners["exist_key"].get());
-    applicationEventQueue->registerEventDispatcher<Events::SwitchSceneEvent>(eventListeners["switch_scene"].get());
+    engineEventQueue->unregisterEventDispatcher<Events::EngineShutdownEvent>(eventListeners["shutdown"].get());
+    applicationEventQueue->unregisterEventDispatcher<Events::KeyPressedEvent>(eventListeners["exist_key"].get());
+    applicationEventQueue->unregisterEventDispatcher<Events::SwitchSceneEvent>(eventListeners["switch_scene"].get());
 }
 
 void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {

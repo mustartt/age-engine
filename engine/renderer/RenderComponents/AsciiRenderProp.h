@@ -5,6 +5,8 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_ASCIIRENDERPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_ASCIIRENDERPROP_H_
 
+#include <renderer/AsciiRenderer.h>
+
 namespace AGE::Renderer {
 
 class AsciiRenderProp {

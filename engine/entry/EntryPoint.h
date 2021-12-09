@@ -12,7 +12,7 @@
 #include "../renderer/RenderTarget.h"
 #include "../renderer/AsciiRenderer.h"
 #include "../events/engine_events/EngineEvent.h"
-#include "../SceneManager.h"
+#include "Scene.h"
 
 namespace AGE {
 
@@ -25,6 +25,7 @@ class ApplicationContext {
     virtual void stop() = 0;
 };
 
+class SceneManager;
 class CursesApplicationContext : public ApplicationContext {
   protected:
     int windowWidth;

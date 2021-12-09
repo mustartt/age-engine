@@ -27,11 +27,11 @@ class SystemManager {
     std::unordered_map<SystemType, Archetype> archetypes;
     std::unordered_map<SystemType, std::unique_ptr<System>> systems;
   public:
-    template<typename T>
-    T *registerSystem(Registry *reg) {
+    template<typename T, typename... Args>
+    T *registerSystem(Registry *reg, Args &&... args) {
         auto typeName = typeid(T).name();
         if (archetypes.count(typeName)) throw SystemAlreadyRegistered{};
-        systems[typeName] = std::move(std::make_unique<T>(reg));
+        systems[typeName] = std::move(std::make_unique<T>(reg, args...));
         return static_cast<T *>(systems[typeName].get());
     }
 

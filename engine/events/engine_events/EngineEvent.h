@@ -5,6 +5,7 @@
 #ifndef FINAL_PROJECT_ENGINE_EVENTS_ENGINE_EVENTS_ENGINEEVENT_H_
 #define FINAL_PROJECT_ENGINE_EVENTS_ENGINE_EVENTS_ENGINEEVENT_H_
 
+#include <ecs/Entity.h>
 #include "../Event.h"
 #include "chrono"
 
@@ -39,6 +40,18 @@ class SwitchSceneEvent : public ApplicationEvent {
   public:
     explicit SwitchSceneEvent(std::string name) : newSceneName(std::move(name)) {}
     [[nodiscard]] const std::string &getNewSceneName() const { return newSceneName; }
+};
+
+class CollisionEvent : public Event {};
+class BasicCollisionEvent : public CollisionEvent {
+    ECS::Entity entity1;
+    ECS::Entity entity2;
+  public:
+    explicit BasicCollisionEvent(ECS::Entity entity1, ECS::Entity entity2)
+        : entity1(entity1), entity2(entity2) {}
+    [[nodiscard]] std::pair<ECS::Entity, ECS::Entity> getCollidingPair() const {
+        return std::make_pair(entity1, entity2);
+    }
 };
 
 }
