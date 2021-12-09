@@ -21,12 +21,16 @@ void MainScene::setup() {
     player.addComponent(AGE::Components::AsciiRenderComponent(resources->at("player").get()));
     player.addComponent(AGE::Components::EntityTagComponent("Player"));
 
-    AGE::ECS::Entity meteor1 = createEntity();
-    meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(40, 10, 0)));
-    meteor1.addComponent(AGE::Components::AsciiRenderComponent(resources->at("meteor2").get()));
-    meteor1.addComponent(AGE::Components::EntityTagComponent("meteor"));
-    meteor1.addComponent(SpaceInvader::CustomCS::Velocity(vec3<int>(0, 0, 0)));
-    meteor1.addComponent(AGE::Components::BoundingBoxComponent(vec2<int>(1, 1)));
+    for (int x = 0; x < 3; ++x) {
+        for (int i = 0; i < 10; ++i) {
+            AGE::ECS::Entity meteor1 = createEntity();
+            meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(35 + i, 10 - x, 0)));
+            meteor1.addComponent(AGE::Components::AsciiRenderComponent(resources->at("meteor2").get()));
+            meteor1.addComponent(AGE::Components::EntityTagComponent("meteor"));
+            meteor1.addComponent(SpaceInvader::CustomCS::Velocity(vec3<int>(0, 0, 0)));
+            meteor1.addComponent(AGE::Components::BoundingBoxComponent(vec2<int>(1, 1)));
+        }
+    }
 }
 
 void MainScene::onActivate() {

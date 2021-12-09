@@ -84,7 +84,7 @@ class PlayerControlSystem : public AGE::ECS::System {
           resourceManager(manager) {}
     void fireProjectile(ProjectileType type, const AGE::vec3<int> &pos) {
         auto bullet = AGE::ECS::Entity(registry->createEntity(), registry);
-        auto *bulletProp = resourceManager->at("bullet1").get();
+        auto *bulletProp = resourceManager->at("bullet2").get();
         auto bulletPosition = vec3<int>(pos) + vec3<int>(0, -1, 0);
         bullet.addComponent(AGE::Components::TransformComponent(bulletPosition));
         bullet.addComponent(AGE::Components::AsciiRenderComponent(bulletProp));
