@@ -29,10 +29,10 @@ class SceneManager {
         }
     };
 
-    template<class SceneType>
-    Scene *createScene(const std::string &name = "Unnamed Scene") {
+    template<class SceneType, typename ...Args>
+    Scene *createScene(const std::string &name = "Unnamed Scene", Args &&...args) {
         if (loadedScenes.count(name)) throw InvalidSceneName{};
-        loadedScenes[name] = std::make_unique<SceneType>(name);
+        loadedScenes[name] = std::make_unique<SceneType>(name, args...);
         loadedScenes[name]->init();
         return loadedScenes[name].get();
     }

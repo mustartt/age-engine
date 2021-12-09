@@ -73,6 +73,11 @@ class Registry {
     }
 
     template<typename T>
+    T *getRegisteredSystem() {
+        return systemManager->template getRegisteredSystem<T>();
+    }
+
+    template<typename T>
     void setSystemArchetype(Archetype &archetype) {
         systemManager->template setArchetype<T>(archetype);
     }

@@ -42,13 +42,20 @@ AGE::Renderer::BitMap createBitMap() {
 
 class DefaultDrawScene : public AGE::Scene {
     std::unique_ptr<AGE::Renderer::AsciiRenderProp> prop;
+  protected:
+    std::unordered_map<std::string, std::unique_ptr<AGE::EventDispatcher>> eventListeners;
+    AGE::EventQueue *engineEventQueue;
+    AGE::EventQueue *applicationEventQueue;
   public:
-    DefaultDrawScene(const std::string &name) : AGE::Scene(name) {}
+    DefaultDrawScene(const std::string &name, AGE::EventQueue *engine, AGE::EventQueue *application)
+        : AGE::Scene(name),
+          engineEventQueue(engine),
+          applicationEventQueue(application) {}
     ~DefaultDrawScene() override = default;
     void init() override {
         prop = std::move(std::make_unique<AGE::Renderer::BitMapProp>(createBitMap()));
     }
-    void onActivate() override {
+    void setup() override {
         using namespace AGE;
         // entity creation
         ECS::Entity testEntity = createEntity();
@@ -56,7 +63,35 @@ class DefaultDrawScene : public AGE::Scene {
         testEntity.addComponent(Components::AsciiRenderComponent(prop.get()));
         testEntity.addComponent(Components::EntityTagComponent("PlayerWASD"));
     }
-    void onDeactivate() override {}
+    void onActivate() override {
+        using namespace AGE;
+        // render dispatch
+        auto asciiRenderSystemPtr = getRegistry()->getRegisteredSystem<Systems::AsciiRenderSystem>();
+        std::unique_ptr<EventDispatcher>
+            renderDispatcher =
+            std::make_unique<FunctionEventDispatcher<Events::EngineDrawEvent>>(
+                [asciiRenderSystemPtr](Events::EngineDrawEvent *event, EventQueue *queue) {
+                  asciiRenderSystemPtr->render();
+                });
+        engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(renderDispatcher.get());
+        eventListeners["render"] = std::move(renderDispatcher);
+
+        // keyboard dispatch
+        auto playerWASDPtr = getRegistry()->getRegisteredSystem<Systems::PlayerWASDControlSystem>();
+        std::unique_ptr<EventDispatcher>
+            keyboardDispatch =
+            std::make_unique<FunctionEventDispatcher<Events::KeyPressedEvent>>(
+                [playerWASDPtr](Events::KeyPressedEvent *event, EventQueue *queue) {
+                  playerWASDPtr->move(event->getKeyCode());
+                });
+        applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
+        eventListeners["player_wasd"] = std::move(keyboardDispatch);
+    }
+    void onDeactivate() override {
+        using namespace AGE;
+        engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(eventListeners["render"].get());
+        applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(eventListeners["player_wasd"].get());
+    }
     void teardown() override {}
 };
 
@@ -68,7 +103,9 @@ class Application : public AGE::CursesApplicationContext {
         CursesApplicationContext::init();
         using namespace AGE;
 
-        Scene *scene = getSceneManager()->createScene<DefaultDrawScene>("Draw_Scene");
+        Scene *scene = getSceneManager()->createScene<DefaultDrawScene>("Draw_Scene",
+                                                                        engineEventQueue.get(),
+                                                                        applicationEventQueue.get());
 
         using namespace AGE;
         // component registration
@@ -87,36 +124,14 @@ class Application : public AGE::CursesApplicationContext {
         auto playerWASDArchetype = playerWASD->getSystemArchetype();
         scene->getRegistry()->setSystemArchetype<Systems::PlayerWASDControlSystem>(playerWASDArchetype);
 
+        // finalize entity setup
+        scene->setup();
+
         getSceneManager()->setActiveScene("Draw_Scene");
-
-        // render dispatch
-        auto asciiRenderSystemPtr = asciiRenderSystem.get();
-        std::unique_ptr<EventDispatcher>
-            renderDispatcher =
-            std::make_unique<FunctionEventDispatcher<Events::EngineDrawEvent>>(
-                [asciiRenderSystemPtr](Events::EngineDrawEvent *event, EventQueue *queue) {
-                  asciiRenderSystemPtr->render();
-                });
-        engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(renderDispatcher.get());
-        eventListeners["render"] = std::move(renderDispatcher);
-
-        // keyboard dispatch
-        auto playerWASDPtr = playerWASD.get();
-        std::unique_ptr<EventDispatcher>
-            keyboardDispatch =
-            std::make_unique<FunctionEventDispatcher<Events::KeyPressedEvent>>(
-                [playerWASDPtr](Events::KeyPressedEvent *event, EventQueue *queue) {
-                  playerWASDPtr->move(event->getKeyCode());
-                });
-        applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
-        eventListeners["player_wasd"] = std::move(keyboardDispatch);
     }
 
     void stop() override {
         CursesApplicationContext::stop();
-        using namespace AGE;
-        engineEventQueue->registerEventDispatcher<Events::EngineDrawEvent>(eventListeners["render"].get());
-        applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(eventListeners["player_wasd"].get());
     }
 
 };

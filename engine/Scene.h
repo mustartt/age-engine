@@ -31,6 +31,7 @@ class Scene {
     }
 
     virtual void init() {};
+    virtual void setup() {};
     virtual void onActivate() {};
     virtual void onDeactivate() {};
     virtual void teardown() {};

@@ -37,6 +37,13 @@ class SystemManager {
     }
 
     template<typename T>
+    T *getRegisteredSystem() {
+        auto typeName = typeid(T).name();
+        if (!systems.count(typeName)) throw SystemNotRegistered{};
+        return static_cast<T *>(systems[typeName].get());
+    }
+
+    template<typename T>
     void setArchetype(Archetype &signature) {
         auto typeName = typeid(T).name();
         if (!systems.count(typeName)) throw SystemNotRegistered{};
