@@ -31,7 +31,7 @@ class Scene {
     }
 
     virtual void init() {};
-    virtual void setup() {};
+    virtual void setup() {}; // must be explicitly called by the user
     virtual void onActivate() {};
     virtual void onDeactivate() {};
     virtual void teardown() {};
@@ -73,7 +73,7 @@ class SceneManager {
     void setActiveScene(const std::string &name) {
         if (!loadedScenes.count(name)) throw InvalidSceneName{};
         if (activeSceneName) {
-            loadedScenes[activeSceneName.value()]->onDeactivate();
+            loadedScenes.at(activeSceneName.value())->onDeactivate();
         }
         activeSceneName = name;
         loadedScenes[name]->onActivate();

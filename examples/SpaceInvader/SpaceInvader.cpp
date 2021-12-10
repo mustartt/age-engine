@@ -12,6 +12,9 @@
 #include <components/OutOfBound.h>
 #include <components/Player.h>
 #include <components/Physics.h>
+#include <renderer/RenderComponents/BitMapProp.h>
+#include <utils/BitMapLoader.h>
+#include <scenes/GameOverScene.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
@@ -28,6 +31,10 @@ void SpaceInvader::init() {
     resources["bullet3"] = std::make_unique<Renderer::CharacterProp>('v');
     resources["meteor1"] = std::make_unique<Renderer::CharacterProp>('M');
     resources["meteor2"] = std::make_unique<Renderer::CharacterProp>('@');
+    resources["game_over"] = std::make_unique<Renderer::BitMapProp>(
+        BitMapLoader::loadBitMap("./assets/game_over.txt"));
+    resources["default_border"] = std::make_unique<Renderer::BitMapProp>(
+        BitMapLoader::loadBitMap("./assets/default_border.txt"));
 
     Scene *mainScene = getSceneManager()->createScene<MainScene>("main_scene",
                                                                  engineEventQueue.get(),
@@ -82,6 +89,26 @@ void SpaceInvader::init() {
     mainScene->getRegistry()->setSystemArchetype<CustomCS::OutOfBoundSystem>(outOfBoundSystemArchetype);
 
     mainScene->setup();
+
+    Scene *gameOverScene = getSceneManager()->createScene<GameOverScene>("game_over_scene",
+                                                                         engineEventQueue.get(),
+                                                                         applicationEventQueue.get(),
+                                                                         &resources);
+
+    // register game over scene components
+    gameOverScene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
+    gameOverScene->getRegistry()->registerComponent<Components::TransformComponent>();
+    gameOverScene->getRegistry()->registerComponent<Components::EntityTagComponent>();
+
+    // ascii renderer setup and registration
+    auto asciiRenderSystem2 =
+        gameOverScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>(gameOverScene->getRegistry());
+    asciiRenderSystem2->setRenderer(asciiRenderer.get());
+    auto asciiRenderSystem2Archetype = asciiRenderSystem->getSystemArchetype();
+    gameOverScene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRenderSystem2Archetype);
+
+    gameOverScene->setup();
+
     getSceneManager()->setActiveScene("main_scene");
 }
 

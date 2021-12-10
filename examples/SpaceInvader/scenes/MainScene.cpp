@@ -66,7 +66,7 @@ void MainScene::onActivate() {
               collisionSystem->detectCollisions();
             });
     engineEventQueue->registerEventDispatcher<Events::EngineUpdateEvent>(engineUpdateHandler.get());
-    eventListeners["physics"] = std::move(engineUpdateHandler);
+    eventListeners["update"] = std::move(engineUpdateHandler);
 
     // keyboard dispatch
     auto playerControl = getRegistry()->getRegisteredSystem<CustomCS::PlayerControlSystem>();
@@ -77,7 +77,7 @@ void MainScene::onActivate() {
               playerControl->move(event->getKeyCode());
             });
     applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
-    eventListeners["player"] = std::move(keyboardDispatch);
+    eventListeners["keyboard"] = std::move(keyboardDispatch);
 
     auto meteorCollisionSystem = getRegistry()->getRegisteredSystem<CustomCS::MeteorBulletCollisionSystem>();
     // collision event dispatch
@@ -93,10 +93,16 @@ void MainScene::onActivate() {
 
 void MainScene::onDeactivate() {
     using namespace AGE;
-    engineEventQueue->unregisterEventDispatcher<Events::EngineDrawEvent>(eventListeners["render"].get());
-    engineEventQueue->unregisterEventDispatcher<Events::EngineUpdateEvent>(eventListeners["physics"].get());
-    applicationEventQueue->unregisterEventDispatcher<Events::KeyPressedEvent>(eventListeners["player"].get());
-    applicationEventQueue->unregisterEventDispatcher<Events::BasicCollisionEvent>(eventListeners["collision"].get());
+
+    engineEventQueue->unregisterAll<Events::EngineDrawEvent>();
+    engineEventQueue->unregisterAll<Events::EngineUpdateEvent>();
+    applicationEventQueue->unregisterAll<Events::KeyPressedEvent>();
+    applicationEventQueue->unregisterAll<Events::BasicCollisionEvent>();
+
+//    engineEventQueue->unregisterEventDispatcher<Events::EngineDrawEvent>(eventListeners.at("render").get());
+//    engineEventQueue->unregisterEventDispatcher<Events::EngineUpdateEvent>(eventListeners.at("update").get());
+//    applicationEventQueue->unregisterEventDispatcher<Events::KeyPressedEvent>(eventListeners.at("keyboard").get());
+//    applicationEventQueue->unregisterEventDispatcher<Events::BasicCollisionEvent>(eventListeners.at("collision").get());
 }
 
 void MainScene::teardown() {

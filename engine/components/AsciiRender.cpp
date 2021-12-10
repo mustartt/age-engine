@@ -31,7 +31,7 @@ void AGE::Systems::AsciiRenderSystem::render() {
 
     // debug: entity counts
     auto count = std::to_string(entities.size());
-    renderer->drawText(0, 24, count);
+    renderer->drawText(75, 24, count);
 
     renderer->draw();
 }

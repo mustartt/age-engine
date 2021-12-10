@@ -13,7 +13,7 @@ add_library(space_invader
         components/OutOfBound.cpp
         components/OutOfBound.h
         components/Physics.cpp
-        components/Physics.h components/Player.cpp components/Player.h)
+        components/Physics.h components/Player.cpp components/Player.h scenes/GameOverScene.cpp scenes/GameOverScene.h)
 
 target_include_directories(space_invader PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(space_invader PROPERTIES LINKER_LANGUAGE CXX)

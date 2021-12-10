@@ -34,7 +34,9 @@ class AsciiRenderSystem : public ECS::System {
     explicit AsciiRenderSystem(ECS::Registry *registry)
         : ECS::System(registry), renderer{nullptr} {}
     void setRenderer(AsciiRenderer *asciiRenderer) { renderer = asciiRenderer; }
+
     void render();
+
     ECS::Archetype getSystemArchetype() override;
 };
 }
