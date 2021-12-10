@@ -15,6 +15,7 @@
 #include <renderer/RenderComponents/BitMapProp.h>
 #include <utils/BitMapLoader.h>
 #include <scenes/GameOverScene.h>
+#include <renderer/RenderComponents/TextProp.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
@@ -35,6 +36,7 @@ void SpaceInvader::init() {
         BitMapLoader::loadBitMap("./assets/game_over.txt"));
     resources["default_border"] = std::make_unique<Renderer::BitMapProp>(
         BitMapLoader::loadBitMap("./assets/default_border.txt"));
+    resources["game_over_text"] = std::make_unique<Renderer::TextProp>("Press Space to Exit...");
 
     Scene *mainScene = getSceneManager()->createScene<MainScene>("main_scene",
                                                                  engineEventQueue.get(),

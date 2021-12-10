@@ -86,8 +86,9 @@ void CursesApplicationContext::stop() {
 
 void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
     if (event->getKeyCode() == 'p') {
-        getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
-        getEngineQueue()->dispatchEvents();
+//        getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
+//        getEngineQueue()->dispatchEvents();
+        getApplicationQueue()->enqueue<Events::SwitchSceneEvent>("game_over_scene");
     }
 }
 

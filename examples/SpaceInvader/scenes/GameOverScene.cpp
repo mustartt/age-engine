@@ -29,6 +29,11 @@ void GameOverScene::setup() {
     gameover.addComponent(Components::TransformComponent(vec3<int>(13, 5, 0)));
     gameover.addComponent(Components::EntityTagComponent("game_over_text"));
 
+    auto text = createEntity();
+    text.addComponent(Components::AsciiRenderComponent(resources->at("game_over_text").get()));
+    text.addComponent(Components::TransformComponent(vec3<int>(29, 13, 100)));
+    text.addComponent(Components::EntityTagComponent("game_over_text"));
+
     auto border = createEntity();
     border.addComponent(Components::AsciiRenderComponent(resources->at("default_border").get()));
     border.addComponent(Components::TransformComponent(vec3<int>(0, 0, 100)));
