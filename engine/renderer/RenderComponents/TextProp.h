@@ -16,6 +16,8 @@ class TextProp : public AsciiRenderProp {
     void render(AsciiRenderer *renderer, int xOffset, int yOffset) override {
         renderer->drawText(xOffset, yOffset, text);
     }
+    void setText(const std::string &str) { TextProp::text = str; }
+    [[nodiscard]] const std::string &getText() const { return text; }
 };
 
 }

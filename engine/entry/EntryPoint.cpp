@@ -62,8 +62,12 @@ void CursesApplicationContext::run() {
         // queue all user keyboard inputs
         manager->getKeyboardInstance()->captureInputs();
         std::optional<int> keycode = manager->getKeyboardInstance()->getKeycode();
+        std::set<int> seen;
         while (keycode) {
-            applicationEventQueue->enqueue<Events::KeyPressedEvent>(keycode.value());
+            if (!seen.count(keycode.value())) {
+                applicationEventQueue->enqueue<Events::KeyPressedEvent>(keycode.value());
+                seen.insert(keycode.value());
+            }
             keycode = manager->getKeyboardInstance()->getKeycode();
         }
 

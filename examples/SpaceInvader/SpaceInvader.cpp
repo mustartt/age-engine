@@ -16,6 +16,8 @@
 #include <utils/BitMapLoader.h>
 #include <scenes/GameOverScene.h>
 #include <renderer/RenderComponents/TextProp.h>
+#include <components/MeteorSpawn.h>
+#include <components/None.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
@@ -26,10 +28,9 @@ void SpaceInvader::init() {
     CursesApplicationContext::init();
     using namespace AGE;
 
-    resources["player"] = std::make_unique<Renderer::CharacterProp>('A');
+    resources["player"] = std::make_unique<Renderer::CharacterProp>('D');
     resources["bullet1"] = std::make_unique<Renderer::CharacterProp>('*');
-    resources["bullet2"] = std::make_unique<Renderer::CharacterProp>('^');
-    resources["bullet3"] = std::make_unique<Renderer::CharacterProp>('v');
+    resources["bullet2"] = std::make_unique<Renderer::CharacterProp>('>');
     resources["meteor1"] = std::make_unique<Renderer::CharacterProp>('M');
     resources["meteor2"] = std::make_unique<Renderer::CharacterProp>('@');
     resources["game_over"] = std::make_unique<Renderer::BitMapProp>(
@@ -44,6 +45,7 @@ void SpaceInvader::init() {
                                                                  &resources);
 
     // component registration
+    mainScene->getRegistry()->registerComponent<Components::None>();
     mainScene->getRegistry()->registerComponent<Components::TransformComponent>();
     mainScene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
     mainScene->getRegistry()->registerComponent<Components::EntityTagComponent>();
@@ -89,6 +91,12 @@ void SpaceInvader::init() {
         mainScene->getRegistry()->registerSystem<CustomCS::OutOfBoundSystem>(mainScene->getRegistry());
     auto outOfBoundSystemArchetype = outOfBoundSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::OutOfBoundSystem>(outOfBoundSystemArchetype);
+
+    // meteor spawning system
+    auto meteorSpawnSystem =
+        mainScene->getRegistry()->registerSystem<CustomCS::MeteorSpawnSystem>(mainScene->getRegistry(), &resources);
+    auto meteorSpawnSystemArchetype = meteorSpawnSystem->getSystemArchetype();
+    mainScene->getRegistry()->setSystemArchetype<CustomCS::MeteorSpawnSystem>(meteorSpawnSystemArchetype);
 
     mainScene->setup();
 

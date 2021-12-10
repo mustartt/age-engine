@@ -22,13 +22,18 @@ PlayerControlSystem::PlayerControlSystem(AGE::ECS::Registry *registry, ResourceM
 
 void PlayerControlSystem::fireProjectile(ProjectileType type, const AGE::vec3<int> &pos) {
     auto bullet = AGE::ECS::Entity(registry->createEntity(), registry);
-    auto *bulletProp = resourceManager->at("bullet2").get();
-    auto bulletPosition = AGE::vec3<int>(pos) + AGE::vec3<int>(0, -1, 0);
+    auto *bulletProp = type == REGULAR ? resourceManager->at("bullet2").get()
+                                       : resourceManager->at("bullet1").get();
+    auto bulletPosition = AGE::vec3<int>(pos) + AGE::vec3<int>(1, 0, 0);
     bullet.addComponent(AGE::Components::TransformComponent(bulletPosition));
     bullet.addComponent(AGE::Components::AsciiRenderComponent(bulletProp));
-    bullet.addComponent(CustomCS::Velocity(AGE::vec3<int>(0, -1, 0)));
+    bullet.addComponent(CustomCS::Velocity(AGE::vec3<int>(1, 0, 0)));
     bullet.addComponent(AGE::Components::EntityTagComponent("bullet"));
-    bullet.addComponent(AGE::Components::BoundingBoxComponent(AGE::vec2<int>(1, 1)));
+    if (type == REGULAR) {
+        bullet.addComponent(AGE::Components::BoundingBoxComponent(AGE::vec2<int>(1, 1)));
+    } else {
+        bullet.addComponent(AGE::Components::BoundingBoxComponent(AGE::vec2<int>(3, 3), AGE::vec2<int>(-1, -1)));
+    }
     bullet.addComponent(CustomCS::RemoveOnOutOfBoundComponent(
         AGE::vec3<int>(0, 5, -100),
         AGE::vec3<int>(80, 25, 100)));
@@ -41,11 +46,13 @@ void PlayerControlSystem::move(int keycode) {
         if (tag.getTag() == "Player") {
             auto &transform = entity.getComponent<AGE::Components::TransformComponent>();
             switch (keycode) {
-                case 'w':fireProjectile(REGULAR, transform.getPosition());
+                case 'j':fireProjectile(REGULAR, transform.getPosition());
                     break;
-                case 'a':transform.getPosition().x -= 1;
+                case 'k':fireProjectile(SPECIAL, transform.getPosition());
                     break;
-                case 'd':transform.getPosition().x += 1;
+                case 'w':transform.getPosition().y -= 1;
+                    break;
+                case 's':transform.getPosition().y += 1;
                     break;
                 default:break;
             }

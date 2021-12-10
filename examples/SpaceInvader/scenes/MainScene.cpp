@@ -11,6 +11,7 @@
 #include <components/Physics.h>
 #include <components/OutOfBound.h>
 #include <components/Player.h>
+#include <components/MeteorSpawn.h>
 #include "MainScene.h"
 #include "../components/SpaceInvaderComponentSystem.h"
 
@@ -22,20 +23,22 @@ void MainScene::init() {
 
 void MainScene::setup() {
     AGE::ECS::Entity player = createEntity();
-    player.addComponent(AGE::Components::TransformComponent(vec3<int>(40, 20, 0)));
+    player.addComponent(AGE::Components::TransformComponent(vec3<int>(5, 9, 0)));
     player.addComponent(AGE::Components::AsciiRenderComponent(resources->at("player").get()));
     player.addComponent(AGE::Components::EntityTagComponent("Player"));
 
-    for (int x = 0; x < 3; ++x) {
-        for (int i = 0; i < 10; ++i) {
-            AGE::ECS::Entity meteor1 = createEntity();
-            meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(35 + i, 10 - x, 0)));
-            meteor1.addComponent(AGE::Components::AsciiRenderComponent(resources->at("meteor2").get()));
-            meteor1.addComponent(AGE::Components::EntityTagComponent("meteor"));
-            meteor1.addComponent(CustomCS::Velocity(vec3<int>(0, 0, 0)));
-            meteor1.addComponent(AGE::Components::BoundingBoxComponent(vec2<int>(1, 1)));
-        }
-    }
+    auto border = createEntity();
+    border.addComponent(Components::AsciiRenderComponent(resources->at("default_border").get()));
+    border.addComponent(Components::TransformComponent(vec3<int>(0, 0, 100)));
+    border.addComponent(Components::EntityTagComponent("default_border"));
+
+    AGE::ECS::Entity meteor1 = createEntity();
+    meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(5, 5, 0)));
+    meteor1.addComponent(AGE::Components::AsciiRenderComponent(resources->at("meteor2").get()));
+    meteor1.addComponent(AGE::Components::EntityTagComponent("meteor"));
+    meteor1.addComponent(CustomCS::Velocity(vec3<int>(0, 0, 0)));
+    meteor1.addComponent(AGE::Components::BoundingBoxComponent(vec2<int>(1, 1)));
+
 }
 
 void MainScene::onActivate() {
@@ -57,10 +60,14 @@ void MainScene::onActivate() {
     auto collisionSystem = getRegistry()->getRegisteredSystem<Systems::BasicCollisionSystem>();
     // out of bound dispatch
     auto outOfBoundSystem = getRegistry()->getRegisteredSystem<CustomCS::OutOfBoundSystem>();
+    // meteor spawn
+    auto meteorSpawnSystem = getRegistry()->getRegisteredSystem<CustomCS::MeteorSpawnSystem>();
+
     std::unique_ptr<EventDispatcher>
         engineUpdateHandler =
         std::make_unique<FunctionEventDispatcher<Events::EngineUpdateEvent>>(
             [=](Events::EngineUpdateEvent *event, EventQueue *queue) {
+              meteorSpawnSystem->spawn();
               physicsSystem->update();
               outOfBoundSystem->removeOutOfBoundEntities();
               collisionSystem->detectCollisions();

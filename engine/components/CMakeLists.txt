@@ -9,7 +9,7 @@ add_library(age_components
         EntityTag.cpp
         Transform.h
         AsciiRender.h
-        AsciiRender.cpp)
+        AsciiRender.cpp None.h)
 
 target_include_directories(age_components PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(age_components PROPERTIES LINKER_LANGUAGE CXX)
