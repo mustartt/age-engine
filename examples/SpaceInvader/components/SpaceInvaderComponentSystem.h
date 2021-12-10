@@ -8,8 +8,7 @@
 #include <algorithm>
 #include <ecs/SystemManager.h>
 #include <ecs/Entity.h>
-
-#include <components/EngineComponents.h>
+#include <map>
 
 namespace SpaceInvader::CustomCS {
 

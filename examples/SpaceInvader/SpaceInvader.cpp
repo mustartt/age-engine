@@ -2,9 +2,10 @@
 // Created by henry on 2021-12-08.
 //
 
-#include <components/EngineComponents.h>
-#include <components/EngineSystems.h>
-#include <components/BasicCollision.h>
+#include <Transform.h>
+#include <AsciiRender.h>
+#include <EntityTag.h>
+#include <BasicCollision.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"

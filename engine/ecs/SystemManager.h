@@ -8,6 +8,8 @@
 #include "ecs.h"
 
 #include <set>
+#include <unordered_map>
+#include <memory>
 
 namespace AGE::ECS {
 
