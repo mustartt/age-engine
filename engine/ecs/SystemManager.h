@@ -10,6 +10,8 @@
 #include <set>
 #include <unordered_map>
 #include <memory>
+#include <typeinfo>
+#include <typeindex>
 
 namespace AGE::ECS {
 

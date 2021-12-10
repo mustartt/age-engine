@@ -9,6 +9,10 @@
 #include <ecs/SystemManager.h>
 #include <ecs/Entity.h>
 #include <map>
+#include <components/Transform.h>
+#include <components/AsciiRender.h>
+#include <components/EntityTag.h>
+#include <components/BasicCollision.h>
 
 namespace SpaceInvader::CustomCS {
 

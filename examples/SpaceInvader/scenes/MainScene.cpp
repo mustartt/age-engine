@@ -3,10 +3,10 @@
 //
 
 #include <utils/vec3.h>
-#include <BasicCollision.h>
-#include <EntityTag.h>
-#include <AsciiRender.h>
-#include <Transform.h>
+#include <components/BasicCollision.h>
+#include <components/EntityTag.h>
+#include <components/AsciiRender.h>
+#include <components/Transform.h>
 #include "MainScene.h"
 #include "../components/SpaceInvaderComponentSystem.h"
 
@@ -56,8 +56,7 @@ void MainScene::onActivate() {
     std::unique_ptr<EventDispatcher>
         engineUpdateHandler =
         std::make_unique<FunctionEventDispatcher<Events::EngineUpdateEvent>>(
-            [physicsSystem, collisionSystem, outOfBoundSystem]
-                (Events::EngineUpdateEvent *event, EventQueue *queue) {
+            [=](Events::EngineUpdateEvent *event, EventQueue *queue) {
               physicsSystem->update();
               outOfBoundSystem->removeOutOfBoundEntities();
               collisionSystem->detectCollisions();
