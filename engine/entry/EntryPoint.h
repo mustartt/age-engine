@@ -11,7 +11,7 @@
 #include "../events/Event.h"
 #include "../renderer/RenderTarget.h"
 #include "../renderer/AsciiRenderer.h"
-#include "../events/engine_events/EngineEvent.h"
+#include "events/EngineEvents/EngineEvents.h"
 #include "Scene.h"
 
 namespace AGE {

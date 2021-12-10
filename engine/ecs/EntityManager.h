@@ -7,6 +7,8 @@
 
 #include "ecs.h"
 
+#include <unordered_map>
+
 namespace AGE::ECS {
 
 class InvalidEntityException : public std::exception {};

@@ -7,6 +7,8 @@
 
 #include "ecs.h"
 
+#include <set>
+
 namespace AGE::ECS {
 
 class Registry;

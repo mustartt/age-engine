@@ -5,19 +5,8 @@
 #ifndef FINAL_PROJECT_ENGINE_ECS_ECS_H_
 #define FINAL_PROJECT_ENGINE_ECS_ECS_H_
 
-#include <iostream>
-#include <vector>
-#include <string>
 #include <cstdint>
-#include <memory>
-#include <typeinfo>
-#include <unordered_set>
-#include <unordered_map>
-#include <list>
-#include <algorithm>
-#include <exception>
-#include <typeindex>
-#include <set>
+#include <vector>
 
 namespace AGE::ECS {
 

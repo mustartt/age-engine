@@ -22,11 +22,10 @@ class Event {
 class UnknownEventException : std::exception {};
 
 class EventQueue;
+
 class EventDispatcher {
   public:
-    void operator()(Event *event, EventQueue *eventQueue) const {
-        call(event, eventQueue);
-    }
+    void operator()(Event *event, EventQueue *eventQueue) const;
   private:
     virtual void call(Event *event, EventQueue *eventQueue) const = 0;
 };
@@ -58,8 +57,7 @@ class FunctionEventDispatcher : public EventDispatcher {
 };
 
 class EventQueue {
-    std::unordered_map<std::type_index,
-                       std::vector<const EventDispatcher *>> dispatchers;
+    std::unordered_map<std::type_index, std::vector<const EventDispatcher *>> dispatchers;
     std::vector<std::unique_ptr<Event>> queue;
     std::vector<std::type_index> queueEventType;
   public:
@@ -68,23 +66,11 @@ class EventQueue {
         queue.push_back(std::make_unique<EventType>(std::forward<Args>(args)...));
         queueEventType.emplace_back(typeid(EventType));
     }
-
-    void dispatchEvents() {
-        for (int i = 0; i < queue.size(); ++i) {
-            auto &eventType = queueEventType[i];
-            for (auto &dispatcher: dispatchers[eventType]) {
-                dispatcher->operator()(queue[i].get(), this);
-            }
-        }
-        queue.clear();
-        queueEventType.clear();
-    }
-
+    void dispatchEvents();
     template<typename EventType>
     void registerEventDispatcher(const EventDispatcher *eventDispatcher) {
         dispatchers[typeid(EventType)].push_back(eventDispatcher);
     }
-
     template<typename EventType>
     void unregisterEventDispatcher(const EventDispatcher *eventDispatcher) {
         std::remove_if(dispatchers[typeid(EventType)].begin(), dispatchers[typeid(EventType)].end(),

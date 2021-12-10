@@ -7,6 +7,8 @@
 
 #include "ecs.h"
 
+#include <list>
+
 namespace AGE::ECS {
 
 class ComponentAlreadyExist : public std::exception {};
