@@ -25,6 +25,7 @@ class EventQueue;
 
 class EventDispatcher {
   public:
+    virtual ~EventDispatcher() = default;
     void operator()(Event *event, EventQueue *eventQueue) const;
   private:
     virtual void call(Event *event, EventQueue *eventQueue) const = 0;
@@ -73,10 +74,13 @@ class EventQueue {
     }
     template<typename EventType>
     void unregisterEventDispatcher(const EventDispatcher *eventDispatcher) {
-        std::remove_if(dispatchers[typeid(EventType)].begin(), dispatchers[typeid(EventType)].end(),
-                       [&eventDispatcher](auto ptr) {
-                         return eventDispatcher == ptr;
-                       });
+        auto start = dispatchers[typeid(EventType)].begin();
+        auto end = dispatchers[typeid(EventType)].end();
+        auto _ = std::remove(start, end, eventDispatcher);
+    }
+    template<typename EventType>
+    void unregisterAll() {
+        dispatchers[typeid(EventType)].clear();
     }
 };
 

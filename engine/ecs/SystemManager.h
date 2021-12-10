@@ -23,6 +23,7 @@ class System {
   public:
     std::set<EntityID> entities;
     explicit System(Registry *registry) : registry(registry) {}
+    virtual ~System() = default;
     virtual Archetype getSystemArchetype() = 0;
 };
 
