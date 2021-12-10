@@ -8,6 +8,7 @@
 #include "ecs.h"
 
 #include <list>
+#include <memory>
 
 namespace AGE::ECS {
 

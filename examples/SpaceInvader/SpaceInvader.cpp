@@ -7,6 +7,11 @@
 #include <components/AsciiRender.h>
 #include <components/EntityTag.h>
 #include <components/BasicCollision.h>
+#include <components/Velocity.h>
+#include <components/Health.h>
+#include <components/OutOfBound.h>
+#include <components/Player.h>
+#include <components/Physics.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
