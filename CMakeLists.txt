@@ -11,6 +11,8 @@ link_libraries(ncurses)
 add_compile_definitions(COMPILE_AS_ENGINE)
 
 add_subdirectory(engine/ecs)
+add_subdirectory(engine/events)
+
 add_executable(final_project main.cpp
         engine/components/EngineComponents.h
         engine/ncurses/CursesRenderer.cpp
@@ -30,7 +32,6 @@ add_executable(final_project main.cpp
         engine/utils/vec2.h
         engine/ncurses/CursesKeyboard.cpp
         engine/ncurses/CursesKeyboard.h
-        engine/events/Event.h
         engine/entry/EntryPoint.cpp
         engine/entry/EntryPoint.h
         engine/ncurses/CursesRenderAdapter.cpp
@@ -39,13 +40,12 @@ add_executable(final_project main.cpp
         engine/Scene.h
         engine/ecs/EntityManager.h
         engine/components/EngineSystems.h
-        engine/events/EngineEvents/EngineEvents.h
         examples/SpaceInvader/scenes/MainScene.cpp
         examples/SpaceInvader/scenes/MainScene.h
         examples/SpaceInvader/SpaceInvader.cpp
         examples/SpaceInvader/SpaceInvader.h
         examples/SpaceInvader/components/SpaceInvaderComponentSystem.h
-        engine/components/BasicCollision.h
-        engine/events/Event.cpp)
+        engine/components/BasicCollision.h)
 
 target_link_libraries(final_project LINK_PUBLIC age_ecs)
+target_link_libraries(final_project LINK_PUBLIC age_events)
