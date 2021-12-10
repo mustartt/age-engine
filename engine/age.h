@@ -24,6 +24,5 @@
 /* engine includes */
 #include "entry/EntryPoint.h"
 #include "events/Event.h"
-#include "ncurses/curseswrapper.h"
 
 #endif //FINAL_PROJECT_ENGINE_AGE_H_

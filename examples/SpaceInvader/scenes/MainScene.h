@@ -10,7 +10,7 @@
 #include <string>
 #include <memory>
 #include <renderer/RenderComponents/AsciiRenderProp.h>
-#include <renderer/RenderComponents/impl/CharacterProp.h>
+#include <renderer/RenderComponents/CharacterProp.h>
 
 namespace SpaceInvader {
 

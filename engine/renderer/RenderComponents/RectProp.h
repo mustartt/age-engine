@@ -5,8 +5,8 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_RECTPROP_H_
 
-#include "../AsciiRenderProp.h"
-#include "../../ScreenBuffer.h"
+#include "AsciiRenderProp.h"
+#include "renderer/ScreenBuffer.h"
 
 namespace AGE::Renderer {
 

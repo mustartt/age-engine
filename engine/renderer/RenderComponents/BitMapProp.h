@@ -11,8 +11,8 @@
 
 #include "utils/vec2.h"
 
-#include "../AsciiRenderProp.h"
-#include "../../ScreenBuffer.h"
+#include "AsciiRenderProp.h"
+#include "renderer/ScreenBuffer.h"
 
 namespace AGE::Renderer {
 

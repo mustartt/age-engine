@@ -5,9 +5,9 @@
 #ifndef FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_CHARACTERPROP_H_
 #define FINAL_PROJECT_ENGINE_RENDERER_RENDERCOMPONENTS_IMPL_CHARACTERPROP_H_
 
-#include "../AsciiRenderProp.h"
-#include "../../ScreenBuffer.h"
-#include "../../AsciiRenderer.h"
+#include "AsciiRenderProp.h"
+#include "renderer/ScreenBuffer.h"
+#include "renderer/AsciiRenderer.h"
 
 namespace AGE::Renderer {
 
