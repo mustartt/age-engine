@@ -92,7 +92,7 @@ void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, Ev
 }
 
 void CursesApplicationContext::changeSceneHandler(Events::SwitchSceneEvent *event, EventQueue *eventQueue) {
-
+    getSceneManager()->setActiveScene(event->getNewSceneName());
 }
 
 }

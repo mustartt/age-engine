@@ -74,12 +74,14 @@ class EventQueue {
     }
     template<typename EventType>
     void unregisterEventDispatcher(const EventDispatcher *eventDispatcher) {
+        // todo: somehow this does not work :)
+        //       this still keeps the event dispatcher
         auto start = dispatchers[typeid(EventType)].begin();
         auto end = dispatchers[typeid(EventType)].end();
         auto _ = std::remove(start, end, eventDispatcher);
     }
     template<typename EventType>
-    void unregisterAll() {
+    void unregisterAll() { // todo: temp replacement for unregisterEventDispatcher<T>
         dispatchers[typeid(EventType)].clear();
     }
 };
