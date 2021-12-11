@@ -68,8 +68,8 @@ class Registry {
     }
 
     template<typename T, typename... Args>
-    T *registerSystem(Registry *reg, Args &&...args) {
-        return systemManager->template registerSystem<T>(reg, args...);
+    T *registerSystem(Args &&...args) {
+        return systemManager->template registerSystem<T>(this, args...);
     }
 
     template<typename T>

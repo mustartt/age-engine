@@ -57,44 +57,44 @@ void SpaceInvader::init() {
     // system registration
     // ascii renderer setup and registration
     auto asciiRenderSystem =
-        mainScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>(mainScene->getRegistry());
+        mainScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>();
     asciiRenderSystem->setRenderer(asciiRenderer.get());
     auto asciiRenderSystemArchetype = asciiRenderSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRenderSystemArchetype);
 
     // player movement controller system setup and registation
     auto playerController =
-        mainScene->getRegistry()->registerSystem<CustomCS::PlayerControlSystem>(mainScene->getRegistry(), &resources);
+        mainScene->getRegistry()->registerSystem<CustomCS::PlayerControlSystem>(&resources);
     auto playerControllerArchetype = playerController->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::PlayerControlSystem>(playerControllerArchetype);
 
     // meteor physics system
     auto physicsSystem =
-        mainScene->getRegistry()->registerSystem<CustomCS::PhysicsSystem>(mainScene->getRegistry());
+        mainScene->getRegistry()->registerSystem<CustomCS::PhysicsSystem>();
     auto physicsSystemArchetype = physicsSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::PhysicsSystem>(physicsSystemArchetype);
 
     // basic collision system
     auto collisionSystem = mainScene->getRegistry()
-        ->registerSystem<Systems::BasicCollisionSystem>(mainScene->getRegistry(), applicationEventQueue.get());
+        ->registerSystem<Systems::BasicCollisionSystem>(applicationEventQueue.get());
     auto collisionSystemArchetype = collisionSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<Systems::BasicCollisionSystem>(collisionSystemArchetype);
 
     // meteor collision handler system
     auto meteorCollisionSystem =
-        mainScene->getRegistry()->registerSystem<CustomCS::MeteorBulletCollisionSystem>(mainScene->getRegistry());
+        mainScene->getRegistry()->registerSystem<CustomCS::MeteorBulletCollisionSystem>();
     auto meteorCollisionSystemArchetype = meteorCollisionSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::MeteorBulletCollisionSystem>(meteorCollisionSystemArchetype);
 
     // out of bound system
     auto outOfBoundSystem =
-        mainScene->getRegistry()->registerSystem<CustomCS::OutOfBoundSystem>(mainScene->getRegistry());
+        mainScene->getRegistry()->registerSystem<CustomCS::OutOfBoundSystem>();
     auto outOfBoundSystemArchetype = outOfBoundSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::OutOfBoundSystem>(outOfBoundSystemArchetype);
 
     // meteor spawning system
     auto meteorSpawnSystem =
-        mainScene->getRegistry()->registerSystem<CustomCS::MeteorSpawnSystem>(mainScene->getRegistry(), &resources);
+        mainScene->getRegistry()->registerSystem<CustomCS::MeteorSpawnSystem>(&resources);
     auto meteorSpawnSystemArchetype = meteorSpawnSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::MeteorSpawnSystem>(meteorSpawnSystemArchetype);
 
@@ -112,7 +112,7 @@ void SpaceInvader::init() {
 
     // ascii renderer setup and registration
     auto asciiRenderSystem2 =
-        gameOverScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>(gameOverScene->getRegistry());
+        gameOverScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>();
     asciiRenderSystem2->setRenderer(asciiRenderer.get());
     auto asciiRenderSystem2Archetype = asciiRenderSystem->getSystemArchetype();
     gameOverScene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRenderSystem2Archetype);
