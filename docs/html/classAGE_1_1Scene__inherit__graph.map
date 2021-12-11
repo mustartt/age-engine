@@ -1,0 +1,5 @@
+<map id="AGE::Scene" name="AGE::Scene">
+<area shape="rect" id="node1" title=" " alt="" coords="161,5,308,244"/>
+<area shape="rect" id="node2" href="$classSpaceInvader_1_1GameOverScene.html" title=" " alt="" coords="5,292,232,501"/>
+<area shape="rect" id="node3" href="$classSpaceInvader_1_1MainScene.html" title=" " alt="" coords="256,292,445,501"/>
+</map>

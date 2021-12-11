@@ -1,0 +1,10 @@
+<map id="lib/ncurses.h" name="lib/ncurses.h">
+<area shape="rect" id="node1" title=" " alt="" coords="261,5,365,32"/>
+<area shape="rect" id="node2" href="$CursesContextManager_8cpp.html" title=" " alt="" coords="5,244,224,285"/>
+<area shape="rect" id="node3" href="$CursesRenderer_8h.html" title=" " alt="" coords="194,80,433,107"/>
+<area shape="rect" id="node8" href="$CursesKeyboard_8cpp.html" title=" " alt="" coords="457,80,713,107"/>
+<area shape="rect" id="node4" href="$CursesContextManager_8h.html" title=" " alt="" coords="79,155,297,196"/>
+<area shape="rect" id="node5" href="$CursesRenderAdapter_8h.html" title=" " alt="" coords="322,155,537,196"/>
+<area shape="rect" id="node7" href="$CursesRenderer_8cpp.html" title=" " alt="" coords="561,162,815,189"/>
+<area shape="rect" id="node6" href="$CursesRenderAdapter_8cpp.html" title=" " alt="" coords="322,244,537,285"/>
+</map>

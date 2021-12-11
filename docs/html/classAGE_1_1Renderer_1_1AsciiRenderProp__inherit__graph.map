@@ -1,0 +1,7 @@
+<map id="AGE::Renderer::AsciiRenderProp" name="AGE::Renderer::AsciiRenderProp">
+<area shape="rect" id="node1" title=" " alt="" coords="333,5,564,112"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Renderer_1_1BitMapProp.html" title=" " alt="" coords="5,175,204,267"/>
+<area shape="rect" id="node3" href="$classAGE_1_1Renderer_1_1CharacterProp.html" title=" " alt="" coords="229,175,445,267"/>
+<area shape="rect" id="node4" href="$classAGE_1_1Renderer_1_1RectProp.html" title=" " alt="" coords="469,160,652,281"/>
+<area shape="rect" id="node5" href="$classAGE_1_1Renderer_1_1TextProp.html" title=" " alt="" coords="676,160,856,281"/>
+</map>

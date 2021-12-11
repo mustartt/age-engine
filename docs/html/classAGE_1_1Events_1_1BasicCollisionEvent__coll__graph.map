@@ -1,0 +1,7 @@
+<map id="AGE::Events::BasicCollisionEvent" name="AGE::Events::BasicCollisionEvent">
+<area shape="rect" id="node1" title=" " alt="" coords="112,637,312,744"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Events_1_1CollisionEvent.html" title=" " alt="" coords="5,417,208,494"/>
+<area shape="rect" id="node3" href="$classAGE_1_1Event.html" title=" " alt="" coords="59,108,154,185"/>
+<area shape="rect" id="node4" href="$classAGE_1_1ECS_1_1Entity.html" title=" " alt="" coords="233,351,405,560"/>
+<area shape="rect" id="node5" href="$classAGE_1_1ECS_1_1Registry.html" title=" " alt="" coords="225,5,412,288"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="AGE::Event" name="AGE::Event">
+<area shape="rect" id="node1" title=" " alt="" coords="519,5,614,83"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Events_1_1ApplicationEvent.html" title=" " alt="" coords="255,131,438,223"/>
+<area shape="rect" id="node5" href="$classAGE_1_1Events_1_1CollisionEvent.html" title=" " alt="" coords="465,138,668,215"/>
+<area shape="rect" id="node7" href="$classAGE_1_1Events_1_1EngineEvent.html" title=" " alt="" coords="949,138,1139,215"/>
+<area shape="rect" id="node3" href="$classAGE_1_1Events_1_1KeyPressedEvent.html" title=" " alt="" coords="5,285,227,377"/>
+<area shape="rect" id="node4" href="$classAGE_1_1Events_1_1SwitchSceneEvent.html" title=" " alt="" coords="251,278,442,385"/>
+<area shape="rect" id="node6" href="$classAGE_1_1Events_1_1BasicCollisionEvent.html" title=" " alt="" coords="467,271,667,392"/>
+<area shape="rect" id="node8" href="$classAGE_1_1Events_1_1EngineDrawEvent.html" title=" " alt="" coords="691,293,915,370"/>
+<area shape="rect" id="node9" href="$classAGE_1_1Events_1_1EngineInitEvent.html" title=" " alt="" coords="939,293,1149,370"/>
+<area shape="rect" id="node10" href="$classAGE_1_1Events_1_1EngineShutdownEvent.html" title=" " alt="" coords="1174,278,1391,385"/>
+<area shape="rect" id="node11" href="$classAGE_1_1Events_1_1EngineUpdateEvent.html" title=" " alt="" coords="1416,278,1616,385"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="engine/renderer/RenderComponents/BitMapProp.h" name="engine/renderer/RenderComponents/BitMapProp.h">
+<area shape="rect" id="node1" title=" " alt="" coords="61,5,319,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,65,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="160,393,223,420"/>
+<area shape="rect" id="node4" href="$vec2_8h.html" title=" " alt="" coords="141,95,239,121"/>
+<area shape="rect" id="node6" href="$AsciiRenderProp_8h.html" title=" " alt="" coords="367,95,507,121"/>
+<area shape="rect" id="node10" href="$ScreenBuffer_8h.html" title=" " alt="" coords="316,319,432,345"/>
+<area shape="rect" id="node5" title=" " alt="" coords="152,169,228,196"/>
+<area shape="rect" id="node7" href="$AsciiRenderer_8h.html" title=" " alt="" coords="397,169,580,196"/>
+<area shape="rect" id="node8" title=" " alt="" coords="458,244,519,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="507,393,566,420"/>
+<area shape="rect" id="node12" href="$RenderTarget_8h.html" title=" " alt="" coords="314,244,434,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="335,393,413,420"/>
+</map>
