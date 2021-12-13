@@ -7,14 +7,15 @@
 
 #include <cstdint>
 #include <vector>
+#include <typeindex>
 
 namespace AGE::ECS {
 
 using EntityID = std::uint64_t;
 using ComponentID = EntityID;
 using Archetype = std::vector<ComponentID>;
-using ComponentType = const char *;
-using SystemType = const char *;
+using ComponentType = std::type_index;
+using SystemType = std::type_index;
 
 }
 

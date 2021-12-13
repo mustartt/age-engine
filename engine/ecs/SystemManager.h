@@ -36,24 +36,21 @@ class SystemManager {
   public:
     template<typename T, typename... Args>
     T *registerSystem(Registry *reg, Args &&... args) {
-        auto typeName = typeid(T).name();
-        if (archetypes.count(typeName)) throw SystemAlreadyRegistered{};
-        systems[typeName] = std::move(std::make_unique<T>(reg, args...));
-        return static_cast<T *>(systems[typeName].get());
+        if (archetypes.count(typeid(T))) throw SystemAlreadyRegistered{};
+        systems[typeid(T)] = std::move(std::make_unique<T>(reg, args...));
+        return static_cast<T *>(systems[typeid(T)].get());
     }
 
     template<typename T>
     T *getRegisteredSystem() {
-        auto typeName = typeid(T).name();
-        if (!systems.count(typeName)) throw SystemNotRegistered{};
-        return static_cast<T *>(systems[typeName].get());
+        if (!systems.count(typeid(T))) throw SystemNotRegistered{};
+        return static_cast<T *>(systems[typeid(T)].get());
     }
 
     template<typename T>
     void setArchetype(Archetype &signature) {
-        auto typeName = typeid(T).name();
-        if (!systems.count(typeName)) throw SystemNotRegistered{};
-        archetypes[typeName] = signature;
+        if (!systems.count(typeid(T))) throw SystemNotRegistered{};
+        archetypes[typeid(T)] = signature;
     }
 
     void entityDestroyed(EntityID entity) {
@@ -65,9 +62,8 @@ class SystemManager {
 
     void entitySignatureChanged(EntityID entity, Archetype &entityArchetype) {
         for (auto const &pair: systems) {
-            auto const &type = pair.first;
             auto const &system = pair.second;
-            auto const &systemArchetype = archetypes[type];
+            auto const &systemArchetype = archetypes[pair.first];
 
             if (hasRequiredArchetype(entityArchetype, systemArchetype)) {
                 system->entities.insert(entity);

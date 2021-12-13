@@ -71,37 +71,43 @@ class ComponentManager {
   public:
     template<typename T>
     void registerComponent() {
-        auto typeName = typeid(T).name();
-        if (componentTypes.count(typeName)) throw ComponentAlreadyRegistered{};
-        componentTypes[typeName] = componentIDSequence++;
-        componentArrays[typeName] = std::make_unique<ConcreteComponentContainer<T>>();
+        if (componentTypes.count(typeid(T))) throw ComponentAlreadyRegistered{};
+        componentTypes[typeid(T)] = componentIDSequence++;
+        componentArrays[typeid(T)] = std::make_unique<ConcreteComponentContainer<T>>();
     }
 
     template<typename T>
     ComponentID getComponentType() {
-        auto typeName = typeid(T).name();
-        if (!componentTypes.count(typeName)) throw ComponentNotRegistered{};
-        return componentTypes[typeName];
+        if (!componentTypes.count(typeid(T))) throw ComponentNotRegistered{};
+        return componentTypes[typeid(T)];
     }
 
     template<typename T>
     bool hasComponent(EntityID entity) {
-        return getComponentArray<T>()->hasComponent(entity);
+        if (!componentTypes.count(typeid(T))) throw ComponentNotRegistered{};
+        auto container = static_cast<ConcreteComponentContainer<T> *>(componentArrays[typeid(T)].get());
+        return container->hasComponent(entity);
     }
 
     template<typename T>
     void addComponent(EntityID entity, T component) {
-        getComponentArray<T>()->insertEntityComponent(entity, component);
+        if (!componentTypes.count(typeid(T))) throw ComponentNotRegistered{};
+        auto container = static_cast<ConcreteComponentContainer<T> *>(componentArrays[typeid(T)].get());
+        container->insertEntityComponent(entity, component);
     }
 
     template<typename T>
     void removeComponent(EntityID entity) {
-        getComponentArray<T>()->removeEntityComponent(entity);
+        if (!componentTypes.count(typeid(T))) throw ComponentNotRegistered{};
+        auto container = static_cast<ConcreteComponentContainer<T> *>(componentArrays[typeid(T)].get());
+        container->removeEntityComponent(entity);
     }
 
     template<typename T>
     T &getComponent(EntityID entity) {
-        return getComponentArray<T>()->getComponent(entity);
+        if (!componentTypes.count(typeid(T))) throw ComponentNotRegistered{};
+        auto container = static_cast<ConcreteComponentContainer<T> *>(componentArrays[typeid(T)].get());
+        return container->getComponent(entity);
     }
 
     void entityDestroyed(EntityID entity) {
@@ -109,14 +115,6 @@ class ComponentManager {
             auto const &component = pair.second;
             component->entityDestroyed(entity);
         }
-    }
-
-  private:
-    template<typename T>
-    ConcreteComponentContainer<T>* getComponentArray() {
-        auto typeName = typeid(T).name();
-        if (!componentTypes.count(typeName)) throw ComponentNotRegistered{};
-        return static_cast<ConcreteComponentContainer<T> *>(componentArrays[typeName].get());
     }
 };
 
