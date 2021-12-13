@@ -9,8 +9,8 @@
 #include <components/BasicCollision.h>
 #include <utils/vec2.h>
 #include <components/None.h>
+#include <components/Physics.h>
 #include "MeteorSpawn.h"
-#include "Velocity.h"
 #include "OutOfBound.h"
 
 namespace SpaceInvader::CustomCS {
@@ -27,7 +27,7 @@ void MeteorSpawnSystem::spawnMeteor(int pos) {
     meteor.addComponent(Components::TransformComponent(vec3<int>(75, pos, 0)));
     meteor.addComponent(Components::AsciiRenderComponent(resources->at("meteor2").get()));
     meteor.addComponent(Components::EntityTagComponent("meteor"));
-    meteor.addComponent(CustomCS::Velocity(vec3<int>(-1, 0, 0)));
+    meteor.addComponent(Components::Velocity(vec3<int>(-1, 0, 0)));
     meteor.addComponent(Components::BoundingBoxComponent(vec2<int>(1, 1)));
     meteor.addComponent(CustomCS::RemoveOnOutOfBoundComponent(
         vec3<int>(0, 0, -1), vec3<int>(80, 20, 1), 0));

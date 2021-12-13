@@ -16,7 +16,7 @@ class RectProp : public AsciiRenderProp {
   public:
     explicit RectProp(char c, int w, int h) : character{c}, width{w}, height{h} {}
     void render(AsciiRenderer *renderer, int xOffset, int yOffset) override {
-        renderer->drawRect(xOffset, yOffset, width, height, c);
+        renderer->drawRect(xOffset, yOffset, width, height, character);
     }
 };
 

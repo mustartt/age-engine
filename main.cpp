@@ -1,11 +1,13 @@
 
 #include <chrono>
 #include <thread>
+
 #include "engine/age.h"
 
 #include "utils/vec2.h"
 #include "utils/vec3.h"
-#include "examples/SpaceInvader/SpaceInvader.h"
+
+#include <FeatureDemo.h>
 
 [[noreturn]] void DEBUG_PAUSE() {
     while (true) {
@@ -15,5 +17,5 @@
 
 // resolve entry point extern
 std::unique_ptr<AGE::ApplicationContext> gameEntryPoint(int argc, char *argv[]) {
-    return std::make_unique<SpaceInvader::SpaceInvader>();
+    return std::make_unique<FeatureDemo::FeatureDemo>();
 }

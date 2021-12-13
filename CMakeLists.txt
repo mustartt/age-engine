@@ -24,6 +24,7 @@ add_subdirectory(engine/components)
 
 # example subdirectory
 add_subdirectory(examples/SpaceInvader)
+add_subdirectory(examples/FeatureDemo)
 
 add_executable(final_project main.cpp
         engine/age.h
@@ -35,6 +36,7 @@ add_executable(final_project main.cpp
 
 # example static library
 target_link_libraries(final_project LINK_PUBLIC space_invader)
+target_link_libraries(final_project LINK_PUBLIC age_demo)
 
 # engine static library
 target_link_libraries(final_project LINK_PUBLIC age_ecs)

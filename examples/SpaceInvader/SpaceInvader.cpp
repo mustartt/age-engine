@@ -7,7 +7,6 @@
 #include <components/AsciiRender.h>
 #include <components/EntityTag.h>
 #include <components/BasicCollision.h>
-#include <components/Velocity.h>
 #include <components/Health.h>
 #include <components/OutOfBound.h>
 #include <components/Player.h>
@@ -49,7 +48,7 @@ void SpaceInvader::init() {
     mainScene->getRegistry()->registerComponent<Components::TransformComponent>();
     mainScene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
     mainScene->getRegistry()->registerComponent<Components::EntityTagComponent>();
-    mainScene->getRegistry()->registerComponent<CustomCS::Velocity>();
+    mainScene->getRegistry()->registerComponent<Components::Velocity>();
     mainScene->getRegistry()->registerComponent<CustomCS::Health>();
     mainScene->getRegistry()->registerComponent<Components::BoundingBoxComponent>();
     mainScene->getRegistry()->registerComponent<CustomCS::RemoveOnOutOfBoundComponent>();
@@ -70,9 +69,9 @@ void SpaceInvader::init() {
 
     // meteor physics system
     auto physicsSystem =
-        mainScene->getRegistry()->registerSystem<CustomCS::PhysicsSystem>();
+        mainScene->getRegistry()->registerSystem<Systems::PhysicsSystem>();
     auto physicsSystemArchetype = physicsSystem->getSystemArchetype();
-    mainScene->getRegistry()->setSystemArchetype<CustomCS::PhysicsSystem>(physicsSystemArchetype);
+    mainScene->getRegistry()->setSystemArchetype<Systems::PhysicsSystem>(physicsSystemArchetype);
 
     // basic collision system
     auto collisionSystem = mainScene->getRegistry()

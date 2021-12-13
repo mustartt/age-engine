@@ -7,13 +7,24 @@
 
 #include <ecs/Entity.h>
 
-namespace SpaceInvader::CustomCS {
+namespace AGE::Components {
+
+class Velocity {
+    AGE::vec3<int> velocity;
+  public:
+    explicit Velocity(const AGE::vec3<int> &velocity) : velocity(velocity) {}
+    [[nodiscard]] const AGE::vec3<int> &getVelocity() const { return velocity; }
+};
+
+}
+
+namespace AGE::Systems {
 
 class PhysicsSystem : public AGE::ECS::System {
     /* uses TransformComponent, Velocity */
   public:
-    explicit PhysicsSystem(AGE::ECS::Registry *registry);
-    ~PhysicsSystem() = default;
+    explicit PhysicsSystem(AGE::ECS::Registry *registry) : AGE::ECS::System(registry) {}
+    ~PhysicsSystem() override = default;
     void update();
     AGE::ECS::Archetype getSystemArchetype() override;
 };

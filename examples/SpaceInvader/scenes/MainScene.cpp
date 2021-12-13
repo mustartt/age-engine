@@ -7,7 +7,6 @@
 #include <components/EntityTag.h>
 #include <components/AsciiRender.h>
 #include <components/Transform.h>
-#include <components/Velocity.h>
 #include <components/Physics.h>
 #include <components/OutOfBound.h>
 #include <components/Player.h>
@@ -36,7 +35,7 @@ void MainScene::setup() {
     meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(5, 5, 0)));
     meteor1.addComponent(AGE::Components::AsciiRenderComponent(resources->at("meteor2").get()));
     meteor1.addComponent(AGE::Components::EntityTagComponent("meteor"));
-    meteor1.addComponent(CustomCS::Velocity(vec3<int>(0, 0, 0)));
+    meteor1.addComponent(AGE::Components::Velocity(vec3<int>(0, 0, 0)));
     meteor1.addComponent(AGE::Components::BoundingBoxComponent(vec2<int>(1, 1)));
 
 }
@@ -55,7 +54,7 @@ void MainScene::onActivate() {
     eventListeners["render"] = std::move(renderDispatcher);
 
     // physics update dispatch
-    auto physicsSystem = getRegistry()->getRegisteredSystem<CustomCS::PhysicsSystem>();
+    auto physicsSystem = getRegistry()->getRegisteredSystem<Systems::PhysicsSystem>();
     // collision update dispatch
     auto collisionSystem = getRegistry()->getRegisteredSystem<Systems::BasicCollisionSystem>();
     // out of bound dispatch

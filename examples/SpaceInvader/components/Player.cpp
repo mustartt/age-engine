@@ -11,7 +11,7 @@
 #include <components/AsciiRender.h>
 #include <components/BasicCollision.h>
 #include <components/EntityTag.h>
-#include "Velocity.h"
+#include <components/Physics.h>
 #include "OutOfBound.h"
 
 namespace SpaceInvader::CustomCS {
@@ -27,7 +27,7 @@ void PlayerControlSystem::fireProjectile(ProjectileType type, const AGE::vec3<in
     auto bulletPosition = AGE::vec3<int>(pos) + AGE::vec3<int>(1, 0, 0);
     bullet.addComponent(AGE::Components::TransformComponent(bulletPosition));
     bullet.addComponent(AGE::Components::AsciiRenderComponent(bulletProp));
-    bullet.addComponent(CustomCS::Velocity(AGE::vec3<int>(1, 0, 0)));
+    bullet.addComponent(AGE::Components::Velocity(AGE::vec3<int>(1, 0, 0)));
     bullet.addComponent(AGE::Components::EntityTagComponent("bullet"));
     if (type == REGULAR) {
         bullet.addComponent(AGE::Components::BoundingBoxComponent(AGE::vec2<int>(1, 1)));
@@ -56,6 +56,11 @@ void PlayerControlSystem::move(int keycode) {
                     break;
                 default:break;
             }
+            auto &pos = transform.getPosition();
+            if (pos.x <= 0) pos.x = 0;
+            if (pos.y <= 0) pos.y = 0;
+            if (pos.x > 79) pos.x = 79;
+            if (pos.y > 24) pos.y = 24;
         }
     }
 }

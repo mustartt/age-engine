@@ -11,7 +11,7 @@ add_library(age_ascii_renderer
         RenderComponents/AsciiRenderProp.h
         RenderComponents/CharacterProp.h
         RenderComponents/RectProp.h
-        RenderComponents/BitMapProp.h RenderComponents/TextProp.h)
+        RenderComponents/BitMapProp.h RenderComponents/TextProp.h RenderComponents/CyclicRenderProp.h)
 
 target_include_directories(age_ascii_renderer PUBLIC RenderComponents)
 set_target_properties(age_ascii_renderer PROPERTIES LINKER_LANGUAGE CXX)
