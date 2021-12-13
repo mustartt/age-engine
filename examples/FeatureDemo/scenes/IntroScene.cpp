@@ -53,6 +53,9 @@ void IntroScene::onActivate() {
         std::make_unique<FunctionEventDispatcher<Events::KeyPressedEvent>>(
             [playerControl](Events::KeyPressedEvent *event, EventQueue *queue) {
               playerControl->move(event->getKeyCode());
+              if (event->getKeyCode() == ' ') {
+                  queue->enqueue<Events::SwitchSceneEvent>("scene_2");
+              }
             });
     applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
     eventListeners["keyboard"] = std::move(keyboardDispatch);

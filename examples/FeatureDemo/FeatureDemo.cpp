@@ -96,7 +96,7 @@ void FeatureDemo::init() {
 
     movement->setup();
 
-    getSceneManager()->setActiveScene("scene_2");
+    getSceneManager()->setActiveScene("scene_1");
 }
 
 void FeatureDemo::stop() {

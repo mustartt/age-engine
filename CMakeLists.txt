@@ -26,8 +26,18 @@ add_subdirectory(engine/components)
 add_subdirectory(examples/SpaceInvader)
 add_subdirectory(examples/FeatureDemo)
 
-add_executable(final_project
-        main.cpp
+add_executable(si
+        examples/SpaceInvader/main.cpp
+        engine/age.h
+        engine/utils/vec2.h
+        engine/entry/EntryPoint.cpp
+        engine/entry/EntryPoint.h
+        engine/Scene.h
+        engine/utils/BitMapLoader.cpp
+        engine/utils/BitMapLoader.h)
+
+add_executable(demo
+        examples/FeatureDemo/main.cpp
         engine/age.h
         engine/utils/vec2.h
         engine/entry/EntryPoint.cpp
@@ -37,12 +47,24 @@ add_executable(final_project
         engine/utils/BitMapLoader.h)
 
 # example static library
-target_link_libraries(final_project LINK_PUBLIC space_invader)
-target_link_libraries(final_project LINK_PUBLIC age_demo)
+target_link_libraries(si LINK_PUBLIC space_invader)
+target_link_libraries(si LINK_PUBLIC age_demo)
 
 # engine static library
-target_link_libraries(final_project LINK_PUBLIC age_ecs)
-target_link_libraries(final_project LINK_PUBLIC age_events)
-target_link_libraries(final_project LINK_PUBLIC age_curses)
-target_link_libraries(final_project LINK_PUBLIC age_ascii_renderer)
-target_link_libraries(final_project LINK_PUBLIC age_components)
+target_link_libraries(si LINK_PUBLIC age_ecs)
+target_link_libraries(si LINK_PUBLIC age_events)
+target_link_libraries(si LINK_PUBLIC age_curses)
+target_link_libraries(si LINK_PUBLIC age_ascii_renderer)
+target_link_libraries(si LINK_PUBLIC age_components)
+
+
+# example static library
+target_link_libraries(demo LINK_PUBLIC space_invader)
+target_link_libraries(demo LINK_PUBLIC age_demo)
+
+# engine static library
+target_link_libraries(demo LINK_PUBLIC age_ecs)
+target_link_libraries(demo LINK_PUBLIC age_events)
+target_link_libraries(demo LINK_PUBLIC age_curses)
+target_link_libraries(demo LINK_PUBLIC age_ascii_renderer)
+target_link_libraries(demo LINK_PUBLIC age_components)

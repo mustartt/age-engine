@@ -10,7 +10,7 @@ add_library(age_demo
         scenes/MovementScene.cpp
         scenes/MovementScene.h
         components/Movement.cpp
-        components/Movement.h)
+        components/Movement.h main.cpp)
 
 target_include_directories(age_demo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(age_demo PROPERTIES LINKER_LANGUAGE CXX)
