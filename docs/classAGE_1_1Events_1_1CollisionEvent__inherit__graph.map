@@ -1,5 +1,6 @@
 <map id="AGE::Events::CollisionEvent" name="AGE::Events::CollisionEvent">
-<area shape="rect" id="node1" title=" " alt="" coords="5,131,208,208"/>
-<area shape="rect" id="node3" href="$classAGE_1_1Events_1_1BasicCollisionEvent.html" title=" " alt="" coords="7,256,207,377"/>
-<area shape="rect" id="node2" href="$classAGE_1_1Event.html" title=" " alt="" coords="59,5,154,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="113,131,316,208"/>
+<area shape="rect" id="node3" href="$classAGE_1_1Events_1_1BasicCollisionEvent.html" title=" " alt="" coords="5,256,205,377"/>
+<area shape="rect" id="node4" href="$structSpaceInvader_1_1MeteorPastBorderEvent.html" title=" " alt="" coords="230,271,421,363"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Event.html" title=" " alt="" coords="167,5,262,83"/>
 </map>

@@ -1,17 +1,19 @@
 <map id="examples/SpaceInvader/components/OutOfBound.h" name="examples/SpaceInvader/components/OutOfBound.h">
-<area shape="rect" id="node1" title=" " alt="" coords="19,5,220,47"/>
-<area shape="rect" id="node2" href="$vec3_8h.html" title=" " alt="" coords="7,95,104,121"/>
-<area shape="rect" id="node3" href="$Registry_8h.html" title=" " alt="" coords="129,95,241,121"/>
-<area shape="rect" id="node4" href="$ecs_8h.html" title=" " alt="" coords="53,244,109,271"/>
-<area shape="rect" id="node8" href="$EntityManager_8h.html" title=" " alt="" coords="35,169,163,196"/>
-<area shape="rect" id="node10" href="$ComponentManager_8h.html" title=" " alt="" coords="187,169,353,196"/>
-<area shape="rect" id="node13" href="$SystemManager_8h.html" title=" " alt="" coords="377,169,515,196"/>
-<area shape="rect" id="node5" title=" " alt="" coords="93,319,159,345"/>
-<area shape="rect" id="node6" title=" " alt="" coords="5,319,68,345"/>
-<area shape="rect" id="node7" title=" " alt="" coords="301,319,388,345"/>
-<area shape="rect" id="node9" title=" " alt="" coords="200,244,324,271"/>
-<area shape="rect" id="node11" title=" " alt="" coords="133,244,175,271"/>
-<area shape="rect" id="node12" title=" " alt="" coords="349,244,426,271"/>
-<area shape="rect" id="node14" title=" " alt="" coords="501,244,543,271"/>
-<area shape="rect" id="node15" title=" " alt="" coords="568,244,644,271"/>
+<area shape="rect" id="node1" title=" " alt="" coords="214,5,416,47"/>
+<area shape="rect" id="node2" href="$vec3_8h.html" title=" " alt="" coords="180,95,277,121"/>
+<area shape="rect" id="node3" href="$Registry_8h.html" title=" " alt="" coords="462,95,574,121"/>
+<area shape="rect" id="node16" href="$Event_8h.html" title=" " alt="" coords="148,169,266,196"/>
+<area shape="rect" id="node4" href="$ecs_8h.html" title=" " alt="" coords="659,244,715,271"/>
+<area shape="rect" id="node8" href="$EntityManager_8h.html" title=" " alt="" coords="454,169,582,196"/>
+<area shape="rect" id="node10" href="$ComponentManager_8h.html" title=" " alt="" coords="606,169,771,196"/>
+<area shape="rect" id="node13" href="$SystemManager_8h.html" title=" " alt="" coords="291,169,430,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="654,319,720,345"/>
+<area shape="rect" id="node6" title=" " alt="" coords="469,319,532,345"/>
+<area shape="rect" id="node7" title=" " alt="" coords="261,319,348,345"/>
+<area shape="rect" id="node9" title=" " alt="" coords="409,244,533,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="739,244,782,271"/>
+<area shape="rect" id="node12" title=" " alt="" coords="558,244,635,271"/>
+<area shape="rect" id="node14" title=" " alt="" coords="342,244,384,271"/>
+<area shape="rect" id="node15" title=" " alt="" coords="190,244,266,271"/>
+<area shape="rect" id="node17" title=" " alt="" coords="28,244,114,271"/>
 </map>

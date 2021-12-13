@@ -2,7 +2,7 @@ var searchData=
 [
   ['d88888p_263',['d88888P',['../example__bitmap_8txt.html#af4af7f0c8c00d3f1b40eaf78d4aef929',1,'example_bitmap.txt']]],
   ['d8p_264',['d8P',['../example__bitmap_8txt.html#a5f78caba56c7e2a3e08619ec1620c2c0',1,'example_bitmap.txt']]],
-  ['debug_5fpause_265',['DEBUG_PAUSE',['../main_8cpp.html#a40cfa2cc4c5de395740abd7cd72765c9',1,'main.cpp']]],
+  ['dead_265',['dead',['../classSpaceInvader_1_1Health.html#a51c1d95c6f65adb48dc0003ef97354d7',1,'SpaceInvader::Health']]],
   ['default_5fborder_2etxt_266',['default_border.txt',['../default__border_8txt.html',1,'']]],
   ['delch_267',['delch',['../ncurses_8h.html#acdbe10aa82aef69b0a748a747d8a6145',1,'ncurses.h']]],
   ['deleteln_268',['deleteln',['../ncurses_8h.html#a4fbe2198d95535ac0d37c01ca2d0d27d',1,'ncurses.h']]],

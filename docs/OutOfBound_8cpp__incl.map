@@ -1,20 +1,27 @@
 <map id="examples/SpaceInvader/components/OutOfBound.cpp" name="examples/SpaceInvader/components/OutOfBound.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="161,5,377,47"/>
-<area shape="rect" id="node2" href="$OutOfBound_8h.html" title=" " alt="" coords="212,95,325,121"/>
-<area shape="rect" id="node17" href="$Entity_8h.html" title=" " alt="" coords="350,95,446,121"/>
-<area shape="rect" id="node18" href="$Transform_8h.html" title=" " alt="" coords="5,95,188,121"/>
-<area shape="rect" id="node3" href="$vec3_8h.html" title=" " alt="" coords="71,169,168,196"/>
-<area shape="rect" id="node4" href="$Registry_8h.html" title=" " alt="" coords="342,169,454,196"/>
-<area shape="rect" id="node5" href="$ecs_8h.html" title=" " alt="" coords="370,319,426,345"/>
-<area shape="rect" id="node9" href="$EntityManager_8h.html" title=" " alt="" coords="505,244,633,271"/>
-<area shape="rect" id="node11" href="$ComponentManager_8h.html" title=" " alt="" coords="315,244,481,271"/>
-<area shape="rect" id="node14" href="$SystemManager_8h.html" title=" " alt="" coords="657,244,795,271"/>
-<area shape="rect" id="node6" title=" " alt="" coords="409,393,475,420"/>
-<area shape="rect" id="node7" title=" " alt="" coords="321,393,384,420"/>
-<area shape="rect" id="node8" title=" " alt="" coords="607,393,693,420"/>
-<area shape="rect" id="node10" title=" " alt="" coords="552,319,676,345"/>
-<area shape="rect" id="node12" title=" " alt="" coords="303,319,346,345"/>
-<area shape="rect" id="node13" title=" " alt="" coords="450,319,527,345"/>
-<area shape="rect" id="node15" title=" " alt="" coords="751,319,794,345"/>
-<area shape="rect" id="node16" title=" " alt="" coords="819,319,895,345"/>
+<area shape="rect" id="node1" title=" " alt="" coords="310,5,526,47"/>
+<area shape="rect" id="node2" href="$OutOfBound_8h.html" title=" " alt="" coords="362,95,475,121"/>
+<area shape="rect" id="node19" href="$Entity_8h.html" title=" " alt="" coords="134,259,230,285"/>
+<area shape="rect" id="node20" href="$Transform_8h.html" title=" " alt="" coords="155,95,338,121"/>
+<area shape="rect" id="node21" href="$MeteorPastBorder_8h.html" title=" " alt="" coords="500,95,697,121"/>
+<area shape="rect" id="node24" href="$EntityTag_8h.html" title=" " alt="" coords="721,95,900,121"/>
+<area shape="rect" id="node3" href="$vec3_8h.html" title=" " alt="" coords="208,177,306,203"/>
+<area shape="rect" id="node4" href="$Registry_8h.html" title=" " alt="" coords="177,333,289,360"/>
+<area shape="rect" id="node17" href="$Event_8h.html" title=" " alt="" coords="536,408,655,435"/>
+<area shape="rect" id="node5" href="$ecs_8h.html" title=" " alt="" coords="86,483,142,509"/>
+<area shape="rect" id="node9" href="$EntityManager_8h.html" title=" " alt="" coords="221,408,349,435"/>
+<area shape="rect" id="node11" href="$ComponentManager_8h.html" title=" " alt="" coords="32,408,197,435"/>
+<area shape="rect" id="node14" href="$SystemManager_8h.html" title=" " alt="" coords="373,408,512,435"/>
+<area shape="rect" id="node6" title=" " alt="" coords="81,557,148,584"/>
+<area shape="rect" id="node7" title=" " alt="" coords="672,557,735,584"/>
+<area shape="rect" id="node8" title=" " alt="" coords="454,557,540,584"/>
+<area shape="rect" id="node10" title=" " alt="" coords="335,483,459,509"/>
+<area shape="rect" id="node12" title=" " alt="" coords="20,483,62,509"/>
+<area shape="rect" id="node13" title=" " alt="" coords="166,483,244,509"/>
+<area shape="rect" id="node15" title=" " alt="" coords="268,483,310,509"/>
+<area shape="rect" id="node16" title=" " alt="" coords="535,483,611,509"/>
+<area shape="rect" id="node18" title=" " alt="" coords="687,483,774,509"/>
+<area shape="rect" id="node22" href="$EngineEvents_8h.html" title=" " alt="" coords="500,169,659,211"/>
+<area shape="rect" id="node23" title=" " alt="" coords="492,259,558,285"/>
+<area shape="rect" id="node25" title=" " alt="" coords="781,177,840,203"/>
 </map>
