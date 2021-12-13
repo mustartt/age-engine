@@ -12,8 +12,8 @@ add_compile_definitions(COMPILE_AS_ENGINE)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
-set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
-set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+#set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 # engine subdirectory
 add_subdirectory(engine/ecs)
@@ -26,13 +26,15 @@ add_subdirectory(engine/components)
 add_subdirectory(examples/SpaceInvader)
 add_subdirectory(examples/FeatureDemo)
 
-add_executable(final_project main.cpp
+add_executable(final_project
+        main.cpp
         engine/age.h
         engine/utils/vec2.h
         engine/entry/EntryPoint.cpp
         engine/entry/EntryPoint.h
         engine/Scene.h
-        engine/utils/BitMapLoader.cpp engine/utils/BitMapLoader.h)
+        engine/utils/BitMapLoader.cpp
+        engine/utils/BitMapLoader.h)
 
 # example static library
 target_link_libraries(final_project LINK_PUBLIC space_invader)

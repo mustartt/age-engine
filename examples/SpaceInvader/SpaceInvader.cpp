@@ -17,6 +17,7 @@
 #include <renderer/RenderComponents/TextProp.h>
 #include <components/MeteorSpawn.h>
 #include <components/None.h>
+#include <scenes/GameStartScene.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
@@ -34,9 +35,13 @@ void SpaceInvader::init() {
     resources["meteor2"] = std::make_unique<Renderer::CharacterProp>('@');
     resources["game_over"] = std::make_unique<Renderer::BitMapProp>(
         BitMapLoader::loadBitMap("./assets/game_over.txt"));
+    resources["game_start"] = std::make_unique<Renderer::BitMapProp>(
+        BitMapLoader::loadBitMap("./assets/game_start.txt"));
     resources["default_border"] = std::make_unique<Renderer::BitMapProp>(
         BitMapLoader::loadBitMap("./assets/default_border.txt"));
     resources["game_over_text"] = std::make_unique<Renderer::TextProp>("Press Space to Exit...");
+    resources["game_start_text"] = std::make_unique<Renderer::TextProp>("Press Space to Start...");
+    resources["game_start_info"] = std::make_unique<Renderer::TextProp>("CTRL: WS to move up and down, JK to shoot!");
 
     Scene *mainScene = getSceneManager()->createScene<MainScene>("main_scene",
                                                                  engineEventQueue.get(),
@@ -99,6 +104,25 @@ void SpaceInvader::init() {
 
     mainScene->setup();
 
+    Scene *gameStartScene = getSceneManager()->createScene<GameStartScene>("game_start_scene",
+                                                                           engineEventQueue.get(),
+                                                                           applicationEventQueue.get(),
+                                                                           &resources);
+
+    // register game over scene components
+    gameStartScene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
+    gameStartScene->getRegistry()->registerComponent<Components::TransformComponent>();
+    gameStartScene->getRegistry()->registerComponent<Components::EntityTagComponent>();
+
+    // ascii renderer setup and registration
+    auto asciiRenderSystem3 =
+        gameStartScene->getRegistry()->registerSystem<Systems::AsciiRenderSystem>();
+    asciiRenderSystem3->setRenderer(asciiRenderer.get());
+    auto asciiRenderSystem3Archetype = asciiRenderSystem3->getSystemArchetype();
+    gameStartScene->getRegistry()->setSystemArchetype<Systems::AsciiRenderSystem>(asciiRenderSystem3Archetype);
+
+    gameStartScene->setup();
+
     Scene *gameOverScene = getSceneManager()->createScene<GameOverScene>("game_over_scene",
                                                                          engineEventQueue.get(),
                                                                          applicationEventQueue.get(),
@@ -118,7 +142,7 @@ void SpaceInvader::init() {
 
     gameOverScene->setup();
 
-    getSceneManager()->setActiveScene("main_scene");
+    getSceneManager()->setActiveScene("game_start_scene");
 }
 
 void SpaceInvader::stop() {

@@ -81,6 +81,9 @@ void MainScene::onActivate() {
         std::make_unique<FunctionEventDispatcher<Events::KeyPressedEvent>>(
             [playerControl](Events::KeyPressedEvent *event, EventQueue *queue) {
               playerControl->move(event->getKeyCode());
+              if (event->getKeyCode() == 'p') {
+                  queue->enqueue<Events::SwitchSceneEvent>("game_over_scene");
+              }
             });
     applicationEventQueue->registerEventDispatcher<Events::KeyPressedEvent>(keyboardDispatch.get());
     eventListeners["keyboard"] = std::move(keyboardDispatch);

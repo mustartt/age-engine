@@ -71,8 +71,8 @@ void CursesApplicationContext::run() {
             keycode = manager->getKeyboardInstance()->getKeycode();
         }
 
-        applicationEventQueue->dispatchEvents(); // dispatch application events second
-        engineEventQueue->dispatchEvents(); // dispatch engine events first
+        applicationEventQueue->dispatchEvents(); // dispatch application events first
+        engineEventQueue->dispatchEvents(); // dispatch engine events second
 
         std::this_thread::sleep_for(delay);
 
@@ -90,9 +90,8 @@ void CursesApplicationContext::stop() {
 
 void CursesApplicationContext::exitKeyHandler(Events::KeyPressedEvent *event, EventQueue *eventQueue) {
     if (event->getKeyCode() == 'p') {
-//        getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
-//        getEngineQueue()->dispatchEvents();
-        getApplicationQueue()->enqueue<Events::SwitchSceneEvent>("game_over_scene");
+        getEngineQueue()->enqueue<Events::EngineShutdownEvent>(0);
+        getEngineQueue()->dispatchEvents();
     }
 }
 

@@ -16,7 +16,7 @@ add_library(space_invader
         scenes/GameOverScene.cpp
         scenes/GameOverScene.h
         components/MeteorSpawn.cpp
-        components/MeteorSpawn.h)
+        components/MeteorSpawn.h scenes/GameStartScene.cpp scenes/GameStartScene.h)
 
 target_include_directories(space_invader PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(space_invader PROPERTIES LINKER_LANGUAGE CXX)

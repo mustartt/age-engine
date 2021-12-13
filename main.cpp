@@ -7,7 +7,8 @@
 #include "utils/vec2.h"
 #include "utils/vec3.h"
 
-#include <FeatureDemo.h>
+// #include <FeatureDemo.h>
+#include <SpaceInvader.h>
 
 [[noreturn]] void DEBUG_PAUSE() {
     while (true) {
@@ -17,5 +18,5 @@
 
 // resolve entry point extern
 std::unique_ptr<AGE::ApplicationContext> gameEntryPoint(int argc, char *argv[]) {
-    return std::make_unique<FeatureDemo::FeatureDemo>();
+    return std::make_unique<SpaceInvader::SpaceInvader>();
 }
