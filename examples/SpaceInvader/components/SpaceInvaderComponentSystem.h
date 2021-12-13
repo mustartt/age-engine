@@ -23,6 +23,7 @@ class MeteorBulletCollisionSystem : public ECS::System {
         try { // handle collisions gets called in the next tick so entities might be deleted already
             auto entity1 = event->getCollidingPair().first;
             auto entity2 = event->getCollidingPair().second;
+            if (!entity1.isValid() || !entity2.isValid()) return;
             std::map<std::string, ECS::Entity> res{
                 {entity1.getComponent<Components::EntityTagComponent>().getTag(), entity1},
                 {entity2.getComponent<Components::EntityTagComponent>().getTag(), entity2}

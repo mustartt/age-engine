@@ -31,6 +31,7 @@ class Entity {
     template<typename T>
     void removeComponent() { registry->removeComponent<T>(entityId); }
     void destroyEntity() { registry->destroyEntity(entityId); }
+    [[nodiscard]] bool isValid() const { return registry->isEntityValid(entityId); }
 };
 
 }

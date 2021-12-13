@@ -25,6 +25,10 @@ class Registry {
         return entityManager->createEntity();
     }
 
+    bool isEntityValid(EntityID entityId) {
+        return entityManager->isEntityValid(entityId);
+    }
+
     void destroyEntity(EntityID entityId) {
         entityManager->destroyEntity(entityId);
         componentManager->entityDestroyed(entityId);

@@ -29,6 +29,7 @@ OutOfBoundSystem::OutOfBoundSystem(AGE::ECS::Registry *registry)
 void OutOfBoundSystem::removeOutOfBoundEntities() {
     for (auto entityId: entities) {
         AGE::ECS::Entity entity(entityId, registry);
+        if (!entity.isValid()) continue;
         auto &bound = entity.getComponent<RemoveOnOutOfBoundComponent>();
         auto &pos = entity.getComponent<AGE::Components::TransformComponent>();
         if (bound.isOutOfBound(pos.getPosition())) {

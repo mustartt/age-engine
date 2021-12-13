@@ -10,6 +10,7 @@ namespace AGE::Systems {
 void PhysicsSystem::update() {
     for (auto entityId: entities) {
         auto entity = AGE::ECS::Entity(entityId, registry);
+        if (!entity.isValid()) return;
         auto &position = entity.getComponent<Components::TransformComponent>();
         auto &velocity = entity.getComponent<Components::Velocity>();
         position.getPosition() += velocity.getVelocity();

@@ -33,6 +33,9 @@ class EntityManager {
         entityComponentMapping.erase(entity);
         --entityCount;
     }
+    bool isEntityValid(EntityID entityId) const {
+        return entityComponentMapping.count(entityId) > 0;
+    }
     void setArchetype(EntityID entity, Archetype &archetype) {
         entityComponentMapping[entity] = archetype;
     }
