@@ -1,0 +1,5 @@
+<map id="SpaceInvader::PlayerScoreSystem" name="SpaceInvader::PlayerScoreSystem">
+<area shape="rect" id="node1" title=" " alt="" coords="5,521,200,657"/>
+<area shape="rect" id="node2" href="$classAGE_1_1ECS_1_1System.html" title=" " alt="" coords="11,365,194,472"/>
+<area shape="rect" id="node3" href="$classAGE_1_1ECS_1_1Registry.html" title=" " alt="" coords="9,5,196,303"/>
+</map>

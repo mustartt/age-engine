@@ -1,4 +1,8 @@
 <map id="engine/events/EngineEvents/EngineEvents.h" name="engine/events/EngineEvents/EngineEvents.h">
-<area shape="rect" id="node1" title=" " alt="" coords="38,5,245,47"/>
-<area shape="rect" id="node2" href="$BasicCollision_8cpp.html" title=" " alt="" coords="5,95,277,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="162,5,369,47"/>
+<area shape="rect" id="node2" href="$BasicCollision_8cpp.html" title=" " alt="" coords="5,102,277,129"/>
+<area shape="rect" id="node3" href="$ScoreEvent_8h.html" title=" " alt="" coords="301,95,480,136"/>
+<area shape="rect" id="node4" href="$SpaceInvaderComponentSystem_8h.html" title=" " alt="" coords="254,184,527,240"/>
+<area shape="rect" id="node5" href="$MainScene_8cpp.html" title=" " alt="" coords="200,288,379,329"/>
+<area shape="rect" id="node6" href="$SpaceInvader_8cpp.html" title=" " alt="" coords="403,288,581,329"/>
 </map>
