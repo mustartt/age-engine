@@ -11,6 +11,7 @@
 #include <components/OutOfBound.h>
 #include <components/Player.h>
 #include <components/MeteorSpawn.h>
+#include <components/PlayerScore.h>
 #include "MainScene.h"
 #include "../components/SpaceInvaderComponentSystem.h"
 
@@ -30,6 +31,17 @@ void MainScene::setup() {
     border.addComponent(Components::AsciiRenderComponent(resources->at("default_border").get()));
     border.addComponent(Components::TransformComponent(vec3<int>(0, 0, 100)));
     border.addComponent(Components::EntityTagComponent("default_border"));
+
+    auto score = createEntity();
+    score.addComponent(Components::TransformComponent(vec3<int>(7, 23, 100)));
+    score.addComponent(Components::AsciiRenderComponent(resources->at("score_display").get()));
+    score.addComponent(Components::EntityTagComponent("score_display"));
+    score.addComponent(PlayerScore());
+
+    auto scoreText = createEntity();
+    scoreText.addComponent(Components::TransformComponent(vec3<int>(0, 23, 100)));
+    scoreText.addComponent(Components::AsciiRenderComponent(resources->at("score_display_text").get()));
+    scoreText.addComponent(Components::EntityTagComponent("score_display"));
 
     AGE::ECS::Entity meteor1 = createEntity();
     meteor1.addComponent(AGE::Components::TransformComponent(vec3<int>(5, 5, 0)));
@@ -98,6 +110,16 @@ void MainScene::onActivate() {
             });
     applicationEventQueue->registerEventDispatcher<Events::BasicCollisionEvent>(collisionDispatch.get());
     eventListeners["collision"] = std::move(collisionDispatch);
+
+    auto playerScoreSystem = getRegistry()->getRegisteredSystem<PlayerScoreSystem>();
+    std::unique_ptr<EventDispatcher>
+        scoreDispatch =
+        std::make_unique<FunctionEventDispatcher<ScoreEvent>>(
+            [=](ScoreEvent *event, EventQueue *queue) {
+              playerScoreSystem->playerScoreHandler();
+            });
+    applicationEventQueue->registerEventDispatcher<ScoreEvent>(scoreDispatch.get());
+    eventListeners["score"] = std::move(scoreDispatch);
 }
 
 void MainScene::onDeactivate() {
@@ -107,6 +129,7 @@ void MainScene::onDeactivate() {
     engineEventQueue->unregisterAll<Events::EngineUpdateEvent>();
     applicationEventQueue->unregisterAll<Events::KeyPressedEvent>();
     applicationEventQueue->unregisterAll<Events::BasicCollisionEvent>();
+    applicationEventQueue->unregisterAll<ScoreEvent>();
 
 //    engineEventQueue->unregisterEventDispatcher<Events::EngineDrawEvent>(eventListeners.at("render").get());
 //    engineEventQueue->unregisterEventDispatcher<Events::EngineUpdateEvent>(eventListeners.at("update").get());

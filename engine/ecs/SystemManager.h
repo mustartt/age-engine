@@ -60,7 +60,7 @@ class SystemManager {
         }
     }
 
-    void entitySignatureChanged(EntityID entity, Archetype &entityArchetype) {
+    void archetypeChanged(EntityID entity, Archetype &entityArchetype) {
         for (auto const &pair: systems) {
             auto const &system = pair.second;
             auto const &systemArchetype = archetypes[pair.first];

@@ -1,5 +1,8 @@
 <map id="AGE::Scene" name="AGE::Scene">
-<area shape="rect" id="node1" title=" " alt="" coords="161,5,308,244"/>
-<area shape="rect" id="node2" href="$classSpaceInvader_1_1GameOverScene.html" title=" " alt="" coords="5,292,232,501"/>
-<area shape="rect" id="node3" href="$classSpaceInvader_1_1MainScene.html" title=" " alt="" coords="256,292,445,501"/>
+<area shape="rect" id="node1" title=" " alt="" coords="507,5,653,244"/>
+<area shape="rect" id="node2" href="$classFeatureDemo_1_1IntroScene.html" title=" " alt="" coords="5,292,192,501"/>
+<area shape="rect" id="node3" href="$classFeatureDemo_1_1MovementScene.html" title=" " alt="" coords="216,292,443,501"/>
+<area shape="rect" id="node4" href="$classSpaceInvader_1_1GameOverScene.html" title=" " alt="" coords="467,292,693,501"/>
+<area shape="rect" id="node5" href="$classSpaceInvader_1_1GameStartScene.html" title=" " alt="" coords="717,292,944,501"/>
+<area shape="rect" id="node6" href="$classSpaceInvader_1_1MainScene.html" title=" " alt="" coords="968,292,1157,501"/>
 </map>

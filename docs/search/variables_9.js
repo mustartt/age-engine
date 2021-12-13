@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['keyboard_1212',['keyboard',['../classAGE_1_1CursesContextManager.html#a80cf8f02aa95e242c48ac7b51cbeebd0',1,'AGE::CursesContextManager']]],
-  ['keycode_1213',['keycode',['../classAGE_1_1Events_1_1KeyPressedEvent.html#a1137bd8b0291e4e2c2d9a143c503cd29',1,'AGE::Events::KeyPressedEvent']]],
-  ['keycodebuffer_1214',['keycodeBuffer',['../classAGE_1_1CursesKeyboard.html#aeb4bc7a45ff83b7f2c4c39878ee1980f',1,'AGE::CursesKeyboard']]]
+  ['j8oo_5f_1316',['J8oo_',['../example__bitmap_8txt.html#acd37f2943cc2f054cc7200d8c1285d82',1,'example_bitmap.txt']]]
 ];

@@ -1,13 +1,20 @@
 var searchData=
 [
-  ['pair_5fnumber_643',['PAIR_NUMBER',['../ncurses_8h.html#a1da6bb7fb7f2eec0e30fbf4bdda2c2f5',1,'ncurses.h']]],
-  ['pdat_644',['pdat',['../struct__win__st_1_1pdat.html',1,'_win_st']]],
-  ['physics_2ecpp_645',['Physics.cpp',['../Physics_8cpp.html',1,'']]],
-  ['physics_2eh_646',['Physics.h',['../Physics_8h.html',1,'']]],
-  ['physicssystem_647',['PhysicsSystem',['../classSpaceInvader_1_1CustomCS_1_1PhysicsSystem.html',1,'SpaceInvader::CustomCS::PhysicsSystem'],['../classSpaceInvader_1_1CustomCS_1_1PhysicsSystem.html#a53da348ad7e3b1c522d2f89844321002',1,'SpaceInvader::CustomCS::PhysicsSystem::PhysicsSystem()']]],
-  ['player_2ecpp_648',['Player.cpp',['../Player_8cpp.html',1,'']]],
-  ['player_2eh_649',['Player.h',['../Player_8h.html',1,'']]],
-  ['playercontrolsystem_650',['PlayerControlSystem',['../classSpaceInvader_1_1CustomCS_1_1PlayerControlSystem.html',1,'SpaceInvader::CustomCS::PlayerControlSystem'],['../classSpaceInvader_1_1CustomCS_1_1PlayerControlSystem.html#a9bc617398df4f912873f348f091b210a',1,'SpaceInvader::CustomCS::PlayerControlSystem::PlayerControlSystem()']]],
-  ['position_651',['position',['../classAGE_1_1Components_1_1TransformComponent.html#a47bfecd9a77dbe3911de4c0467a2f999',1,'AGE::Components::TransformComponent']]],
-  ['projectiletype_652',['ProjectileType',['../namespaceSpaceInvader_1_1CustomCS.html#a67c129dd8ac573b3c42d8e1d6f9ee2e6',1,'SpaceInvader::CustomCS']]]
+  ['offset_658',['offset',['../classAGE_1_1Components_1_1BoundingBoxComponent.html#a4454fe9de2ac959a0b40f9da235ad063',1,'AGE::Components::BoundingBoxComponent']]],
+  ['ok_659',['OK',['../ncurses_8h.html#aba51915c87d64af47fb1cc59348961c9',1,'ncurses.h']]],
+  ['onactivate_660',['onActivate',['../classAGE_1_1Scene.html#a2674de73350feaa8ef5908fdf21c4ee6',1,'AGE::Scene::onActivate()'],['../classFeatureDemo_1_1IntroScene.html#ad6fef5114ba0b027a3780f239c603a23',1,'FeatureDemo::IntroScene::onActivate()'],['../classFeatureDemo_1_1MovementScene.html#a48fefe6b61466fbef0cab5464bb1878d',1,'FeatureDemo::MovementScene::onActivate()'],['../classSpaceInvader_1_1GameOverScene.html#a5311eca4f7b3825476b5439fc7c4b244',1,'SpaceInvader::GameOverScene::onActivate()'],['../classSpaceInvader_1_1GameStartScene.html#aea6b2adc4b5132613319125a6250faa9',1,'SpaceInvader::GameStartScene::onActivate()'],['../classSpaceInvader_1_1MainScene.html#acadf85b67a6973e4c498fb51a980d9cb',1,'SpaceInvader::MainScene::onActivate()']]],
+  ['ondeactivate_661',['onDeactivate',['../classAGE_1_1Scene.html#aed1ba3cabd55feaf4c3c4db2635a2afa',1,'AGE::Scene::onDeactivate()'],['../classFeatureDemo_1_1IntroScene.html#a0f2ed538421d1963773410d90b971130',1,'FeatureDemo::IntroScene::onDeactivate()'],['../classFeatureDemo_1_1MovementScene.html#ab7c93785e943e60011b09581c5c43a94',1,'FeatureDemo::MovementScene::onDeactivate()'],['../classSpaceInvader_1_1GameOverScene.html#afcb1ee145b96e14773b9cdc2b75fa4b0',1,'SpaceInvader::GameOverScene::onDeactivate()'],['../classSpaceInvader_1_1GameStartScene.html#ac3dfe5ef0fe6951a452fa42b21c45e4a',1,'SpaceInvader::GameStartScene::onDeactivate()'],['../classSpaceInvader_1_1MainScene.html#a2d66dfceddbbd33fe5eb18d5a08f550f',1,'SpaceInvader::MainScene::onDeactivate()']]],
+  ['operator_28_29_662',['operator()',['../structAGE_1_1ECS_1_1ConcreteComponentContainer_1_1ListIterHash.html#ad3546c533afcbc7a6ad68bec1a1b2c7f',1,'AGE::ECS::ConcreteComponentContainer::ListIterHash::operator()()'],['../classAGE_1_1EventDispatcher.html#a794dc7aef624a87dbb9c2a20b0c8aaa8',1,'AGE::EventDispatcher::operator()()']]],
+  ['operator_2a_663',['operator*',['../classAGE_1_1vec2.html#a94555459b0af9a5a45e7deb3ca213d61',1,'AGE::vec2']]],
+  ['operator_2b_664',['operator+',['../classAGE_1_1vec2.html#a76420ea9054080ce408200e10d65ac5a',1,'AGE::vec2::operator+(const vec2&lt; T &gt; &amp;v) const'],['../classAGE_1_1vec2.html#ab4c39b22bd9996d70b183a21a8629a67',1,'AGE::vec2::operator+(T s) const'],['../classAGE_1_1vec3.html#a71d2fe29569a72a4408272ec145c1310',1,'AGE::vec3::operator+()']]],
+  ['operator_2b_3d_665',['operator+=',['../classAGE_1_1vec3.html#addfdd93fed29ee30ff7edd61523f571f',1,'AGE::vec3']]],
+  ['operator_2d_666',['operator-',['../classAGE_1_1vec2.html#acf16206800ecc5f211bb588fb1195042',1,'AGE::vec2::operator-(const vec2&lt; T &gt; &amp;v) const'],['../classAGE_1_1vec2.html#a189cbfd57bf133000a998bca82a177ae',1,'AGE::vec2::operator-(T s) const'],['../classAGE_1_1vec3.html#a6097041d32bcf0186339e3586f95dd78',1,'AGE::vec3::operator-()']]],
+  ['operator_2d_3d_667',['operator-=',['../classAGE_1_1vec3.html#af6598a92efd8b822447badd154c66d23',1,'AGE::vec3']]],
+  ['operator_2f_668',['operator/',['../classAGE_1_1vec2.html#a1acf948617d1fa8f3cef8b285ede0a10',1,'AGE::vec2']]],
+  ['operator_3c_3c_669',['operator&lt;&lt;',['../classAGE_1_1vec2.html#a66fe0e821de19e29e4d7b877b6c4d061',1,'AGE::vec2']]],
+  ['operator_3d_670',['operator=',['../classAGE_1_1ECS_1_1Entity.html#a0b0ee1b2b3fb9c91a16ae8fa43419f55',1,'AGE::ECS::Entity::operator=()'],['../classAGE_1_1vec2.html#a7f8bfaab9f960c0baa688bf1309c2bfd',1,'AGE::vec2::operator=()'],['../classAGE_1_1vec3.html#a0df22631372509c48aa0c8e657c5666f',1,'AGE::vec3::operator=()']]],
+  ['outofbound_671',['outOfBound',['../classSpaceInvader_1_1CustomCS_1_1RemoveOnOutOfBoundComponent.html#ad70b460f3a217fca54e6f83aff64cb77',1,'SpaceInvader::CustomCS::RemoveOnOutOfBoundComponent']]],
+  ['outofbound_2ecpp_672',['OutOfBound.cpp',['../OutOfBound_8cpp.html',1,'']]],
+  ['outofbound_2eh_673',['OutOfBound.h',['../OutOfBound_8h.html',1,'']]],
+  ['outofboundsystem_674',['OutOfBoundSystem',['../classSpaceInvader_1_1CustomCS_1_1OutOfBoundSystem.html',1,'SpaceInvader::CustomCS::OutOfBoundSystem'],['../classSpaceInvader_1_1CustomCS_1_1OutOfBoundSystem.html#abf922c7787b33ed085161fd2c4d0a94b',1,'SpaceInvader::CustomCS::OutOfBoundSystem::OutOfBoundSystem()']]]
 ];

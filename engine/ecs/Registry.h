@@ -40,7 +40,7 @@ class Registry {
         componentManager->addComponent<T>(entity, component);
         auto &archetype = entityManager->getArchetype(entity);
         archetype.push_back(componentManager->template getComponentType<T>());
-        systemManager->entitySignatureChanged(entity, archetype);
+        systemManager->archetypeChanged(entity, archetype);
     }
 
     template<typename T>
@@ -48,7 +48,7 @@ class Registry {
         componentManager->removeComponent<T>(entity);
         std::vector<ComponentID> archetype = entityManager->getArchetype(entity);
         std::remove(archetype.begin(), archetype.end(), componentManager->getComponentType<T>());
-        systemManager->entitySignatureChanged(entity, archetype);
+        systemManager->archetypeChanged(entity, archetype);
     }
 
     template<typename T>

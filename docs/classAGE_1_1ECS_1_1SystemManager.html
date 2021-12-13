@@ -81,7 +81,7 @@ Collaboration diagram for AGE::ECS::SystemManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAGE_1_1ECS_1_1SystemManager__coll__graph.png" border="0" usemap="#AGE_1_1ECS_1_1SystemManager_coll__map" alt="Collaboration graph"/></div>
 <map name="AGE_1_1ECS_1_1SystemManager_coll__map" id="AGE_1_1ECS_1_1SystemManager_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,209,171"/>
+<area shape="rect" title=" " alt="" coords="5,5,201,171"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -98,8 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a44a7b772304782db99d9e300f9b3d90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcf12df90986f399934dda105d221eba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#abcf12df90986f399934dda105d221eba">entityDestroyed</a> (<a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a> entity)</td></tr>
 <tr class="separator:abcf12df90986f399934dda105d221eba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7cdab62a351dc4c5e5ba7382fc6bfc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#ad7cdab62a351dc4c5e5ba7382fc6bfc7">entitySignatureChanged</a> (<a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a> entity, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &amp;entityArchetype)</td></tr>
-<tr class="separator:ad7cdab62a351dc4c5e5ba7382fc6bfc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08a5c704f84ba309ebefa49334cb3d5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#a08a5c704f84ba309ebefa49334cb3d5f">archetypeChanged</a> (<a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a> entity, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &amp;entityArchetype)</td></tr>
+<tr class="separator:a08a5c704f84ba309ebefa49334cb3d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
@@ -108,12 +108,48 @@ Static Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:aabb2da42a3e5237f1f671653a0363490"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a022c869c9875e76bfdeee4b88257d0cd">SystemType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#aabb2da42a3e5237f1f671653a0363490">archetypes</a></td></tr>
+<tr class="memitem:aabb2da42a3e5237f1f671653a0363490"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a7454d12ef7744532ed5e4669a85b7e61">SystemType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#aabb2da42a3e5237f1f671653a0363490">archetypes</a></td></tr>
 <tr class="separator:aabb2da42a3e5237f1f671653a0363490"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29bb1338916abfb72a68cfbeaf4c995b"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a022c869c9875e76bfdeee4b88257d0cd">SystemType</a>, std::unique_ptr&lt; <a class="el" href="classAGE_1_1ECS_1_1System.html">System</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#a29bb1338916abfb72a68cfbeaf4c995b">systems</a></td></tr>
+<tr class="memitem:a29bb1338916abfb72a68cfbeaf4c995b"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a7454d12ef7744532ed5e4669a85b7e61">SystemType</a>, std::unique_ptr&lt; <a class="el" href="classAGE_1_1ECS_1_1System.html">System</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1SystemManager.html#a29bb1338916abfb72a68cfbeaf4c995b">systems</a></td></tr>
 <tr class="separator:a29bb1338916abfb72a68cfbeaf4c995b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a08a5c704f84ba309ebefa49334cb3d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a5c704f84ba309ebefa49334cb3d5f">&#9670;&nbsp;</a></span>archetypeChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AGE::ECS::SystemManager::archetypeChanged </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &amp;&#160;</td>
+          <td class="paramname"><em>entityArchetype</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abcf12df90986f399934dda105d221eba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abcf12df90986f399934dda105d221eba">&#9670;&nbsp;</a></span>entityDestroyed()</h2>
 
@@ -129,42 +165,6 @@ Private Attributes</h2></td></tr>
           <td class="paramtype"><a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a>&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
           <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad7cdab62a351dc4c5e5ba7382fc6bfc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7cdab62a351dc4c5e5ba7382fc6bfc7">&#9670;&nbsp;</a></span>entitySignatureChanged()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AGE::ECS::SystemManager::entitySignatureChanged </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a>&#160;</td>
-          <td class="paramname"><em>entity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a> &amp;&#160;</td>
-          <td class="paramname"><em>entityArchetype</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -316,7 +316,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a022c869c9875e76bfdeee4b88257d0cd">SystemType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a>&gt; AGE::ECS::SystemManager::archetypes</td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a7454d12ef7744532ed5e4669a85b7e61">SystemType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a80c445eb9025a4e636dfd718aa3f7045">Archetype</a>&gt; AGE::ECS::SystemManager::archetypes</td>
         </tr>
       </table>
   </td>
@@ -338,7 +338,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a022c869c9875e76bfdeee4b88257d0cd">SystemType</a>, std::unique_ptr&lt;<a class="el" href="classAGE_1_1ECS_1_1System.html">System</a>&gt; &gt; AGE::ECS::SystemManager::systems</td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a7454d12ef7744532ed5e4669a85b7e61">SystemType</a>, std::unique_ptr&lt;<a class="el" href="classAGE_1_1ECS_1_1System.html">System</a>&gt; &gt; AGE::ECS::SystemManager::systems</td>
         </tr>
       </table>
   </td>

@@ -13,6 +13,7 @@
 #include <components/AsciiRender.h>
 #include <components/EntityTag.h>
 #include <components/BasicCollision.h>
+#include <events/ScoreEvent.h>
 
 namespace SpaceInvader::CustomCS {
 
@@ -31,6 +32,7 @@ class MeteorBulletCollisionSystem : public ECS::System {
             if (res.count("bullet") && res.count("meteor")) {
                 entity1.destroyEntity();
                 entity2.destroyEntity();
+                eventQueue->enqueue<ScoreEvent>();
             }
         } catch (...) {}
     }

@@ -1,8 +1,8 @@
 <map id="AGE::Systems::AsciiRenderSystem" name="AGE::Systems::AsciiRenderSystem">
-<area shape="rect" id="node1" title=" " alt="" coords="109,608,307,744"/>
-<area shape="rect" id="node2" href="$classAGE_1_1ECS_1_1System.html" title=" " alt="" coords="23,395,206,501"/>
-<area shape="rect" id="node3" href="$classAGE_1_1ECS_1_1Registry.html" title=" " alt="" coords="5,5,192,288"/>
-<area shape="rect" id="node4" href="$classAGE_1_1AsciiRenderer.html" title=" " alt="" coords="246,351,394,545"/>
-<area shape="rect" id="node5" href="$classAGE_1_1Renderer_1_1ScreenBuffer.html" title=" " alt="" coords="217,49,423,244"/>
-<area shape="rect" id="node6" href="$classAGE_1_1Renderer_1_1RenderTarget.html" title=" " alt="" coords="448,101,659,193"/>
+<area shape="rect" id="node1" title=" " alt="" coords="109,623,307,759"/>
+<area shape="rect" id="node2" href="$classAGE_1_1ECS_1_1System.html" title=" " alt="" coords="23,409,206,516"/>
+<area shape="rect" id="node3" href="$classAGE_1_1ECS_1_1Registry.html" title=" " alt="" coords="5,5,192,303"/>
+<area shape="rect" id="node4" href="$classAGE_1_1AsciiRenderer.html" title=" " alt="" coords="246,365,394,560"/>
+<area shape="rect" id="node5" href="$classAGE_1_1Renderer_1_1ScreenBuffer.html" title=" " alt="" coords="217,57,423,251"/>
+<area shape="rect" id="node6" href="$classAGE_1_1Renderer_1_1RenderTarget.html" title=" " alt="" coords="448,108,659,200"/>
 </map>

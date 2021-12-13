@@ -18,6 +18,7 @@
 #include <components/MeteorSpawn.h>
 #include <components/None.h>
 #include <scenes/GameStartScene.h>
+#include <components/PlayerScore.h>
 #include "SpaceInvader.h"
 #include "scenes/MainScene.h"
 #include "components/SpaceInvaderComponentSystem.h"
@@ -42,6 +43,8 @@ void SpaceInvader::init() {
     resources["game_over_text"] = std::make_unique<Renderer::TextProp>("Press Space to Exit...");
     resources["game_start_text"] = std::make_unique<Renderer::TextProp>("Press Space to Start...");
     resources["game_start_info"] = std::make_unique<Renderer::TextProp>("CTRL: WS to move up and down, JK to shoot!");
+    resources["score_display"] = std::make_unique<Renderer::TextProp>("0");
+    resources["score_display_text"] = std::make_unique<Renderer::TextProp>("Score: ");
 
     Scene *mainScene = getSceneManager()->createScene<MainScene>("main_scene",
                                                                  engineEventQueue.get(),
@@ -57,6 +60,7 @@ void SpaceInvader::init() {
     mainScene->getRegistry()->registerComponent<CustomCS::Health>();
     mainScene->getRegistry()->registerComponent<Components::BoundingBoxComponent>();
     mainScene->getRegistry()->registerComponent<CustomCS::RemoveOnOutOfBoundComponent>();
+    mainScene->getRegistry()->registerComponent<PlayerScore>();
 
     // system registration
     // ascii renderer setup and registration
@@ -101,6 +105,11 @@ void SpaceInvader::init() {
         mainScene->getRegistry()->registerSystem<CustomCS::MeteorSpawnSystem>(&resources);
     auto meteorSpawnSystemArchetype = meteorSpawnSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<CustomCS::MeteorSpawnSystem>(meteorSpawnSystemArchetype);
+
+    // player score
+    auto playerSystem = mainScene->getRegistry()->registerSystem<PlayerScoreSystem>();
+    auto scoreSystemArchetype = playerSystem->getSystemArchetype();
+    mainScene->getRegistry()->setSystemArchetype<PlayerScoreSystem>(scoreSystemArchetype);
 
     mainScene->setup();
 

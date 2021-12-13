@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classAGE_1_1ECS_1_1ComponentManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -81,7 +80,7 @@ Collaboration diagram for AGE::ECS::ComponentManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classAGE_1_1ECS_1_1ComponentManager__coll__graph.png" border="0" usemap="#AGE_1_1ECS_1_1ComponentManager_coll__map" alt="Collaboration graph"/></div>
 <map name="AGE_1_1ECS_1_1ComponentManager_coll__map" id="AGE_1_1ECS_1_1ComponentManager_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,228,215"/>
+<area shape="rect" title=" " alt="" coords="5,5,228,200"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -108,18 +107,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a954a241228e46f3c3e3c7bfed10ba036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a954a241228e46f3c3e3c7bfed10ba036">entityDestroyed</a> (<a class="el" href="namespaceAGE_1_1ECS.html#a020e6bad2a8875fcf9dd49d9d6a99ca8">EntityID</a> entity)</td></tr>
 <tr class="separator:a954a241228e46f3c3e3c7bfed10ba036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a0090040b1102a0360a6ffb6a937875f1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a0090040b1102a0360a6ffb6a937875f1"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classAGE_1_1ECS_1_1ConcreteComponentContainer.html">ConcreteComponentContainer</a>&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a0090040b1102a0360a6ffb6a937875f1">getComponentArray</a> ()</td></tr>
-<tr class="separator:a0090040b1102a0360a6ffb6a937875f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a92907b2a8eee8cb5b8d7a8a4bf4d3a23"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a572e4706d3cb059f9d4d8b129781bf97">ComponentType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a3823b0969366eb00edc5223195eb41bb">ComponentID</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a92907b2a8eee8cb5b8d7a8a4bf4d3a23">componentTypes</a></td></tr>
+<tr class="memitem:a92907b2a8eee8cb5b8d7a8a4bf4d3a23"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a168d5ca090d74f4990417e6e2c551013">ComponentType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a3823b0969366eb00edc5223195eb41bb">ComponentID</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a92907b2a8eee8cb5b8d7a8a4bf4d3a23">componentTypes</a></td></tr>
 <tr class="separator:a92907b2a8eee8cb5b8d7a8a4bf4d3a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad669126c3a4890dfcc17e11ccac43f16"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a572e4706d3cb059f9d4d8b129781bf97">ComponentType</a>, std::shared_ptr&lt; <a class="el" href="classAGE_1_1ECS_1_1ComponentContainer.html">ComponentContainer</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#ad669126c3a4890dfcc17e11ccac43f16">componentArrays</a></td></tr>
-<tr class="separator:ad669126c3a4890dfcc17e11ccac43f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01b00601edc0b914e774ff2a192cc62a"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceAGE_1_1ECS.html#a168d5ca090d74f4990417e6e2c551013">ComponentType</a>, std::unique_ptr&lt; <a class="el" href="classAGE_1_1ECS_1_1ComponentContainer.html">ComponentContainer</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a01b00601edc0b914e774ff2a192cc62a">componentArrays</a></td></tr>
+<tr class="separator:a01b00601edc0b914e774ff2a192cc62a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a294ed2ce3a38bddc2d6a462a15333a03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceAGE_1_1ECS.html#a3823b0969366eb00edc5223195eb41bb">ComponentID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGE_1_1ECS_1_1ComponentManager.html#a294ed2ce3a38bddc2d6a462a15333a03">componentIDSequence</a> = 0</td></tr>
 <tr class="separator:a294ed2ce3a38bddc2d6a462a15333a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -210,33 +203,6 @@ template&lt;typename T &gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0090040b1102a0360a6ffb6a937875f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0090040b1102a0360a6ffb6a937875f1">&#9670;&nbsp;</a></span>getComponentArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classAGE_1_1ECS_1_1ConcreteComponentContainer.html">ConcreteComponentContainer</a>&lt;T&gt; &gt; AGE::ECS::ComponentManager::getComponentArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -354,8 +320,8 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad669126c3a4890dfcc17e11ccac43f16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad669126c3a4890dfcc17e11ccac43f16">&#9670;&nbsp;</a></span>componentArrays</h2>
+<a id="a01b00601edc0b914e774ff2a192cc62a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01b00601edc0b914e774ff2a192cc62a">&#9670;&nbsp;</a></span>componentArrays</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,7 +330,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a572e4706d3cb059f9d4d8b129781bf97">ComponentType</a>, std::shared_ptr&lt;<a class="el" href="classAGE_1_1ECS_1_1ComponentContainer.html">ComponentContainer</a>&gt; &gt; AGE::ECS::ComponentManager::componentArrays</td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a168d5ca090d74f4990417e6e2c551013">ComponentType</a>, std::unique_ptr&lt;<a class="el" href="classAGE_1_1ECS_1_1ComponentContainer.html">ComponentContainer</a>&gt; &gt; AGE::ECS::ComponentManager::componentArrays</td>
         </tr>
       </table>
   </td>
@@ -408,7 +374,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a572e4706d3cb059f9d4d8b129781bf97">ComponentType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a3823b0969366eb00edc5223195eb41bb">ComponentID</a>&gt; AGE::ECS::ComponentManager::componentTypes</td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceAGE_1_1ECS.html#a168d5ca090d74f4990417e6e2c551013">ComponentType</a>, <a class="el" href="namespaceAGE_1_1ECS.html#a3823b0969366eb00edc5223195eb41bb">ComponentID</a>&gt; AGE::ECS::ComponentManager::componentTypes</td>
         </tr>
       </table>
   </td>

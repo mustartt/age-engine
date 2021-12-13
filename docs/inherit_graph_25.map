@@ -1,4 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classAGE_1_1Renderer_1_1RenderTarget.html" title=" " alt="" coords="5,13,216,39"/>
-<area shape="rect" id="node2" href="$classAGE_1_1Renderer_1_1CursesRenderAdapter.html" title=" " alt="" coords="264,5,479,47"/>
+<area shape="rect" id="node1" href="$classAGE_1_1Renderer_1_1AsciiRenderProp.html" title=" " alt="" coords="5,107,236,133"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Renderer_1_1BitMapProp.html" title=" " alt="" coords="304,5,503,32"/>
+<area shape="rect" id="node3" href="$classAGE_1_1Renderer_1_1CharacterProp.html" title=" " alt="" coords="295,56,511,83"/>
+<area shape="rect" id="node4" href="$classAGE_1_1Renderer_1_1CyclicRenderProp.html" title=" " alt="" coords="284,107,523,133"/>
+<area shape="rect" id="node5" href="$classAGE_1_1Renderer_1_1RectProp.html" title=" " alt="" coords="312,157,495,184"/>
+<area shape="rect" id="node6" href="$classAGE_1_1Renderer_1_1TextProp.html" title=" " alt="" coords="313,208,493,235"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="SpaceInvader::GameStartScene" name="SpaceInvader::GameStartScene">
+<area shape="rect" id="node1" title=" " alt="" coords="5,292,232,501"/>
+<area shape="rect" id="node2" href="$classAGE_1_1Scene.html" title=" " alt="" coords="45,5,192,244"/>
+</map>
