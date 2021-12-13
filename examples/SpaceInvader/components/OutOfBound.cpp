@@ -5,6 +5,8 @@
 #include "OutOfBound.h"
 #include <ecs/Entity.h>
 #include <components/Transform.h>
+#include <events/MeteorPastBorder.h>
+#include <components/EntityTag.h>
 
 namespace SpaceInvader::CustomCS {
 
@@ -26,13 +28,19 @@ bool RemoveOnOutOfBoundComponent::outOfBound(int x1, int x2, int val) const {
 OutOfBoundSystem::OutOfBoundSystem(AGE::ECS::Registry *registry)
     : AGE::ECS::System(registry) {}
 
-void OutOfBoundSystem::removeOutOfBoundEntities() {
+void OutOfBoundSystem::removeOutOfBoundEntities(AGE::EventQueue *queue) {
     for (auto entityId: entities) {
         AGE::ECS::Entity entity(entityId, registry);
         if (!entity.isValid()) continue;
         auto &bound = entity.getComponent<RemoveOnOutOfBoundComponent>();
         auto &pos = entity.getComponent<AGE::Components::TransformComponent>();
         if (bound.isOutOfBound(pos.getPosition())) {
+            if (entity.hasComponent<AGE::Components::EntityTagComponent>()) {
+                auto &tag = entity.getComponent<AGE::Components::EntityTagComponent>();
+                if (tag.getTag() == "meteor") {
+                    queue->enqueue<MeteorPastBorderEvent>();
+                }
+            }
             entity.destroyEntity();
         }
     }

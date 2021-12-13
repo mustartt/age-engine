@@ -7,6 +7,7 @@
 
 #include <utils/vec3.h>
 #include <ecs/Registry.h>
+#include <events/Event.h>
 
 namespace SpaceInvader::CustomCS {
 
@@ -26,7 +27,7 @@ class RemoveOnOutOfBoundComponent {
 class OutOfBoundSystem : public AGE::ECS::System {
   public:
     explicit OutOfBoundSystem(AGE::ECS::Registry *registry);
-    void removeOutOfBoundEntities();
+    void removeOutOfBoundEntities(AGE::EventQueue *queue);
     AGE::ECS::Archetype getSystemArchetype() override;
 };
 

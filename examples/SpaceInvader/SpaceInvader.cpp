@@ -29,6 +29,7 @@ void SpaceInvader::init() {
     CursesApplicationContext::init();
     using namespace AGE;
 
+    resources["space"] = std::make_unique<Renderer::CharacterProp>(' ');
     resources["player"] = std::make_unique<Renderer::CharacterProp>('D');
     resources["bullet1"] = std::make_unique<Renderer::CharacterProp>('*');
     resources["bullet2"] = std::make_unique<Renderer::CharacterProp>('>');
@@ -44,7 +45,9 @@ void SpaceInvader::init() {
     resources["game_start_text"] = std::make_unique<Renderer::TextProp>("Press Space to Start...");
     resources["game_start_info"] = std::make_unique<Renderer::TextProp>("CTRL: WS to move up and down, JK to shoot!");
     resources["score_display"] = std::make_unique<Renderer::TextProp>("0");
+    resources["health_display"] = std::make_unique<Renderer::TextProp>("10/10");
     resources["score_display_text"] = std::make_unique<Renderer::TextProp>("Score: ");
+    resources["health_display_text"] = std::make_unique<Renderer::TextProp>("Health: ");
 
     Scene *mainScene = getSceneManager()->createScene<MainScene>("main_scene",
                                                                  engineEventQueue.get(),
@@ -57,7 +60,7 @@ void SpaceInvader::init() {
     mainScene->getRegistry()->registerComponent<Components::AsciiRenderComponent>();
     mainScene->getRegistry()->registerComponent<Components::EntityTagComponent>();
     mainScene->getRegistry()->registerComponent<Components::Velocity>();
-    mainScene->getRegistry()->registerComponent<CustomCS::Health>();
+    mainScene->getRegistry()->registerComponent<Health>();
     mainScene->getRegistry()->registerComponent<Components::BoundingBoxComponent>();
     mainScene->getRegistry()->registerComponent<CustomCS::RemoveOnOutOfBoundComponent>();
     mainScene->getRegistry()->registerComponent<PlayerScore>();
@@ -110,6 +113,11 @@ void SpaceInvader::init() {
     auto playerSystem = mainScene->getRegistry()->registerSystem<PlayerScoreSystem>();
     auto scoreSystemArchetype = playerSystem->getSystemArchetype();
     mainScene->getRegistry()->setSystemArchetype<PlayerScoreSystem>(scoreSystemArchetype);
+
+    // player health
+    auto healthSystem = mainScene->getRegistry()->registerSystem<PlayerHealthSystem>();
+    auto healthSystemArchetype = healthSystem->getSystemArchetype();
+    mainScene->getRegistry()->setSystemArchetype<PlayerHealthSystem>(healthSystemArchetype);
 
     mainScene->setup();
 
